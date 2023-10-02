@@ -83,7 +83,7 @@
 		}
 		let chunk = str.substr(start, chars)
 		start += chars
-		let delay = Math.random() * 100
+		let delay = Math.random() * 1.00
 		info_text.value += chunk
 		if (!last){
 			setTimeout(() => {
@@ -99,6 +99,7 @@
 	const showDeviceInfo = async () => {
 		await getDeviceInfo()	
 		console.log(device_info_str)
+		state.$patch({browserInfo: device_info_str})
 		infoChunk(device_info_str)
 
 	}
@@ -114,10 +115,11 @@
     width: 100vw;
     height:100vh;
     position: fixed;
+    background-color: DarkMagenta;
     color: black;
     font-size: 60px;
-	font-family: monospace;
-	top: 0px;
+		font-family: monospace;
+		top: 0px;
   }
 
 </style>
