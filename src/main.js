@@ -9,6 +9,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import './index.css'
+
 const app = createApp(App)
 app.config.globalProperties.window = window
 app.use(createPinia())
