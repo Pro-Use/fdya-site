@@ -12,5 +12,9 @@ export const useStateStore = defineStore('state', () => {
     splashComplete.value = true
   }
 
-  return { splashComplete, splashDone }
+  const browserInfo = ref(null)
+
+  const hmData = ref([])
+
+  return { splashComplete, splashDone, browserInfo, hmData }
 })
