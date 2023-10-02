@@ -3,21 +3,22 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue';
 import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
+import Heatmap from './components/Heatmap.vue'
 import { useStateStore } from './stores/state'
 
 const state = useStateStore()
 console.log(state)
 
 const hm_div = ref(null)
+const hm_data = ref(null)
 </script>
 
 <template>
-  <section v-heatmap:map="hm_div" class="heatmap">
+  <section ref="hm_data" class="heatmap">
     <header>
     </header>
     <BackgroundText />
-    <div ref="hm_div" class="heatmap" v-if="state.splashComplete"></div>
-    <div class="fake-heatmap" v-else></div>
+    <Heatmap :monitored="hm_data" v-if="hm_data"/>
     <BrowserInfo v-show="!state.splashComplete"/>
     <RouterView />
   </section>
@@ -29,13 +30,5 @@ const hm_div = ref(null)
     height:100vh;
     position: fixed;
     top: 0;
-  }
-
-  .fake-heatmap{
-    width: 100vw;
-    height:100vh;
-    position: fixed;
-    top: 0;
-    background-color: DarkMagenta;
   }
 </style>
