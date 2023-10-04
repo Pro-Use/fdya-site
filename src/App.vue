@@ -3,6 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue';
 import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
+import ScreenSaver from './components/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
 import { useStateStore } from './stores/state'
 
@@ -20,6 +21,7 @@ const hm_data = ref(null)
     <BackgroundText />
     <Heatmap :monitored="hm_data" v-if="hm_data"/>
     <BrowserInfo v-show="!state.splashComplete"/>
+    <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
     <RouterView />
   </section>
 </template>
