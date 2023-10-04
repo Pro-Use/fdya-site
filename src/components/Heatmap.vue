@@ -49,7 +49,7 @@
 
 	    const click_max = 100
 	    let data_max = 100
-		const heatmap = h337.create({
+		  const heatmap = h337.create({
 	        maxOpacity: 0.5,
 	        minOpacity: 0.999999,
 	        gradient: {0.1: 'Black', 0.3: 'BlueViolet', 0.6: 'Lime', 0.9: 'Black'},
@@ -57,7 +57,7 @@
 	        blur: 0.90,
 	        backgroundColor: 'rgba(0, 0, 0, 0)',
 	        container: hm_div._value,
-		});
+			});
 
 		console.log(start_data)
 
