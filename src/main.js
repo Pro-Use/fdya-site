@@ -1,13 +1,12 @@
-import './assets/main.css'
 import h337 from 'heatmap.js';
 import { fromEvent, map, mergeWith } from 'rxjs';
-import axios from 'axios';
-
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import router from './router'
+
+import './index.css'
 
 
 const app = createApp(App)

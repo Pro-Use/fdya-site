@@ -3,26 +3,31 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref } from 'vue';
 import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
+import ScreenSaver from './components/ScreenSaver.vue'
+import Heatmap from './components/Heatmap.vue'
 import { useStateStore } from './stores/state'
 
 const state = useStateStore()
 console.log(state)
 
 const hm_div = ref(null)
+const hm_data = ref(null)
 </script>
 
 <template>
-  <section v-heatmap:map="hm_div" class="heatmap">
+  <section ref="hm_data" class="heatmap">
     <header>
     </header>
     <Transition name="fadeSlow">
       <BrowserInfo v-if="!state.splashComplete" />
     </Transition>
     <BackgroundText />
-    <div ref="hm_div" class="heatmap"></div>
+    <Heatmap :monitored="hm_data" v-if="hm_data"/>
     <Transition name="fade">
       <RouterView v-if="state.splashComplete"/>
     </Transition>
+    <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
+    <RouterView />
   </section>
 </template>
 

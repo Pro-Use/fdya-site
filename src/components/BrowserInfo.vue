@@ -111,6 +111,9 @@
 	const showDeviceInfo = async () => {
 		await getDeviceInfo()	
 		console.log(splashText)
+		let str = splashText.join(' ');
+		state.$patch({browserInfo: str})
+		console.log(splashText)
 		processText(splashText, 0)
 
 	}
@@ -128,10 +131,11 @@
     width: 100vw;
     height:100vh;
     position: fixed;
+    background-color: DarkMagenta;
     color: black;
     font-size: 60px;
-	font-family: monospace;
-	top: 0px;
+		font-family: monospace;
+		top: 0px;
   }
 
   .flash{
