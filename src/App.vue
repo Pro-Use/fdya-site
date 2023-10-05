@@ -23,9 +23,7 @@ const hm_data = ref(null)
     </Transition>
     <BackgroundText />
     <Heatmap :monitored="hm_data" v-if="hm_data"/>
-    <Transition name="fade">
       <RouterView v-if="state.splashComplete"/>
-    </Transition>
     <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
     <RouterView />
   </section>

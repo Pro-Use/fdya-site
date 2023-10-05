@@ -27,13 +27,14 @@
     	// fill screen with data
 	    let start_data = []
 	    // Placeholder values
-	    for (let i = 0; i <= monitored.scrollHeight; i += 20) {
+	    for (let i = 0; i <= monitored.scrollHeight; i += 1) {
 	    	// console.log(i)
-	    	for (let n = 0; n <= monitored.scrollWidth; n += 20) {
+	    	for (let n = 0; n <= monitored.scrollWidth; n += 1) {
 	    		let new_point = {
 	    			'x': n,
 	    			'y': i,
 	    			'value': 1,
+					'radius': 1
 	    		}
 	    		start_data.push(new_point)
 	    	}
@@ -49,15 +50,22 @@
 
 	    const click_max = 100
 	    let data_max = 100
-		  const heatmap = h337.create({
-	        maxOpacity: 0.5,
-	        minOpacity: 0.999999,
-	        gradient: {0.1: 'Black', 0.3: 'BlueViolet', 0.6: 'Lime', 0.9: 'Black'},
-	        radius: 50,
-	        blur: 0.90,
-	        backgroundColor: 'rgba(0, 0, 0, 0)',
+		const heatmap = h337.create({
+	        maxOpacity: 1,
+	        minOpacity: 1,
+	        gradient: {
+					'.1': '#201E21',
+					'.3': '#574C2D',
+					'.5': '#370E79',
+					'.8': '#40886D',
+					'.96': '#BCFF2F',
+					'.97': '#A7C369',
+					'.99': 'red'
+			},
+			blur: .85,
+	        radius: 90,
 	        container: hm_div._value,
-			});
+		});
 
 		console.log(start_data)
 

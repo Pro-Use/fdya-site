@@ -58,6 +58,8 @@
 	    height:100vh;
 	    position: fixed;
 	    top: 0;
+		z-index: 10000;
+		opacity: .75;
 	}
 	
 </style>
