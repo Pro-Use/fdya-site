@@ -15,27 +15,52 @@ const hm_div = ref(null)
   <section v-heatmap:map="hm_div" class="heatmap">
     <header>
     </header>
+    <Transition name="fadeSlow">
+      <BrowserInfo v-if="!state.splashComplete" />
+    </Transition>
     <BackgroundText />
-    <div ref="hm_div" class="heatmap" v-if="state.splashComplete"></div>
-    <div class="fake-heatmap" v-else></div>
-    <BrowserInfo v-show="!state.splashComplete"/>
-    <RouterView />
+    <div ref="hm_div" class="heatmap"></div>
+    <Transition name="fade">
+      <RouterView v-if="state.splashComplete"/>
+    </Transition>
   </section>
 </template>
 
 <style scoped>
+  body, html{
+    padding: 0;
+    margin: 0;
+  }
   .heatmap {
     width: 100vw;
     height:100vh;
     position: fixed;
     top: 0;
+    left: 0;
+    z-index: 10;
+    /* mix-blend-mode: darken; */
   }
 
-  .fake-heatmap{
-    width: 100vw;
-    height:100vh;
-    position: fixed;
-    top: 0;
-    background-color: DarkMagenta;
+  /* Transitions */
+
+  .fadeSlow-enter-active,
+  .fadeSlow-leave-active {
+    transition: opacity 3s ease;
   }
-</style>
+
+  .fadeSlow-enter-from,
+  .fadeSlow-leave-to {
+    opacity: 0;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 1s ease;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
+
+</style> 

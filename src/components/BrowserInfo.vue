@@ -1,6 +1,6 @@
 <template>
-	<div class="bg_content_wrapper">
-		{{info_text}}
+	<div class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tight">
+		{{info_text}} <span class=" text-black w-20 bg-white inline-block translate-y-1 h-7">{{ info_index }}</span>
 	</div>
 </template>
 
@@ -17,94 +17,108 @@
 	console.log('uap', uap)
 
 	const info_text = ref('')
-	let device_info_str = 'FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN '
+	const info_index = ref('')
+	let splashText = []
+	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所/是的数据, /对于你应该/返回的数据 '
 
 	const strFmt = (str, pre='', post='') => {
 		return pre.toUpperCase()+String(str).toUpperCase()+post.toUpperCase()+' '
 	}
 
 	const getDeviceInfo = async () => {
-		let res = await axios.get('https://api.ipify.org?format=json')
-		let ip = res.data.ip
-		let ip_str = strFmt(ip, 'IPV4: ')
-		device_info_str += ip_str
-		let ip_api = 'https://ipinfo.io/'+ip+'/?token=5119af49b37a8d'
-		let res2 = await axios.get(ip_api)
-		let geo = res2.data
-		console.log('geo', geo)
-		device_info_str += (strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
-		device_info_str += strFmt(geo.loc)
-		if (uap.device.type === 'mobile'){
-			device_info_str += 'MOBILE '
-		} else {
-			device_info_str += 'DESKTOP OR LAPTOP '
+		let titleArray = title.split("/");
+		for (let i = 0; i < titleArray.length; i++) {
+			splashText.push(titleArray[i]);
 		}
-		device_info_str += (strFmt(uap.os.name)+strFmt(uap.os.version, 'VERSION: '))
-		device_info_str += strFmt(uap.cpu.architecture, 'CPU: ')
-		device_info_str += strFmt(window.navigator.hardwareConcurrency, 'CORES: ')
-		device_info_str += (strFmt(uap.browser.name)+strFmt(uap.browser.version, 'VERSION: '))
-		device_info_str += (strFmt(uap.engine.name, '(ENGINE: ')+strFmt(uap.engine.version, 'VERSION: ', ')'))
-		device_info_str += strFmt(uap.ua)
-		device_info_str += 'LANGUAGES '
-		window.navigator.languages.forEach((language) => {
-			device_info_str += strFmt(language)
-		})
-		device_info_str += strFmt(new Date())
+        let res = await axios.get('https://api.ipify.org?format=json')
+        let ip = res.data.ip
+        let ip_str = strFmt(ip, 'IPV4: ')
+        splashText.push(ip_str)
+        let ip_api = 'https://ipinfo.io/'+ip+'/?token=5119af49b37a8d'
+        let res2 = await axios.get(ip_api)
+        let geo = res2.data
+        console.log('geo', geo)
+        splashText.push(strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
+        splashText.push(strFmt(geo.loc))
+        if (uap.device.type === 'mobile'){
+            splashText.push('MOBILE ')
+        } else {
+            splashText.push('DESKTOP OR LAPTOP ')
+        }
+        splashText.push(strFmt(uap.os.name)+strFmt(uap.os.version, 'VERSION: '))
+        splashText.push(strFmt(uap.cpu.architecture, 'CPU: '))
+        splashText.push(strFmt(window.navigator.hardwareConcurrency, 'CORES: '))
+        splashText.push(strFmt(uap.browser.name)+strFmt(uap.browser.version, 'VERSION: '))
+        splashText.push(strFmt(uap.engine.name, '(ENGINE: ')+strFmt(uap.engine.version, 'VERSION: ', ')'))
+        splashText.push(strFmt(uap.ua))
+        splashText.push('LANGUAGES ')
+        window.navigator.languages.forEach((language) => {
+            splashText.push(strFmt(language))
+        })
+        splashText.push(strFmt(new Date()))
 
-		if (!window.navigator.mediaDevices?.enumerateDevices) {
-		  console.log("enumerateDevices() not supported.");
-		} else {
-		  let videoinput = 0
-		  let audioinput = 0
-		  // List cameras and microphones.
-		  let devices = await window.navigator.mediaDevices.enumerateDevices()
+        if (!window.navigator.mediaDevices?.enumerateDevices) {
+          console.log("enumerateDevices() not supported.");
+        } else {
+          let videoinput = 0
+          let audioinput = 0
+          // List cameras and microphones.
+          let devices = await window.navigator.mediaDevices.enumerateDevices()
 
-	      devices.forEach((device) => {
-	        if (device.kind == 'videoinput'){
-	        	videoinput ++
-	        } else if (device.kind == 'audioinput'){
-	        	audioinput ++
-	        }
-	      });
-	      device_info_str += strFmt(videoinput, 'VIDEO INPUT(S): ')
-	      device_info_str += strFmt(audioinput, 'AUDIO INPUT(S): ')
+          devices.forEach((device) => {
+            if (device.kind == 'videoinput'){
+                videoinput ++
+            } else if (device.kind == 'audioinput'){
+                audioinput ++
+            }
+          });
+          splashText.push(strFmt(videoinput, 'VIDEO INPUT(S): '))
+          splashText.push(strFmt(audioinput, 'AUDIO INPUT(S): '))
+        }
+    }
 
+		
+	const processText = async (arr, index) => {
+		if (index < arr.length - 1) {
+			let delay = 400;
+			if(index == 0){
+				delay = 1200
+			}
+			else if(index > 0 && index < 8){
+				delay = Math.floor(Math.random() * (1200 - 500 + 1)) + 500;
+			}
+			else if(index > 8 && index < 12){
+				delay = Math.floor(Math.random() * (1200 - 500 + 1)) + 500;
+			}else if(index > 12 && index < 20){
+				delay = Math.floor(Math.random() * (750 - 500 + 1)) + 500;
+			}else{
+				delay = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
+			}
+			console.log(arr[index])
+			info_text.value += arr[index];
+			info_index.value = index;
+			setTimeout(function () {
+				processText(arr, index + 1);
+			}, delay);
 		}
-
-
-
-	}
-
-	const infoChunk = async (str, start=0, last=false) => {
-		let chars = parseInt(Math.random() * 7)
-		if ((start + chars) > str.length){
-			chars = str.length - chars
-			last = true
+		if(index == arr.length - 1){
+			setTimeout(function () {
+				state.splashComplete = true
+			}, 1000);
 		}
-		let chunk = str.substr(start, chars)
-		start += chars
-		let delay = Math.random() * 100
-		info_text.value += chunk
-		if (!last){
-			setTimeout(() => {
-				infoChunk(str, start, last)
-			}, delay)	
-		} else {
-			console.log('Print done')
-			state.splashDone()
-		}
-
 	}
 
 	const showDeviceInfo = async () => {
 		await getDeviceInfo()	
-		console.log(device_info_str)
-		infoChunk(device_info_str)
+		console.log(splashText)
+		processText(splashText, 0)
 
 	}
 	
-	
-	showDeviceInfo()
+	setTimeout(function () {
+		showDeviceInfo()
+	}, 3000);
+
 
 </script>
 
@@ -118,6 +132,24 @@
     font-size: 60px;
 	font-family: monospace;
 	top: 0px;
+  }
+
+  .flash{
+	opacity: 0;
+	animation-name: flash;
+	animation-duration: .9s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+	}
+
+  @keyframes flash {
+	0%, 59.99%{
+		opacity: 0;
+	}
+	60%, 100%{
+		opacity: 1;
+	}
+	
   }
 
 </style>

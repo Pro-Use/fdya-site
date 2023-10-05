@@ -9,6 +9,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+
 const app = createApp(App)
 app.config.globalProperties.window = window
 app.use(createPinia())
@@ -27,34 +28,42 @@ app.directive('heatmap', {
 	    // fill screen with data
 	    let start_data = []
 	    // Placeholder values
-	    for (let i = 0; i <= el.scrollHeight; i += 20) {
+	    for (let i = 0; i <= window.innerHeight; i += 1) {
 	    	// console.log(i)
-	    	for (let n = 0; n <= el.scrollWidth; n += 20) {
+	    	for (let n = 0; n <= window.innerWidth; n += 1) {
 	    		let new_point = {
 	    			'x': n,
 	    			'y': i,
 	    			'value': 1,
+					'radius': 1
 	    		}
 	    		start_data.push(new_point)
 	    	}
 	    }
 
 	    //From latest session in DB
-	    let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
+	    // let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
 	    // console.log(res)
-	    if (res.data.data.length > 0 && res.data.data[0].data.length > 0){
-	    	console.log('Using '+ res.data.data[0].id)
-	    	start_data = start_data.concat(res.data.data[0].data)
-	    }
+	    // if (res.data.data.length > 0 && res.data.data[0].data.length > 0){
+	    	// console.log('Using '+ res.data.data[0].id)
+	    	// start_data = start_data.concat(res.data.data[0].data)
+	    // }
 	    const click_max = 100
 	    let data_max = 100
     	const heatmap = h337.create({
-	        maxOpacity: 0.5,
-	        minOpacity: 0.999999,
-	        gradient: {0.1: 'Black', 0.3: 'BlueViolet', 0.6: 'Lime', 0.9: 'Black'},
-	        radius: 50,
-	        blur: 0.90,
-	        backgroundColor: 'rgba(0, 0, 0, 0)',
+	        maxOpacity: 1,
+	        minOpacity: 1,
+	        gradient: {
+					'.1': '#201E21',
+					'.3': '#574C2D',
+					'.5': '#370E79',
+					'.8': '#40886D',
+					'.96': '#BCFF2F',
+					'.97': '#A7C369',
+					'.99': 'red'
+			},
+			blur: .85,
+	        radius: 90,
 	        container: binding.value,
 		});
 
@@ -62,8 +71,8 @@ app.directive('heatmap', {
 
 		heatmap.setData({min:0, max:data_max, data:start_data})
 
-	    const move = fromEvent(el, 'mousemove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 5}}));
-        const touch = fromEvent(el, 'touchmove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 5}}));;
+	    const move = fromEvent(el, 'mousemove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 10}}));
+        const touch = fromEvent(el, 'touchmove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 10}}));;
         const click = fromEvent(el, 'click').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 10}}));
 
         const all_points = []
