@@ -27,14 +27,14 @@
     	// fill screen with data
 	    let start_data = []
 	    // Placeholder values
-	    for (let i = 0; i <= monitored.scrollHeight; i += 1) {
+	    for (let i = 0; i <= monitored.scrollHeight; i += 10) {
 	    	// console.log(i)
-	    	for (let n = 0; n <= monitored.scrollWidth; n += 1) {
+	    	for (let n = 0; n <= monitored.scrollWidth; n += 10) {
 	    		let new_point = {
 	    			'x': n,
 	    			'y': i,
 	    			'value': 1,
-					'radius': 1
+					'radius': 10
 	    		}
 	    		start_data.push(new_point)
 	    	}
@@ -50,7 +50,7 @@
 
 	    const click_max = 100
 	    let data_max = 100
-		const heatmap = h337.create({
+			const heatmap = h337.create({
 	        maxOpacity: 1,
 	        minOpacity: 1,
 	        gradient: {
@@ -63,11 +63,9 @@
 					'.99': 'red'
 			},
 			blur: .85,
-	        radius: 90,
-	        container: hm_div._value,
-		});
-
-		console.log(start_data)
+      radius: 90,
+      container: hm_div.value,
+			});
 
 		heatmap.setData({min:0, max:data_max, data:start_data})
 		console.log(heatmap)
@@ -94,11 +92,11 @@
 		const all_clicks = []
 
 		click.subscribe(async click => {
-			if (data_max > 20){
-				data_max -= 5
+			// if (data_max > 20){
+			// 	data_max -= 5
 				
-			}
-			heatmap.setDataMax(data_max)
+			// }
+			// heatmap.setDataMax(data_max)
 			let payload = {data: all_points}
 			//send to an API for database storage
 			if (session_id === null){
