@@ -1,18 +1,20 @@
 <template>
-	<div v-show="ss_active">
+	<div v-if="ss_active">
 		<iframe 
 			class="ss-iframe"  
 			src="http://works.fordatayouareandtodatayoushallreturn.online/threejs_yunshi/">
 		</iframe>
-		<div
-			class="ss-iframe"  
-			ref="ss_monitor">
-		</div>
+	</div>
+	<div
+		class="ss-iframe"  
+		ref="ss_monitor">
 	</div>
 </template>
 <script setup>
 	import { ref, defineProps, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
+
+	const ss_disabled = true
 
 	const ss_monitor = ref(null)
 	const timeout_ms = 10000
@@ -26,7 +28,9 @@
 			clearTimeout(timeout_id.value)
 		}
 		timeout_id.value = setTimeout(() => {
-			ss_active.value = true
+			if(!ss_disabled){
+				ss_active.value = true
+			}
 		}, timeout_ms)
 	}
 
