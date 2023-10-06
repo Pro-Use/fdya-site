@@ -5,6 +5,7 @@ import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
 import ScreenSaver from './components/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
+import Interface from './components/Interface.vue'
 import { useStateStore } from './stores/state'
 import axios from 'axios';
 
@@ -32,8 +33,9 @@ onMounted(() => {
 
 <template>
   <section ref="hm_data" class="heatmap">
-    <header>
-    </header>
+    <Transition name="fadeSlow">
+      <Interface></Interface>
+    </Transition>
     <Transition name="fadeSlow">
       <BrowserInfo v-if="!state.splashComplete" />
     </Transition>
