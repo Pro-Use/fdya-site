@@ -1,17 +1,33 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import { ref } from 'vue';
+import { ref, provide, onMounted } from 'vue';
 import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
 import ScreenSaver from './components/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
 import { useStateStore } from './stores/state'
+import axios from 'axios';
 
 const state = useStateStore()
-console.log(state)
 
-const hm_div = ref(null)
 const hm_data = ref(null)
+const works_info = ref([])
+
+const get_works_info = async () => {
+  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/works')
+  const works = res.data.data
+
+  state.$patch({'worksInfo': works})
+}
+
+onMounted(() => {
+  get_works_info()
+})
+
+
+
+
+
 </script>
 
 <template>
@@ -22,7 +38,7 @@ const hm_data = ref(null)
       <BrowserInfo v-if="!state.splashComplete" />
     </Transition>
     <BackgroundText />
-    <Heatmap :monitored="hm_data" v-if="hm_data"/>
+    <Heatmap :monitored="hm_data" v-if="hm_data" />
       <RouterView v-if="state.splashComplete"/>
     <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
     <RouterView />
