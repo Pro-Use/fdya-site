@@ -6,6 +6,7 @@ import BackgroundText from './components/BackgroundText.vue'
 import ScreenSaver from './components/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
 import Interface from './components/Interface.vue'
+import FooterComponent from './components/FooterComponent.vue'
 import { useStateStore } from './stores/state'
 
 const state = useStateStore()
@@ -18,16 +19,22 @@ const hm_data = ref(null)
 <template>
   <section ref="hm_data" class="heatmap">
     <Transition name="fadeSlow">
-      <Interface></Interface>
+      <Interface v-if="state.splashComplete"></Interface>
     </Transition>
     <Transition name="fadeSlow">
       <BrowserInfo v-if="!state.splashComplete" />
     </Transition>
     <BackgroundText />
     <Heatmap :monitored="hm_data" v-if="hm_data"/>
-      <RouterView v-if="state.splashComplete"/>
-    <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
-    <RouterView />
+    <Transition name="fadeSlow">
+      <template v-if="state.splashComplete">
+        <RouterView/>
+      </template>
+    </Transition>
+    <!-- <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" /> -->
+    <Transition name="fadeSlow">
+      <FooterComponent  v-if="state.splashComplete"></FooterComponent>
+    </Transition>
   </section>
 </template>
 
@@ -35,10 +42,12 @@ const hm_data = ref(null)
   body, html{
     padding: 0;
     margin: 0;
+    width: 100vw;
+    min-height:100vh;
   }
   .heatmap {
     width: 100vw;
-    height:100vh;
+    min-height:100vh;
     position: fixed;
     top: 0;
     left: 0;

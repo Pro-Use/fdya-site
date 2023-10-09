@@ -11,6 +11,7 @@ module.exports = {
       'current': 'currentColor',
       'black': '#000000',
       'white': '#ffffff',
+      'yellow': '#B8F33A'
     },
     extend: {
       fontFamily: {

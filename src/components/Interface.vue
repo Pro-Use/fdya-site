@@ -1,12 +1,19 @@
 
 <template>
     <header class="fixed top-0 left-0 w-screen grid grid-cols-header gap-5 z-[100] p-2.5 font-DMregular">
-        <h1 class="col-start-2 bg-white h-12 border-solid border border-black shadow-default max-w-sm mx-auto leading-[44px]">
+        <h1 class="col-start-2 bg-white h-12 border-solid border border-black shadow-default max-w-sm mx-auto leading-[44px] lg:fixed lg:top-8 lg:left-1/2 lg:translate-x-[-50%] lg:rounded-lg">
             <Vue3Marquee>
-                <div>{{title}} </div>
+                <div class="px-1">{{title}} </div>
             </Vue3Marquee>
         </h1>
-        <button class="col-start-1 row-start-1 bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default">中文</button>
+        <button class="
+            col-start-1 row-start-1 bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow 
+            lg:fixed lg:top-[96px] lg:right-8 lg:w-[96px] lg:rounded-lg
+            ">中文</button>
+        <button class="
+            col-start-3 row-start-1 bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
+            lg:fixed lg:top-8 lg:right-8 lg:w-[96px] lg:rounded-lg
+            ">INFO</button>
     </header>
 </template>
 

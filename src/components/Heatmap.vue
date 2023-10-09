@@ -98,7 +98,7 @@
 				data_max -= 5
 				
 			}
-			heatmap.setDataMax(data_max)
+			// heatmap.setDataMax(data_max)
 			let payload = {data: all_points}
 			//send to an API for database storage
 			if (session_id === null){
