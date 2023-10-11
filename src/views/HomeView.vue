@@ -10,6 +10,7 @@ const launchProject = (event) => {
   const a = event.target
   const container = a.parentElement
   const link = a.getAttribute('data-link')
+  state.interfaceVisible = false
   console.log(link)
   if(container.classList.contains('active')){
     container.classList.remove('active')
@@ -18,7 +19,7 @@ const launchProject = (event) => {
   }
   container.addEventListener('transitionend', () => {
     state.mainTransition = 'none'
-    console.log(state.mainTransition)
+    
     setTimeout(() => {
       router.push({
         path: link

@@ -54,7 +54,7 @@ onMounted(() => {
   </section>
 </template>
 
-<style scoped>
+<style>
   body, html{
     padding: 0;
     margin: 0;

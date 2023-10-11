@@ -1,7 +1,7 @@
 <template>
     <main class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight uppercase">
         <div class="grid p-8 grid-cols-3 gap-8 relative">
-            <router-link class="absolute top-8 right-8" to="/">[CLOSE]</router-link>
+            <router-link class="absolute top-8 right-8" to="/">CLOSE</router-link>
             <div class="col-span-2 pb-16">
                 <h2 class="pb-8">ACCESSIBILITY</h2>
                 <p class="text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
@@ -22,15 +22,12 @@ import { useStateStore } from '../stores/state'
 const state = useStateStore()
 
 onMounted(() => {
-    state.infoVisible = true
+    state.interfaceVisible = false
     if(state.access_bg_images == true){
         backgroundsButtonsState.value = "On"
     }else{
         backgroundsButtonsState.value = "off"
     }
-})
-onUnmounted(() => {
-    state.infoVisible = false
 })
 
 const backgroundsButtonText = "Background Images"
