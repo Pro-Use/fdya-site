@@ -5,12 +5,15 @@
 </template>
 
 <script setup>
-	import { ref } from 'vue';
+	import { ref, onMounted } from 'vue';
 	import axios from 'axios';
 	import { UAParser } from 'ua-parser-js';
 	import { useStateStore } from '../stores/state'
+	import { useClStore } from '../stores/CrossLucid'
 
 	const state = useStateStore()
+	const cl_store = useClStore()
+
 
 	console.log('navigator',window.navigator)
 	const uap = UAParser(navigator.userAgent);
@@ -40,11 +43,13 @@
         console.log('geo', geo)
         splashText.push(strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
         splashText.push(strFmt(geo.loc))
+        let device
         if (uap.device.type === 'mobile'){
-            splashText.push('MOBILE ')
+            device = 'mobile'
         } else {
-            splashText.push('DESKTOP OR LAPTOP ')
+            device = 'desktop or laptop'
         }
+        splashText.push(strFmt(device))
         splashText.push(strFmt(uap.os.name)+strFmt(uap.os.version, 'VERSION: '))
         splashText.push(strFmt(uap.cpu.architecture, 'CPU: '))
         splashText.push(strFmt(window.navigator.hardwareConcurrency, 'CORES: '))
@@ -74,6 +79,8 @@
           });
           splashText.push(strFmt(videoinput, 'VIDEO INPUT(S): '))
           splashText.push(strFmt(audioinput, 'AUDIO INPUT(S): '))
+
+          cl_store.$patch({'location': geo.country, 'device': device, 'platformVersion': uap.os.version, 'sessionStart': Date.now()})
         }
     }
 
@@ -114,13 +121,16 @@
 		let str = splashText.join(' ');
 		state.$patch({browserInfo: str})
 		console.log(splashText)
-		processText(splashText, 0)
+		await processText(splashText, 0)
 
 	}
 	
-	setTimeout(function () {
-		showDeviceInfo()
-	}, 3000);
+	// onMounted(() => {
+	// 	setTimeout(async () => {
+	// 		await showDeviceInfo()
+	// 	}, 3000);
+	// })
+	showDeviceInfo()
 
 
 </script>
