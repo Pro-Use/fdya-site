@@ -237,7 +237,7 @@ onMounted(() => {
 
   .cross-container-9{
     top: calc(var(--x)*1);
-    left: calc(var(--x)*34);
+    left: calc(var(--x)*4);
   }
   .cross-container-9:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
