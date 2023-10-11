@@ -23,7 +23,31 @@ export const useStateStore = defineStore('state', () => {
 
   const worksInfo = ref([])
 
+  const gridWorks = computed( () => {
+    if (worksInfo.value.length === 0) {
+      return []
+    } else {
+      return worksInfo.value.map((work) => {
+        let slug = work.slug
+        let lang = siteLang.value
+        return `/works/${slug}/${lang}`
+      })
+    }
+  })
+
   const siteInfo = ref({})
 
-  return {interfaceVisible, mainTransition, splashComplete, splashDone, infoVisible, browserInfo, hmData, siteLang, worksInfo, siteInfo, access_bg_images, access_animations}
+  return {interfaceVisible, 
+          mainTransition, 
+          splashComplete, 
+          splashDone, 
+          infoVisible, 
+          browserInfo, 
+          hmData, 
+          siteLang, 
+          worksInfo,
+          gridWorks,
+          siteInfo, 
+          access_bg_images, 
+          access_animations,}
 })

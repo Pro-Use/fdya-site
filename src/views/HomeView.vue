@@ -1,12 +1,12 @@
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStateStore } from '../stores/state'
 
 const router = useRouter()
 const state = useStateStore()
 
-function launchProject(event){
+const launchProject = (event) => {
   const a = event.target
   const container = a.parentElement
   const link = a.getAttribute('data-link')
@@ -27,6 +27,14 @@ function launchProject(event){
 
   });
 }
+
+const workLinks = computed(() => {
+  if (state.gridWorks.length === 0){
+    return ['','','','','','']
+  } else {
+    return state.gridWorks
+  }
+})
 
 onMounted(() => {
 		state.interfaceVisible = true
@@ -52,15 +60,15 @@ onMounted(() => {
     </div>
 
     <div class="cross-container-7">
-      <a @click="launchProject" data-link="/works/test/en"> 
+      <a @click="launchProject" :data-link="workLinks[0]"> 
         <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/LEL.png">
       </a>
     </div>
-    <div class="cross-container-8"><a @click="launchProject" data-link="/works/test"> </a></div>
-    <div class="cross-container-9"><a @click="launchProject" data-link="/works/test"> </a></div>
-    <div class="cross-container-10"><a @click="launchProject" data-link="/works/test"> </a></div>
-    <div class="cross-container-11"><a @click="launchProject" data-link="/works/test"> </a></div>
-    <div class="cross-container-12"><a @click="launchProject" data-link="/works/test"> </a></div>
+    <div class="cross-container-8"><a @click="launchProject" :data-link="workLinks[1]"> </a></div>
+    <div class="cross-container-9"><a @click="launchProject" :data-link="workLinks[2]"> </a></div>
+    <div class="cross-container-10"><a @click="launchProject" :data-link="workLinks[3]"> </a></div>
+    <div class="cross-container-11"><a @click="launchProject" :data-link="workLinks[4]"> </a></div>
+    <div class="cross-container-12"><a @click="launchProject" :data-link="workLinks[5]"> </a></div>
 
   </main>
 </template>
