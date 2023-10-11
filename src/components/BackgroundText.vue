@@ -1,9 +1,9 @@
 <template>
-	<div class="bg-text p-8">
-		<div class="grid grid-cols-3 gap-3">
-			<div>{{state.browserInfo}}</div>
-			<div>{{state.hmData}}</div>
-			<div>3</div>
+	<div class="bg-text h-screen w-screen">
+		<div class="grid grid-cols-3">
+			<div class="p-4 h-screen overflow-y-auto break-all">{{state.browserInfo}} <br> <br> {{state.hmData}}</div>
+			<div class="p-4 h-screen overflow-y-auto break-all"><example></example></div>
+			<div class="p-4 h-screen overflow-y-auto break-all">{{state.browserInfo}} <br> <br> {{state.hmData}}</div>
 		</div>
 	</div>
 </template>
@@ -11,7 +11,7 @@
 <script setup>
 	import { ref } from 'vue'
 	import { useStateStore } from '../stores/state'
-
+	import example from './displayData/example.vue'
 	const state = useStateStore()
 	
 </script>

@@ -1,19 +1,48 @@
 <script setup>
+import { onMounted } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
+import { useStateStore } from '../stores/state'
+
+const router = useRouter()
+const state = useStateStore()
+
+function launchProject(event){
+  const a = event.target
+  const container = a.parentElement
+  const link = a.getAttribute('data-link')
+  console.log(link)
+  if(container.classList.contains('active')){
+    container.classList.remove('active')
+  }else{
+    container.classList.add('active')
+  }
+  container.addEventListener('transitionend', () => {
+    state.mainTransition = 'none'
+    console.log(state.mainTransition)
+    setTimeout(() => {
+      router.push({
+        path: link
+      })
+    }, 1000)
+
+  });
+}
+
+onMounted(() => {
+		state.interfaceVisible = true
+	})
 
 </script>
 
 <template>
-  <main class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto">
+  <main class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
 
-    <div class="grid-container absolute top-0 min-h-screen w-screen">
+    <div class="grid-container absolute top-0 w-screen">
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
-    </div>
-
-    <div class="grid-container absolute top-0 min-h-screen w-screen">
       <div class="grid-line-h"></div>
       <div class="grid-line-h"></div>
       <div class="grid-line-h"></div>
@@ -22,17 +51,21 @@
       <div class="grid-line-h"></div>
     </div>
 
-    <div class="cross-container-7"><a> </a></div>
-    <div class="cross-container-8"><a> </a></div>
-    <div class="cross-container-9"><a> </a></div>
-    <div class="cross-container-10"><a> </a></div>
-    <div class="cross-container-11"><a> </a></div>
-    <div class="cross-container-12"><a> </a></div>
+    <div class="cross-container-7">
+      <a @click="launchProject" data-link="/works/test/en"> 
+        <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/LEL.png">
+      </a>
+    </div>
+    <div class="cross-container-8"><a @click="launchProject" data-link="/works/test"> </a></div>
+    <div class="cross-container-9"><a @click="launchProject" data-link="/works/test"> </a></div>
+    <div class="cross-container-10"><a @click="launchProject" data-link="/works/test"> </a></div>
+    <div class="cross-container-11"><a @click="launchProject" data-link="/works/test"> </a></div>
+    <div class="cross-container-12"><a @click="launchProject" data-link="/works/test"> </a></div>
 
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 
 
 .grid-line-v{
@@ -75,31 +108,31 @@
     transform: translateY(-50%);
   }
 
-  .grid-line-h:nth-child(1){
+  .grid-line-h:nth-child(6){
     top: var(--x);
   }
 
-  .grid-line-h:nth-child(2){
+  .grid-line-h:nth-child(7){
     top: calc(var(--x)*2);
   }
 
-  .grid-line-h:nth-child(3){
+  .grid-line-h:nth-child(8){
     top:calc(var(--x)*3);
   }
 
-  .grid-line-h:nth-child(4){
+  .grid-line-h:nth-child(9){
     top: calc(var(--x)*4);
   }
 
-  .grid-line-h:nth-child(5){
+  .grid-line-h:nth-child(10){
     top: calc(var(--x)*5);
   }
 
-  .grid-line-h:nth-child(6){
+  .grid-line-h:nth-child(11){
     top:calc(var(--x)*6);
   }
 
-  .grid-line-h:nth-child(7){
+  .grid-line-h:nth-child(12){
     top: calc(var(--x)*7);
   }
 
@@ -125,13 +158,20 @@
     height: calc(var(--x)*2);
     cursor: pointer;
     transition: 
-      transform 300ms 0ms ease-in-out;
+      all 300ms 0ms ease-in-out;
     transform: translate(-50%,-50%) scale(25%);
     z-index: 2;
+    img{
+      opacity: 0;
+      transition: all 300ms 0ms ease-in-out;
+    }
   }
   
   [class^="cross-container"]:hover{
     transform:translate(-50%,-50%) scale(100%, 50%);
+    img{
+      opacity: 1;
+    }
   }
   [class^="cross-container"] a{
     display: block;
@@ -150,12 +190,21 @@
     clip-path: polygon(0 49%, 49% 49%, 49% 0, 51% 0, 51% 49%, 100% 49%, 100% 51%, 51% 51%, 51% 100%, 49% 100%, 49% 51%, 0 51%);  
   }
 
-  [class^="cross-container"]:hover a{
-    /* background: url('LEL2.png'); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
+  [class^="cross-container"].active{
+    top: 50%;
+    left:50%;
+    width: 100vw;
+    height: 100vh;
+    transform:translate(-50%,-50%) scale(100%, 100%);
+    z-index: 1000;
+    a{
+      transform: rotate(0);
+      clip-path: polygon(0% 15%, 0 0, 15% 0%, 85% 0%, 100% 0, 100% 15%, 100% 85%, 100% 100%, 85% 100%, 15% 100%, 0 100%, 0% 85%) !important ;
+      transition: clip-path 300ms 300ms ease-in-out;
+    }
+    img{
+      opacity: 1;
+    }
   }
 
 

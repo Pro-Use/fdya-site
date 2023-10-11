@@ -1,5 +1,8 @@
 <template>
-	<WorkInfo :work="props.work" />
+	  <main class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
+        <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/LEL.png">
+		<WorkInfo :work="props.work" />
+	  </main>
 </template>
 
 <script setup>
@@ -19,6 +22,10 @@
 		store.$patch({siteLang: props.language})
 	}
 
+	onMounted(() => {
+		state.mainTransition = 'zoom-fade'
+		state.interfaceVisible = false
+	})
 
 
 
