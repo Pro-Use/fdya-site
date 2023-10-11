@@ -8,8 +8,10 @@
 	import { fromEvent, map, mergeWith } from 'rxjs';
 	import axios from 'axios';
 	import { useStateStore } from '../stores/state'
+	import { useClStore } from '../stores/CrossLucid'
 
 	const state = useStateStore()
+	const cl_store = useClStore()
 
 	const props = defineProps(['monitored'])
 	const monitored = props.monitored
@@ -43,7 +45,7 @@
 	    //From latest session in DB
 	    let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
 	    // console.log(res)
-	    if (res.data.data.length > 0 && res.data.data[0].data.length > 0){
+	    if (res.data.data[0].data && res.data.data[0].data.length > 0){
 	    	console.log('Using '+ res.data.data[0].id)
 	    	start_data = start_data.concat(res.data.data[0].data)
 	    }
@@ -97,6 +99,7 @@
 				
 			// }
 			// heatmap.setDataMax(data_max)
+			cl_store.clicks ++
 			let payload = {data: all_points}
 			//send to an API for database storage
 			if (session_id === null){
