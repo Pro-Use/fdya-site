@@ -4,12 +4,16 @@ import WorkView from '../views/WorkView.vue'
 import InfoView from '../views/InfoView.vue'
 import AccessView from '../views/AccessView.vue'
 
-
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
+      name: 'home',
+      component: HomeView
+    },
+    {
+      path: '/no-splash',
       name: 'home',
       component: HomeView
     },
