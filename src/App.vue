@@ -6,6 +6,7 @@ import BackgroundText from './components/BackgroundText.vue'
 import ScreenSaver from './components/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
 import Interface from './components/Interface.vue'
+import FooterComponent from './components/FooterComponent.vue'
 import { useStateStore } from './stores/state'
 import axios from 'axios';
 
@@ -33,17 +34,23 @@ onMounted(() => {
 
 <template>
   <section ref="hm_data" class="heatmap">
-    <Transition name="fadeSlow">
-      <Interface></Interface>
+    <Transition name="fade">
+      <Interface v-if="state.splashComplete && state.interfaceVisible"></Interface>
     </Transition>
-    <Transition name="fadeSlow">
+    <Transition name="fade">
       <BrowserInfo v-if="!state.splashComplete" />
     </Transition>
     <BackgroundText />
-    <Heatmap :monitored="hm_data" v-if="hm_data" />
-      <RouterView v-if="state.splashComplete"/>
-    <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
-    <RouterView />
+    <Heatmap :monitored="hm_data" v-if="hm_data && state.access_bg_images"/>
+    <router-view v-slot="{ Component }">
+      <transition :name="state.mainTransition">
+        <component v-if="state.splashComplete" :is="Component" />
+      </transition>
+    </router-view>
+    <!-- <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" /> -->
+    <Transition name="fade">
+      <FooterComponent  v-if="state.splashComplete && state.interfaceVisible"></FooterComponent>
+    </Transition>
   </section>
 </template>
 
@@ -51,10 +58,12 @@ onMounted(() => {
   body, html{
     padding: 0;
     margin: 0;
+    width: 100vw;
+    min-height:100vh;
   }
   .heatmap {
     width: 100vw;
-    height:100vh;
+    min-height:100vh;
     position: fixed;
     top: 0;
     left: 0;
@@ -64,24 +73,40 @@ onMounted(() => {
 
   /* Transitions */
 
-  .fadeSlow-enter-active,
-  .fadeSlow-leave-active {
-    transition: opacity 3s ease;
+  .none-enter-active, .none-leave-active{
+    transition: all 0s 0s linear;
   }
 
-  .fadeSlow-enter-from,
-  .fadeSlow-leave-to {
-    opacity: 0;
+  .none-enter-from, .none-leave-to{
+    opacity: 1;
   }
 
   .fade-enter-active,
   .fade-leave-active {
-    transition: opacity 1s ease;
+    transition: all .1s cubic-bezier(1, 0.5, 0.8, 1);;
   }
 
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
+    transition: all .1s cubic-bezier(1, 0.5, 0.8, 1);;
   }
+
+
+
+  .zoom-fade-enter-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+
+  .zoom-fade-leave-active {
+    transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  }
+
+  .zoom-fade-enter-from,
+  .zoom-fade-leave-to {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+
 
 </style> 

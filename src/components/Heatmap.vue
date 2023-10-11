@@ -43,12 +43,16 @@
 	    }
 
 	    //From latest session in DB
-	    let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
-	    // console.log(res)
-	    if (res.data.data[0].data && res.data.data[0].data.length > 0){
-	    	console.log('Using '+ res.data.data[0].id)
-	    	start_data = start_data.concat(res.data.data[0].data)
-	    }
+		try {
+			let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
+			// console.log(res)
+			if (res.data.data.length > 0 && res.data.data[0].data.length > 0){
+				console.log('Using '+ res.data.data[0].id)
+				start_data = start_data.concat(res.data.data[0].data)
+			}
+		} catch (error) {
+			console.error(error);
+		}
 
 	    const click_max = 100
 	    let data_max = 100
@@ -58,10 +62,11 @@
 	        gradient: {
 					'.1': '#201E21',
 					'.3': '#574C2D',
-					'.5': '#370E79',
+					'.4': '#63127E',
+					'.45': '#370E79',
 					'.8': '#40886D',
-					'.96': '#BCFF2F',
-					'.97': '#A7C369',
+					'.96': 'red',
+					'.97': 'red',
 					'.99': 'red'
 			},
 			blur: .85,
@@ -72,9 +77,9 @@
 		heatmap.setData({min:0, max:data_max, data:start_data})
 		console.log(heatmap)
 	
-	    const move = fromEvent(monitored, 'mousemove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 5}}));
-	    const touch = fromEvent(monitored, 'touchmove').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 5}}));;
-	    const click = fromEvent(monitored, 'click').pipe(map((value) => {return {x: value.layerX, y: value.layerY, value: 10}}));
+	    const move = fromEvent(monitored, 'mousemove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));
+	    const touch = fromEvent(monitored, 'touchmove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));;
+	    const click = fromEvent(monitored, 'click').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 40, radius: 10}}));
 
 	    const all_points = []
 
@@ -119,6 +124,12 @@
 			
 
 		})
+
+		window.addEventListener("resize", function(){
+			console.log('resize')
+			heatmap.repaint()
+		})
+
 	}
 
 	onMounted(() => {

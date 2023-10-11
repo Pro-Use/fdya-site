@@ -1,6 +1,6 @@
 <template>
 	<div class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tight">
-		{{info_text}} <span class=" text-black w-20 bg-white inline-block translate-y-1 h-7">{{ info_index }}</span>
+		{{info_text}} <span class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>
 	</div>
 </template>
 
@@ -23,6 +23,8 @@
 	const info_index = ref('')
 	let splashText = []
 	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所/是的数据, /对于你应该/返回的数据 '
+
+	info_text.value = 'Loading'
 
 	const strFmt = (str, pre='', post='') => {
 		return pre.toUpperCase()+String(str).toUpperCase()+post.toUpperCase()+' '
@@ -102,7 +104,12 @@
 				delay = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
 			}
 			console.log(arr[index])
-			info_text.value += arr[index];
+			if (index == 0){
+				info_text.value = arr[index];
+			}else{
+				info_text.value += arr[index];
+			}
+			
 			info_index.value = index;
 			setTimeout(function () {
 				processText(arr, index + 1);

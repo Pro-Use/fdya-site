@@ -6,15 +6,15 @@
 		</iframe>
 	</div>
 	<div
-		class="ss-iframe"  
-		ref="ss_monitor">
+		 class="ss-iframe hide"  
+		 ref="ss_monitor">
 	</div>
 </template>
 <script setup>
 	import { ref, defineProps, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
 
-	const ss_disabled = true
+	const ss_disabled = false
 
 	const ss_monitor = ref(null)
 	const timeout_ms = 10000
@@ -28,7 +28,7 @@
 			clearTimeout(timeout_id.value)
 		}
 		timeout_id.value = setTimeout(() => {
-			if(!ss_disabled){
+			if(ss_disabled.value == false){
 				ss_active.value = true
 			}
 		}, timeout_ms)
