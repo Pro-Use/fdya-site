@@ -2,6 +2,7 @@
 	  <main class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
         <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/LEL.png">
 		<WorkInfo :work="props.work" />
+		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" />
 	  </main>
 </template>
 
@@ -10,6 +11,7 @@
 	import { useRoute } from 'vue-router'
 	import { useStateStore } from '../stores/state'
 	import WorkInfo from '../components/works/WorkInfo.vue'
+	import CrossLucid from '../components/works/CrossLucid.vue'
 
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])
