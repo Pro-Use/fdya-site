@@ -10,7 +10,7 @@
 	console.log(props.work)
 
 	const work_info = computed(() => {
-		const filter_work = state.worksInfo.filter((work_obj) => work_obj.name == props.work)
+		const filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
 		console.log(filter_work)
 		if (filter_work.length != 0) {
 			return filter_work[0]
