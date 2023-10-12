@@ -48,10 +48,11 @@
 	    //From latest session in DB
 		try {
 			let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
-			// console.log(res)
-			if (res.data.data.length > 0 && res.data.data[0].data.length > 0){
+			console.log(res)
+			if (res.data.data.length > 0) {
+				const old_data = JSON.parse(res.data.data[0].data)
 				console.log('Using '+ res.data.data[0].id)
-				start_data = start_data.concat(res.data.data[0].data)
+				start_data = start_data.concat(old_data)
 			}
 		} catch (error) {
 			console.error(error);
