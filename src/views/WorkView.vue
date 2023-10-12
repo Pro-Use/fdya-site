@@ -2,8 +2,9 @@
 	  <main class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
         <img v-if="coverImage" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
-		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" />
-		<VideoComponent v-else :work="props.work"></VideoComponent>
+		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
+		<iframe class="funeral-iframe" v-if="props.work == 'funeral-play'" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+		<SymbioticAi v-if="props.work == 'symbiotic-ai'" :work="props.work" />
 	  </main>
 </template>
 
@@ -14,6 +15,7 @@
 	import WorkInfo from '../components/works/WorkInfo.vue'
 	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
+	import SymbioticAi from '../components/works/SymbioticAi.vue'
 
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])
@@ -30,7 +32,7 @@
 	const coverImage = computed(() => {
 		const filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
 		if (filter_work.length != 0 && filter_work[0].cover) {
-			return `${api_base}assets/${filter_work[0].cover}`
+			return `${api_base}assets/${filter_work[0].cover.filename_disk}`
 		} else {
 			return null
 		}
@@ -46,5 +48,10 @@
 </script>
 
 <style scoped>
-	
+	.funeral-iframe {
+		width: 100vw;
+		height: 100%;
+		overflow: hidden;
+		position: fixed;
+	}
 </style>
