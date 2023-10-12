@@ -14,7 +14,7 @@ const router = createRouter({
     },
     {
       path: '/no-splash',
-      name: 'home',
+      name: 'home2',
       component: HomeView
     },
     {
