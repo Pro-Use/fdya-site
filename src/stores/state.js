@@ -41,7 +41,13 @@ export const useStateStore = defineStore('state', () => {
     if (worksInfo.value.length === 0){
       return [null,null,null,null,null,null]
     } else {
-      return worksInfo.value.map((workInfo) => `${api_base}assets/${workInfo.cover}`)
+      return worksInfo.value.map((workInfo) => {
+        if (workInfo.cover === null){
+          return null
+        } else {
+          return `${api_base}assets/${workInfo.cover.filename_disk}`
+        }    
+      })
     }
   })
 
