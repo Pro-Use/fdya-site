@@ -13,7 +13,7 @@
 			<Transition name="zoom-fade">
 				<div v-if="showInfo" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight uppercase">
 					<button @click="toggleInfo" class="absolute top-4 right-4 p-4 text-white text-3xl font-DMregular">CLOSE</button>
-					{{ work_info.description_en }}
+					<span v-html="work_info.description_en"></span>
 				</div>
 			</Transition>
 		</div>
