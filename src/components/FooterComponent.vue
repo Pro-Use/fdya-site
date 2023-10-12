@@ -1,12 +1,13 @@
 <template>
     <footer class="z-[100] font-DMregular">
-        <button 
+        <router-link 
+            to="/audio"
             class="
                 fixed flex items-center justify-center bottom-2.5 left-2.5 z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow text-center
                 lg:left-[initial] lg:right-8 lg:bottom-[96px] lg:w-[96px] lg:rounded-[50%]    
             ">
             <AudioIcon></AudioIcon>
-        </button>
+        </router-link >
         <router-link 
             to="/accessibility"
             class="

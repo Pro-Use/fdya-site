@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import WorkView from '../views/WorkView.vue'
 import InfoView from '../views/InfoView.vue'
 import AccessView from '../views/AccessView.vue'
+import AudioView from '../views/AudioView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +15,7 @@ const router = createRouter({
     },
     {
       path: '/no-splash',
-      name: 'home',
+      name: 'home2',
       component: HomeView
     },
     {
@@ -32,7 +33,12 @@ const router = createRouter({
       name: 'work',
       component: WorkView,
       props: true,
-    }
+    },
+    {
+      path: '/audio/',
+      name: 'audio',
+      component: AudioView,
+    },
   ]
 })
 

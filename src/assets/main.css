@@ -10,6 +10,13 @@
         url("/src/assets/dmmono-regular-webfont.woff2")format("woff2");
 }
 
+@font-face {
+    font-family: "dm-mono-regular";
+    font-style: italic;
+    src: 
+        url("/src/assets/dmmono-italic-webfont.woff")format("woff"), 
+        url("/src/assets/dmmono-italic-webfont.woff2")format("woff2");
+}
 
 :root{
     --x: 16.66vw;
