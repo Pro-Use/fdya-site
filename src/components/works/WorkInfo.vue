@@ -11,9 +11,15 @@
 			<button @click="toggleInfo" class="fixed bottom-4 right-4 p-4 text-white text-3xl font-DMregular z-50">INFO</button>
 			
 			<Transition name="zoom-fade">
-				<div v-if="showInfo" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight uppercase">
+				<div v-if="showInfo" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight ">
 					<button @click="toggleInfo" class="absolute top-4 right-4 p-4 text-white text-3xl font-DMregular">CLOSE</button>
-					<span v-html="work_info.description_en"></span>
+					<div class="p-4 grid grid-cols-3 gap-8">
+						<div class="col-span-2">
+							<h2 class="pb-8 uppercase"><i>{{ work_info.title_en }}</i>
+							<br>{{ work_info.artist_en }}</h2>
+							<div v-html="work_info.description_en"></div>
+						</div>
+					</div> 
 				</div>
 			</Transition>
 		</div>
