@@ -4,7 +4,8 @@
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
 		<iframe class="funeral-iframe" v-if="props.work == 'funeral-play'" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
-		<SymbioticAi v-if="props.work == 'symbiotic-ai'" :work="props.work" />
+		<VideoWorkWrapper 
+			v-if="props.work == 'symbiotic-ai' || props.work == 'digital-traces' || props.work == 'landscape-enter-life'" :work="props.work" />
 	  </main>
 </template>
 
@@ -15,7 +16,7 @@
 	import WorkInfo from '../components/works/WorkInfo.vue'
 	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
-	import SymbioticAi from '../components/works/SymbioticAi.vue'
+	import VideoWorkWrapper from '../components/works/VideoWorkWrapper.vue'
 
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])
