@@ -62,7 +62,7 @@ onMounted(() => {
 
     <div class="cross-container-7">
       <a @click="launchProject" :data-link="workLinks[0]"> 
-        <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/LEL.png">
+        <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/poster-1.jpg">
       </a>
     </div>
     <div class="cross-container-8"><a @click="launchProject" :data-link="workLinks[1]"> </a></div>
