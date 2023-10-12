@@ -2,7 +2,8 @@
 	  <main class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
         <img class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" src="../assets/poster-1.jpg">
 		<WorkInfo :work="props.work" />
-		<VideoComponent :work="props.work"></VideoComponent>
+		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" />
+		<VideoComponent v-else :work="props.work"></VideoComponent>
 	  </main>
 </template>
 
@@ -12,6 +13,7 @@
 	import { useStateStore } from '../stores/state'
 	import WorkInfo from '../components/works/WorkInfo.vue'
 	import VideoComponent from '../components/works/VideoComponent.vue'
+	import CrossLucid from '../components/works/CrossLucid.vue'
 
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])

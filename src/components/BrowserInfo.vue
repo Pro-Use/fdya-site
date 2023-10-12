@@ -10,10 +10,14 @@
 	import { UAParser } from 'ua-parser-js';
 	import { useStateStore } from '../stores/state'
 	import { useClStore } from '../stores/CrossLucid'
+	import { useRoute } from 'vue-router'
 
 	const state = useStateStore()
 	const cl_store = useClStore()
 
+	const route = useRoute()
+
+	console.log('route', route.fullPath)
 
 	console.log('navigator',window.navigator)
 	const uap = UAParser(navigator.userAgent);
@@ -103,7 +107,7 @@
 			}else{
 				delay = Math.floor(Math.random() * (500 - 100 + 1)) + 100;
 			}
-			console.log(arr[index])
+			// console.log(arr[index])
 			if (index == 0){
 				info_text.value = arr[index];
 			}else{
@@ -128,7 +132,11 @@
 		let str = splashText.join(' ');
 		state.$patch({browserInfo: str})
 		console.log(splashText)
-		await processText(splashText, 0)
+		if (route.fullPath === '/'){
+			await processText(splashText, 0)
+		} else {
+			state.splashComplete = true
+		}
 
 	}
 	
