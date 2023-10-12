@@ -47,7 +47,7 @@ onMounted(() => {
         <component v-if="state.splashComplete" :is="Component" />
       </transition>
     </router-view>
-    <!-- <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" /> -->
+    <ScreenSaver :monitored="hm_data" v-if="state.splashComplete" />
     <Transition name="fade">
       <FooterComponent  v-if="state.splashComplete && state.interfaceVisible"></FooterComponent>
     </Transition>

@@ -14,7 +14,7 @@
 	import { ref, defineProps, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
 
-	const ss_disabled = false
+	const ss_disabled = ref(false)
 
 	const ss_monitor = ref(null)
 	const timeout_ms = 10000
