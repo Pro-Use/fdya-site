@@ -3,7 +3,7 @@ import { RouterLink, RouterView } from 'vue-router'
 import { ref, provide, onMounted } from 'vue';
 import BrowserInfo from './components/BrowserInfo.vue'
 import BackgroundText from './components/BackgroundText.vue'
-import ScreenSaver from './components/ScreenSaver.vue'
+import ScreenSaver from './components/works/ScreenSaver.vue'
 import Heatmap from './components/Heatmap.vue'
 import Interface from './components/Interface.vue'
 import FooterComponent from './components/FooterComponent.vue'

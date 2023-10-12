@@ -1,6 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
+const api_base =  import.meta.env.VITE_API_BASE
+
 export const useStateStore = defineStore('state', () => {
   const splashComplete = ref(false)
   const infoVisible = ref(false)
@@ -23,15 +25,23 @@ export const useStateStore = defineStore('state', () => {
 
   const worksInfo = ref([])
 
-  const gridWorks = computed( () => {
+  const workLinks = computed( () => {
     if (worksInfo.value.length === 0) {
-      return []
+      return ['','','','','','']
     } else {
       return worksInfo.value.map((work) => {
         let slug = work.slug
         let lang = siteLang.value
         return `/works/${slug}/${lang}`
       })
+    }
+  })
+
+  const workCovers = computed(() => {
+    if (worksInfo.value.length === 0){
+      return [null,null,null,null,null,null]
+    } else {
+      return worksInfo.value.map((workInfo) => `${api_base}assets/${workInfo.cover}`)
     }
   })
 
@@ -46,7 +56,8 @@ export const useStateStore = defineStore('state', () => {
           hmData, 
           siteLang, 
           worksInfo,
-          gridWorks,
+          workLinks,
+          workCovers,
           siteInfo, 
           access_bg_images, 
           access_animations,}
