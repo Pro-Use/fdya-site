@@ -55,32 +55,32 @@ onMounted(() => {
 
     <div class="cross-container-7">
       <a @click="launchProject" :data-link="state.workLinks[0]"> 
-        <img v-if="state.workCovers[0]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[0]">
+        <img v-if="state.workCovers[0] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[0]">
       </a>
     </div>
     <div class="cross-container-8">
       <a @click="launchProject" :data-link="state.workLinks[1]"> 
-        <img v-if="state.workCovers[1]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[1]">
+        <img v-if="state.workCovers[1] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[1]">
       </a>
     </div>
     <div class="cross-container-9">
       <a @click="launchProject" :data-link="state.workLinks[2]"> 
-        <img v-if="state.workCovers[2]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[2]">
+        <img v-if="state.workCovers[2] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[2]">
       </a>
     </div>
     <div class="cross-container-10">
       <a @click="launchProject" :data-link="state.workLinks[3]"> 
-        <img v-if="state.workCovers[3]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[3]">
+        <img v-if="state.workCovers[3] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[3]">
       </a>
     </div>
     <div class="cross-container-11">
       <a @click="launchProject" :data-link="state.workLinks[4]"> 
-        <img v-if="state.workCovers[4]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[4]">
+        <img v-if="state.workCovers[4] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[4]">
       </a>
     </div>
     <div class="cross-container-12">
       <a @click="launchProject" :data-link="state.workLinks[5]"> 
-        <img v-if="state.workCovers[5]" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[5]">
+        <img v-if="state.workCovers[5] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[5]">
       </a>
     </div>
 
