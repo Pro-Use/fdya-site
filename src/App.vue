@@ -16,7 +16,7 @@ const hm_data = ref(null)
 const works_info = ref([])
 
 const get_works_info = async () => {
-  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/works')
+  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*')
   const works = res.data.data
 
   state.$patch({'worksInfo': works})
