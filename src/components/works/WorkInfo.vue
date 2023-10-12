@@ -1,14 +1,14 @@
 <template>
 	<Transition name="fade" appear>
 		<div>
-			<router-link to="/" class="absolute top-4 right-4 p-4 text-white text-3xl font-DMregular">CLOSE</router-link>
+			<router-link to="/" class="fixed z-50 top-4 right-4 p-4 text-white text-3xl font-DMregular">CLOSE</router-link>
 			
-			<h1 class="absolute bottom-4 left-4 p-4 text-white text-3xl font-DMregular">
+			<h1 class="fixed z-50 bottom-4 left-4 p-4 text-white text-3xl font-DMregular">
 				<i>{{ work_info.title_en }}</i>
 				<br>{{ work_info.artist_en }}
 			</h1>
 			
-			<button @click="toggleInfo" class="absolute bottom-4 right-4 p-4 text-white text-3xl font-DMregular">INFO</button>
+			<button @click="toggleInfo" class="fixed bottom-4 right-4 p-4 text-white text-3xl font-DMregular z-50">INFO</button>
 			
 			<Transition name="zoom-fade">
 				<div v-if="showInfo" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight uppercase">

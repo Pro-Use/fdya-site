@@ -3,6 +3,7 @@
         <img v-if="coverImage" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" />
+		<VideoComponent v-else :work="props.work"></VideoComponent>
 	  </main>
 </template>
 
@@ -11,6 +12,7 @@
 	import { useRoute } from 'vue-router'
 	import { useStateStore } from '../stores/state'
 	import WorkInfo from '../components/works/WorkInfo.vue'
+	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
 
 	const state = useStateStore()

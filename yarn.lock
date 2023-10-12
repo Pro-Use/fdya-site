@@ -558,7 +558,7 @@ has@^1.0.3:
 
 "heatmap.js@https://github.com/Pro-Use/heatmap.js.git":
   version "2.0.5"
-  resolved "git+ssh://git@github.com/Pro-Use/heatmap.js.git#5ccecb69560a9e220a9de665834522adc81e6c50"
+  resolved "https://github.com/Pro-Use/heatmap.js.git#89055bd3ddb52402191c6bbe96c587bf77ebaa4c"
 
 immutable@^4.0.0:
   version "4.3.4"
