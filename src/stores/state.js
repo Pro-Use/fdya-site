@@ -53,6 +53,8 @@ export const useStateStore = defineStore('state', () => {
 
   const siteInfo = ref({})
 
+  const screensaver_disabled = ref(false)
+
   return {interfaceVisible, 
           mainTransition, 
           splashComplete, 
@@ -66,5 +68,6 @@ export const useStateStore = defineStore('state', () => {
           workCovers,
           siteInfo, 
           access_bg_images, 
-          access_animations,}
+          access_animations,
+          screensaver_disabled }
 })
