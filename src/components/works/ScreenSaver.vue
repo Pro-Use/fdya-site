@@ -2,10 +2,12 @@
 	<div v-if="ss_active">
 		<iframe 
 			class="ss-iframe"  
+			allowtransparency="true"
 			src="http://works.fordatayouareandtodatayoushallreturn.online/threejs_yunshi/">
+
 		</iframe>
 	</div>
-	<div v-if="ss_active"
+	<div v-show="ss_active"
 		 class="ss-iframe hide"  
 		 ref="ss_monitor">
 	</div>
@@ -13,11 +15,12 @@
 <script setup>
 	import { ref, defineProps, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
+	import { useStateStore } from '../../stores/state'
 
-	const ss_disabled = ref(false)
+	const state = useStateStore()
 
 	const ss_monitor = ref(null)
-	const timeout_ms = 10000
+	const timeout_ms = 1000
 	const timeout_id = ref(null)
 	const ss_active = ref(false)
 	const props = defineProps(['monitored'])
@@ -28,7 +31,7 @@
 			clearTimeout(timeout_id.value)
 		}
 		timeout_id.value = setTimeout(() => {
-			if(ss_disabled.value == false){
+			if(state.screensaver_disabled == false && document.hasFocus()){
 				ss_active.value = true
 			}
 		}, timeout_ms)
@@ -37,8 +40,8 @@
 	onMounted(() => {
 		set_timeout()
 
-		console.log(monitored)
-		console.log(ss_monitor)
+		// console.log(document.hasFocus())
+		// console.log(ss_monitor)
 
 		const move = fromEvent(monitored, 'mousemove')
 		const ss_move = fromEvent(ss_monitor._value, 'mousemove')
@@ -63,7 +66,8 @@
 	    position: fixed;
 	    top: 0;
 		z-index: 10000;
-		opacity: .75;
+/*		opacity: .75;*/
+		background-color : transparent;
 	}
 	
 </style>
