@@ -1,7 +1,12 @@
 <template>
-	<div class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tight">
-		{{info_text}} <span class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>
-	</div>
+	<main id="#main" class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tight">
+		<h1 class="sr-only">{{ accessTitle }}</h1>
+		<p class="introduction sr-only">
+			An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.
+		</p>
+		<button class="sr-only" @click="skipIntro">Enter the exhibition</button>
+		<span aria-hidden="true">{{info_text}}</span> <span aria-hidden="true" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>	
+	</main>
 </template>
 
 <script setup>
@@ -26,7 +31,8 @@
 	const info_text = ref('')
 	const info_index = ref('')
 	let splashText = []
-	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所/是的数据, /对于你应该/返回的数据 '
+	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所是的数据, /对于你应该返回的数据 '
+	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  对于你所是的数据, 对于你应该返回的数据 '
 
 	info_text.value = 'Loading'
 
@@ -136,8 +142,13 @@
 			await processText(splashText, 0)
 		} else {
 			state.splashComplete = true
+			state.interfaceVisible = true
 		}
+	}
 
+	const skipIntro = async () => {
+		state.splashComplete = true
+		state.interfaceVisible = true
 	}
 	
 	// onMounted(() => {

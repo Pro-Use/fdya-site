@@ -1,6 +1,6 @@
 <template>
-	  <main class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
-        <img v-if="coverImage" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
+	  <main id="main" class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
+        <img aria-hidden="true" v-if="coverImage" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
 		<iframe class="funeral-iframe" v-if="props.work == 'funeral-play'" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>

@@ -5,7 +5,7 @@
 			src="http://works.fordatayouareandtodatayoushallreturn.online/threejs_yunshi/">
 		</iframe>
 	</div>
-	<div
+	<div v-if="ss_active"
 		 class="ss-iframe hide"  
 		 ref="ss_monitor">
 	</div>

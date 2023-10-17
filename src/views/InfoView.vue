@@ -1,7 +1,6 @@
 <template>
-    <main class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight">
+    <main id="main" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight">
         <div class="grid p-8 grid-cols-3 gap-8 relative">
-            <router-link class="absolute top-8 right-8 text-lg" to="/">CLOSE</router-link>
             <div class="grid col-span-2 grid-cols-2 gap-24 pb-16 text-lg">
                 <div class="col-span-2">
                     <h2 class="pb-8 uppercase">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h2>
@@ -9,48 +8,48 @@
                 </div>
                 <div class="col-span-2">
                     <h3 class="text-lg pb-8 uppercase">List Of Works</h3>
-                    <ul class="grid grid-cols-2 gap-8 text-lg">
+                    <ul role="list" class="grid grid-cols-2 gap-8 text-lg">
                         <li> 
-                            <i>Technological Grief Altar</i><br>
-                            Alice Yuan Zhang<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">Technological Grief Altar</i>
+                            <p>Alice Yuan Zhang</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[3]">[OPEN]</router-link>
                         </li>
                         <li> 
                             <i>Digital Traces</i><br>
-                            April Lin 林森<br>
-                            2023<br>
-                            [OPEN]
+                            <p>April Lin 林森</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[5]">[OPEN]</router-link>
                         </li>
                         <li> 
-                            <i>Dwellers between the waters</i><br>
-                            Crosslucid<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">Dwellers between the waters</i>
+                            <p>Crosslucid</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[1]">[OPEN]</router-link>
                         </li>
                         <li> 
-                            <i>Symbiotic AI</i><br>
-                            Iris QU<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">Symbiotic AI</i>
+                            <p>Iris QU</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[0]">[OPEN]</router-link>
                         </li>
                         <li> 
-                            <i>landscape / enter / life</i><br>
-                            Rebecca Allen<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">landscape / enter / life</i>
+                            <p>Rebecca Allen</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[2]">[OPEN]</router-link>
                         </li>
                         <li> 
-                            <i>Funeral Play</i><br>
-                            Ruini Shi<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">Funeral Play</i>
+                            <p>Ruini Shi</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[4]">[OPEN]</router-link>
                         </li>
                         <li> 
-                            <i>Glimpse</i><br>
-                            Crosslucid<br>
-                            2023<br>
-                            [OPEN]
+                            <i class="block">Glimpse</i>
+                            <p>Xu Haomin</p>
+                            <p>2023</p>
+                            <router-link :to="state.workLinks[6]">[OPEN]</router-link>
                         </li>
                     </ul>
                 </div>
@@ -69,26 +68,30 @@
                 </div>
                 <div class="col-span-1 text-lg">
                     <h3 class="pb-4 uppercase">CREDITS</h3>
-                    <ul>
+                    <ul role="list">
                         <li class="pb-4">
-                            <i>Integer Purus</i><br>
+                            <i class="block">Integer Purus</i>
                             Praesent consequat
                         </li>
                         <li class="pb-4">
-                            <i>Integer Purus</i><br>
+                            <i class="block">Integer Purus</i>
                             Praesent consequat
                         </li>
                         <li class="pb-4">
-                            <i>Integer Purus</i><br>
+                            <i class="block">Integer Purus</i>
                             Praesent consequat
                         </li>
                         <li class="pb-4">
-                            <i>Integer Purus</i><br>
+                            <i class="block">Integer Purus</i>
                             Praesent consequat
                         </li>
                     </ul>
                 </div>
             </div>
+            <router-link class="absolute top-8 right-8 text-lg" to="/">
+                <span class="sr-only">Back to Home Page</span>
+			    <span aria-hidden="true">CLOSE</span>
+            </router-link>
         </div>
    </main>
 </template>

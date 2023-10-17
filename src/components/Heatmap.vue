@@ -1,5 +1,5 @@
 <template>
-	<div class="heatmap" ref="hm_div"></div>
+	<div aria-hidden="true" class="heatmap" ref="hm_div"></div>
 </template>
 
 <script setup>

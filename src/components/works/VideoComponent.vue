@@ -1,6 +1,6 @@
 <template>
 
-    <video ref="video" class="w-screen h-screen absolute top-0 left-0 object-cover z-40" :src="video" autoplay>
+    <video ref="video" class="w-screen h-screen absolute top-0 left-0 object-cover z-40" :src="video" autoplay playsinline="true">
 
     </video>
 

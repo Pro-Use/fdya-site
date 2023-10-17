@@ -9,9 +9,11 @@ export const useStateStore = defineStore('state', () => {
 
   const access_bg_images = ref(true)
   const access_animations = ref(true)
-  const interfaceVisible = ref(true)
+  const interfaceVisible = ref(false)
+
+  const navIntent = ref('mouse')
   
-  const mainTransition = ref('zoom-fade');
+  const mainTransition = ref('zoom-fade')
 
   const splashDone = () => {
     splashComplete.value = true
@@ -51,6 +53,7 @@ export const useStateStore = defineStore('state', () => {
     }
   })
 
+
   const siteInfo = ref({})
 
   return {interfaceVisible, 
@@ -66,5 +69,7 @@ export const useStateStore = defineStore('state', () => {
           workCovers,
           siteInfo, 
           access_bg_images, 
-          access_animations,}
+          access_animations,
+          navIntent
+        }
 })

@@ -1,5 +1,5 @@
 <template>
-	<div class="bg-text h-screen w-screen">
+	<div aria-hidden="true" class="bg-text h-screen w-screen">
 		<div class="grid grid-cols-3">
 			<div class="p-4 h-screen overflow-y-auto break-all">{{state.browserInfo}} <br> <br> {{state.hmData}}</div>
 			<div class="p-4 h-screen overflow-y-auto break-all"><example></example></div>

@@ -37,7 +37,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
+  <main id="main" aria-label="Index Page" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
 
     <div class="grid-container absolute top-0 w-screen">
       <div class="grid-line-v"></div>
@@ -53,36 +53,62 @@ onMounted(() => {
       <div class="grid-line-h"></div>
     </div>
 
-    <div class="cross-container-7">
-      <a @click="launchProject" :data-link="state.workLinks[0]"> 
-        <img v-if="state.workCovers[0] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[0]">
+  <ul role="list" aria-label="Artworks">
+    <li class="cross-container-7">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[0]" aria-label="Open A by Artist A"> 
+        <img 
+          v-if="state.workCovers[0] !== null" 
+          aria-hidden="true"
+          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          :src="state.workCovers[0]">
       </a>
-    </div>
-    <div class="cross-container-8">
-      <a @click="launchProject" :data-link="state.workLinks[1]"> 
-        <img v-if="state.workCovers[1] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[1]">
+    </li>
+    <li class="cross-container-8">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[1]"> 
+        <img 
+        v-if="state.workCovers[1] !== null" 
+        alt="Open B by Artist B"
+        class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+        :src="state.workCovers[1]">
       </a>
-    </div>
-    <div class="cross-container-9">
-      <a @click="launchProject" :data-link="state.workLinks[2]"> 
-        <img v-if="state.workCovers[2] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[2]">
+    </li>
+    <li class="cross-container-9">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[2]"> 
+        <img 
+        v-if="state.workCovers[2] !== null" 
+        alt="Open C by Artist C"
+        class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+        :src="state.workCovers[2]">
       </a>
-    </div>
-    <div class="cross-container-10">
-      <a @click="launchProject" :data-link="state.workLinks[3]"> 
-        <img v-if="state.workCovers[3] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[3]">
+    </li>
+    <li class="cross-container-10">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[3]"> 
+        <img 
+          v-if="state.workCovers[3] !== null" 
+          alt="Open D by Artist D"
+          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          :src="state.workCovers[3]">
       </a>
-    </div>
-    <div class="cross-container-11">
-      <a @click="launchProject" :data-link="state.workLinks[4]"> 
-        <img v-if="state.workCovers[4] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[4]">
+    </li>
+    <li class="cross-container-11">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[4]"> 
+        <img 
+          v-if="state.workCovers[4] !== null"
+          alt="Open E by Artist E" 
+          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          :src="state.workCovers[4]">
       </a>
-    </div>
-    <div class="cross-container-12">
-      <a @click="launchProject" :data-link="state.workLinks[5]"> 
-        <img v-if="state.workCovers[5] !== null" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="state.workCovers[5]">
+    </li>
+    <li class="cross-container-12">
+      <a href="#work" @click="launchProject" :data-link="state.workLinks[5]"> 
+        <img 
+          v-if="state.workCovers[5] !== null" 
+          alt="Open F by Artist F"
+          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          :src="state.workCovers[5]">
       </a>
-    </div>
+    </li>
+  </ul>
 
   </main>
 </template>
@@ -189,12 +215,13 @@ onMounted(() => {
     }
   }
   
-  [class^="cross-container"]:hover{
-    transform:translate(-50%,-50%) scale(100%, 50%);
+  [class^="cross-container"]:hover, [class^="cross-container"]:focus-within{
+    transform:translate(-50%,-50%) scale(100%, 100%);
     img{
       opacity: 1;
     }
   }
+
   [class^="cross-container"] a{
     display: block;
     width: 100%;
@@ -237,7 +264,7 @@ onMounted(() => {
   .cross-container-7:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-7:hover a{
+  .cross-container-7:hover a, .cross-container-7 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 85% 0%, 100% 0, 100% 15%, 100% 85%, 100% 100%, 85% 100%, 25% 100%, 25% 75%, 0 75%);
@@ -251,7 +278,7 @@ onMounted(() => {
   .cross-container-8:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-8:hover a{
+  .cross-container-8:hover a, .cross-container-8 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 0 0, 25% 0, 75% 0, 75% 26%, 100% 26%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
@@ -264,7 +291,7 @@ onMounted(() => {
   .cross-container-9:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-9:hover a{
+  .cross-container-9:hover a, .cross-container-9 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
@@ -278,7 +305,7 @@ onMounted(() => {
   .cross-container-10:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-10:hover a{
+  .cross-container-10:hover a, .cross-container-10 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 0 0, 25% 0, 75% 0, 100% 0, 100% 26%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%);
@@ -292,7 +319,7 @@ onMounted(() => {
   .cross-container-11:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-11:hover a{
+  .cross-container-11:hover a, .cross-container-11 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 25%, 100% 25%, 100% 75%, 75% 75%, 75% 100%, 25% 100%, 25% 75%, 0 75%);  
@@ -305,7 +332,7 @@ onMounted(() => {
   .cross-container-12:hover{
     transform:translate(-50%,-50%) scale(100%, 100%);
   }
-  .cross-container-12:hover a{
+  .cross-container-12:hover a, .cross-container-12 a:focus{
    /* transform: rotate(90deg); */
  transform: rotate(0deg);
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 26%, 100% 26%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);  
