@@ -72,6 +72,6 @@ export const useStateStore = defineStore('state', () => {
           siteInfo, 
           access_bg_images, 
           access_animations,
-          navIntent
+          navIntent,
           screensaver_disabled }
 })
