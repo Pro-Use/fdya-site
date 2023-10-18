@@ -23,7 +23,10 @@
 			<div class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16 p-2 lg:p-4  max-w-[1200px]">
                 <div class="col-span-2">
-					<h2 class="pb-8 text-lg xl:text-2xl uppercase"><i>{{ work_info.title_en }}</i><br>{{ work_info.artist_en }}</h2>
+					<h2 class="pb-8 text-lg xl:text-2xl uppercase">
+						<div v-html="work_info.artist_en"></div>
+						<div v-html="work_info.listing_en"></div>
+					</h2>
 					<div class="text-base xl:text-lg rte" v-html="work_info.description_en"></div>
                 </div>   
             </div>
