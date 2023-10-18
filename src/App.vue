@@ -23,8 +23,16 @@ const get_works_info = async () => {
   state.$patch({'worksInfo': works})
 }
 
+const get_site_info = async () => {
+  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/site_info')
+  const site = res.data.data
+
+  state.$patch({'siteInfo': site})
+}
+
 onMounted(() => {
   get_works_info()
+  get_site_info()
 })
 
 
