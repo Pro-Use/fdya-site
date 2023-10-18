@@ -9,7 +9,7 @@
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Hide background images and heatmap:</h3>
                     <button 
-                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" 
+                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm hover:text-black hover:bg-white" 
                         @click="toggleBG"
                         :aria-label="backgroundsButtonLabel"
                         >{{ backgroundsButtonText }}
@@ -18,7 +18,7 @@
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Pause animations:</h3>
                     <button 
-                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" 
+                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm hover:text-black hover:bg-white" 
                         @click="toggleAnimations"
                         :aria-label="animationsButtonLabel"
                         >{{ animationsButtonText }}
@@ -26,7 +26,7 @@
                 </div>    
             </div>
             <div class="close-button">
-                <router-link class="sticky top-0  p-2 lg:p-4 text-lg xl:text-2xl text-white text-right w-full block" to="/">
+                <router-link class="sticky top-0  p-2 lg:p-4 text-lg xl:text-2xl text-white text-right w-full block hover:text-yellow" to="/">
                     <span class="sr-only">Back to Home Page</span>
                     <span aria-hidden="true">CLOSE</span>
                 </router-link>

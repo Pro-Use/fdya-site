@@ -125,6 +125,12 @@ onMounted(() => {
     p{
       padding-bottom: 1em;
     }
+    a, a:link, a:visited{
+      color: #B8F33A
+    }
+    a:hover, a:active{
+      color: #D65CFF
+    }
   }
 
 </style> 

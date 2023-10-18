@@ -7,12 +7,12 @@
 			</h1>
 			
 			<button @click="toggleInfo" 
-				class="fixed bottom-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular z-50">
+				class="fixed bottom-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular z-50 hover:text-yellow">
 				<span class="sr-only">About this artwork</span>
 				<span aria-hidden="true">INFO</span>
 			</button>
 
-			<router-link to="/" class="fixed z-50 top-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
+			<router-link to="/" class="fixed z-50 top-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular hover:text-yellow">
 				<span class="sr-only">Back to index page</span>
 				<span aria-hidden="true">CLOSE</span>
 			</router-link>
@@ -31,7 +31,7 @@
                 </div>   
             </div>
             <div class="close-button">
-				<button ref="closeInfo" @click="toggleInfo" class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full">CLOSE</button>
+				<button ref="closeInfo" @click="toggleInfo" class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full hover:text-yellow">CLOSE</button>
             </div>
         </div>
 		</div>

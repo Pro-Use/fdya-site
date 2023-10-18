@@ -1,7 +1,7 @@
 <template>
     <main class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tighter">
         <div class="w-screen h-screen flex items-center justify-center">
-            <router-link class="absolute top-8 right-8 text-lg" to="/">CLOSE</router-link>
+            <router-link class="absolute top-8 right-8 text-lg hover:text-yellow" to="/">CLOSE</router-link>
             <figure>
                 <figcaption class="sr-only">Listen to the audio guide:</figcaption>
                 <audio controls autoplay src="/audio-guide-test.mp3">

@@ -15,65 +15,32 @@
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pb-8 uppercase">List Of Works</h3>
                     <ul role="list" class="grid col-span-2 md:grid-cols-2 xl:grid-cols-3 gap-8 text-base xl:text-lg">
-                        <li> 
-                            <i class="block">Technological Grief Altar</i>
-                            <p>Alice Yuan Zhang</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[3]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i>Digital Traces</i><br>
-                            <p>April Lin 林森</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[5]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i class="block">Dwellers between the waters</i>
-                            <p>Crosslucid</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[1]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i class="block">Symbiotic AI</i>
-                            <p>Iris QU</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[0]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i class="block">landscape / enter / life</i>
-                            <p>Rebecca Allen</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[2]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i class="block">Funeral Play</i>
-                            <p>Ruini Shi</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[4]">[OPEN]</router-link>
-                        </li>
-                        <li> 
-                            <i class="block">Glimpse</i>
-                            <p>Xu Haomin</p>
-                            <p>2023</p>
-                            <router-link :to="state.workLinks[6]">[OPEN]</router-link>
+                        <li v-for="(work, index) in state.worksInfo" :key="index"> 
+                            <div v-html="work.artist_en"></div>
+                            <div v-html="work.listing_en"></div>
+                            <router-link :to="state.workLinks[index]" class="hover:text-yellow">[OPEN]</router-link>
                         </li>
                     </ul>
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="pb-8 text-lg  xl:text-2xl uppercase">AREBYTE</h3>
-                    <div class="text-base xl:text-lg" v-html="state.siteInfo.arebyte_en"></div>
+                    <div class="text-base xl:text-lg rte" v-html="state.siteInfo.arebyte_en"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
                     <h3 class="pb-8 text-lg  xl:text-2xl uppercase">CHRONUS ART CENTER</h3>
-                    <div class="text-base xl:text-lg" v-html="state.siteInfo.cac_en"></div>
+                    <div class="text-base xl:text-lg rte" v-html="state.siteInfo.cac_en"></div>
                 </div>
-                <div class="col-span-2">
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">EVENTS</h3>
+                    <div class="text-base xl:text-lg rte" v-html="state.siteInfo.events_en"></div>
+                </div>
+                <div class="col-span-2 md:col-span-1">
                     <h3 class="pb-4 text-lg  xl:text-2xl uppercase">CREDITS</h3>
-                    <div class="text-base xl:text-lg" v-html="state.siteInfo.credits_en"></div>
+                    <div class="text-base xl:text-lg rte" v-html="state.siteInfo.credits_en"></div>
                 </div>
             </div>
             <div class="close-button">
-                <router-link class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full" to="/">
+                <router-link class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full hover:text-yellow" to="/">
                     <span class="sr-only">Back to Home Page</span>
                     <span aria-hidden="true">CLOSE</span>
                 </router-link>
