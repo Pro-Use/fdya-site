@@ -27,7 +27,7 @@
             aria-label="Listen to an audio guide of the exhibition"
             class="
                 fixed flex items-center justify-center bottom-2.5 left-2.5 z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow text-center
-                lg:left-[initial] lg:right-8 lg:bottom-[96px] lg:w-[96px] lg:rounded-[50%]    
+                lg:left-[initial] lg:right-8 lg:bottom-48 lg:w-[96px] lg:rounded-[50%]    
             ">
             <AudioIcon></AudioIcon>
         </router-link >
@@ -36,10 +36,18 @@
             aria-label="Open Accessibility Options"
             class="
                 fixed flex items-center justify-center bottom-2.5 right-2.5 z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
-                lg:right-8 lg:bottom-8 lg:w-[96px] lg:rounded-[50%] lg:bg-transparent lg:border-none lg:shadow-none lg:hover:bg-transparent lg:hover:border-solid lg:hover:border lg:hover:border-white
+                lg:right-8 lg:bottom-28 lg:w-[96px] lg:rounded-[50%] lg:bg-transparent lg:border-none lg:shadow-none lg:hover:bg-transparent lg:hover:border-solid lg:hover:border lg:hover:border-white
             ">
             <AccessIcon></AccessIcon>
         </router-link>
+        <button @click="download_heatmap" :disabled="state.download_canvas"
+            aria-label="Download the heatmap"
+            class="
+                fixed flex items-center justify-center bottom-2.5 right-2.5 z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
+                lg:right-8 lg:bottom-8 lg:w-[96px] lg:rounded-[50%] lg:bg-transparent lg:border-none lg:shadow-none lg:hover:bg-transparent lg:hover:border-solid lg:hover:border lg:hover:border-white
+            ">
+            <DownloadIcon></DownloadIcon>
+        </button>
     </header>
 </template>
 
@@ -49,5 +57,14 @@
 const title ='FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN 对于你所是的数据, 对于你应该返回的数据 '
 import AudioIcon from './icons/AudioIcon.vue';
 import AccessIcon from './icons/AccessIcon.vue';
+import DownloadIcon from './icons/DownloadIcon.vue';
+import { useStateStore } from '../stores/state'
 
+const state = useStateStore()
+// const { download_canvas } = storeToRefs(state)
+
+const download_heatmap = () => {
+    console.log('download_heatmap clicked')
+    state.$patch({'download_heatmap': true})
+}
 </script>

@@ -1,14 +1,16 @@
 <template>
 	<div aria-hidden="true" class="heatmap" ref="hm_div"></div>
+	<HeatmapDownload v-if="hm_div !== null" :heatmap="hm_div" />
 </template>
 
 <script setup>
-	import { ref, defineProps, watch, onMounted } from 'vue';
+	import { ref, defineProps, onMounted } from 'vue';
 	import h337 from 'heatmap.js';
 	import { fromEvent, map, mergeWith } from 'rxjs';
 	import axios from 'axios';
 	import { useStateStore } from '../stores/state'
 	import { useClStore } from '../stores/CrossLucid'
+	import HeatmapDownload from './HeatmapDownload.vue'
 
 	const state = useStateStore()
 	const cl_store = useClStore()
