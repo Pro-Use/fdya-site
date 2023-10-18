@@ -8,11 +8,21 @@
                 </div>
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Hide background images and heatmap:</h3>
-                    <button class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" @click="toggleBG">{{ backgroundsButtonText }} {{ backgroundsButtonState }}</button>
+                    <button 
+                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" 
+                        @click="toggleBG"
+                        :aria-label="backgroundsButtonLabel"
+                        >{{ backgroundsButtonText }}
+                    </button>
                 </div>
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Pause animations:</h3>
-                    <button class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" @click="toggleAnimations">{{ animationsButtonText }} {{ animationsButtonState }}</button>
+                    <button 
+                        class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm" 
+                        @click="toggleAnimations"
+                        :aria-label="animationsButtonLabel"
+                        >{{ animationsButtonText }}
+                    </button>
                 </div>    
             </div>
             <div class="close-button">
@@ -33,37 +43,54 @@ const state = useStateStore()
 
 onMounted(() => {
     state.interfaceVisible = false
-    if(state.access_bg_images == true){
-        backgroundsButtonState.value = "On"
-    }else{
-        backgroundsButtonState.value = "off"
-    }
+    setButtonText()
 })
 
-const backgroundsButtonText = "Background Images"
-const animationsButtonText = "Animations"
-let backgroundsButtonState = ref("on")
-let animationsButtonState =  ref("on")
+const buttonTextJson = {
+    "bgImagesOnButtonText": "Turn Background Images Off",
+    "bgImagesOffButtonText": "Turn Background Images On",
+    "bgImagesOffLabelText": "Background Images are off, click to turn background images on",
+    "bgImagesOnLabelText": "Background Images are on, click to turn background images off",
+    "animationsOnButtonText": "Turn Animations Off",
+    "animationsOffButtonText": "Turn Animations On",
+    "animationsOffLabelText": "Animations are off, click to turn Animations on",
+    "animationsOnLabelText": "Animations are on, click to turn Animations off"
+}
+
+
+const backgroundsButtonText = ref()
+const animationsButtonText = ref()
+const backgroundsButtonLabel = ref()
+const animationsButtonLabel = ref()
 
 
 function toggleBG(event){
     const button = event.target
     state.access_bg_images = !state.access_bg_images
-    if(backgroundsButtonState.value == "on"){
-        backgroundsButtonState.value = "off"
+    setButtonText()
+}
+
+function setButtonText(){
+    if(state.access_bg_images == true){
+        backgroundsButtonText.value = buttonTextJson.bgImagesOnButtonText
+        backgroundsButtonLabel.value =  buttonTextJson.bgImagesOnLabelText
     }else{
-        backgroundsButtonState.value = "on"
+        backgroundsButtonText.value = buttonTextJson.bgImagesOffButtonText
+        backgroundsButtonLabel.value =  buttonTextJson.bgImagesOffLabelText
+    }
+    if(state.access_animations == true){
+        animationsButtonText.value = buttonTextJson.animationsOnButtonText
+        animationsButtonLabel.value =  buttonTextJson.animationsOnLabelText
+    }else{
+        animationsButtonText.value =    buttonTextJson.animationsOffButtonText
+        animationsButtonLabel.value =  buttonTextJson.animationsOffLabelText
     }
 }
 
 function toggleAnimations(event){
     const button = event.target
     state.access_animations = !state.access_animations
-    if(animationsButtonState.value == "on"){
-        animationsButtonState.value = "off"
-    }else{
-        animationsButtonState.value = "on"
-    }
+    setButtonText()
 }
 
 </script>

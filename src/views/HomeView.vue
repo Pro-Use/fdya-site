@@ -13,7 +13,12 @@ const launchProject = (event) => {
   const container = a.parentElement
   const link = a.getAttribute('data-link')
   state.interfaceVisible = false
-  console.log(link)
+
+  if(state.access_animations == false){
+    router.push({
+        path: link
+      })
+  }
   if(container.classList.contains('active')){
     container.classList.remove('active')
   }else{
@@ -415,5 +420,9 @@ const okaySmallScreen = (event) => {
     display: block;
   }
 }
+
+.notransition [class^="cross-container"], .notransition a, .notransition img {
+    transition: all 0s 1ms linear !important;
+  }
 
 </style>
