@@ -1,12 +1,13 @@
 <template>
 	<div aria-hidden="true" class="heatmap" ref="hm_div"></div>
+	<div class="fake-heatmap" v-show="heatmap_faked"></div>
 	<HeatmapDownload v-if="hm_div !== null" :heatmap="hm_div" />
 </template>
 
 <script setup>
 	import { ref, defineProps, onMounted } from 'vue';
 	import h337 from 'heatmap.js';
-	import { fromEvent, map, mergeWith } from 'rxjs';
+	import { fromEvent, map, mergeWith, debounceTime } from 'rxjs';
 	import axios from 'axios';
 	import { useStateStore } from '../stores/state'
 	import { useClStore } from '../stores/CrossLucid'
@@ -19,6 +20,8 @@
 	const monitored = props.monitored
 
 	const hm_div = ref(null)
+	const heatmap_faked = ref(true)
+	let heatmap
 
 	const addValue = (e, value) => {
      	e.value = value;
@@ -27,7 +30,7 @@
 
     const api_base =  import.meta.env.VITE_API_BASE
 
-    const renderHeatmap = async () => {
+    const renderHeatmap = async (pull=true) => {
     	// fill screen with data
 	    let start_data = []
 	    // Placeholder values
@@ -45,21 +48,23 @@
 	    }
 
 	    //From latest session in DB
-		try {
-			let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
-			console.log(res)
-			if (res.data.data.length > 0) {
-				const old_data = JSON.parse(res.data.data[0].data)
-				console.log('Using '+ res.data.data[0].id)
-				start_data = start_data.concat(old_data)
+		  if (pull){
+				try {
+					let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
+					console.log(res)
+					if (res.data.data.length > 0) {
+						const old_data = JSON.parse(res.data.data[0].data)
+						console.log('Using '+ res.data.data[0].id)
+						start_data = start_data.concat(old_data)
+					}
+				} catch (error) {
+					console.error(error);
+				}
 			}
-		} catch (error) {
-			console.error(error);
-		}
 
 	    const click_max = 100
 	    let data_max = 100
-			const heatmap = h337.create({
+			heatmap = h337.create({
 	        maxOpacity: 1,
 	        minOpacity: 1,
 	        gradient: {
@@ -77,8 +82,8 @@
       container: hm_div.value,
 			});
 
-		heatmap.setData({min:0, max:data_max, data:start_data})
-		console.log(heatmap)
+			heatmap.setData({min:0, max:data_max, data:start_data})
+			console.log(heatmap)
 	
 	    const move = fromEvent(monitored, 'mousemove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));
 	    const touch = fromEvent(monitored, 'touchmove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));;
@@ -127,25 +132,76 @@
 			
 
 		})
-
-		window.addEventListener("resize", function(){
-			console.log('resize')
-			heatmap.repaint()
-		})
+		
+		const resize = fromEvent(window, 'resize');
+		const result = resize.pipe(debounceTime(1));
+		
+		result.subscribe(x => {
+			// fake heatmap to hide background text
+			heatmap_faked.value = true
+			console.log(heatmap_faked.value)
+			// fill screen with data
+	    let start_data = []
+	    // Placeholder values
+	    for (let i = 0; i <= monitored.scrollHeight; i += 10) {
+	    	// console.log(i)
+	    	for (let n = 0; n <= monitored.scrollWidth; n += 10) {
+	    		let new_point = {
+	    			'x': n,
+	    			'y': i,
+	    			'value': 1,
+					'radius': 10
+	    		}
+	    		start_data.push(new_point)
+	    	}
+	    }
+			heatmap = h337.create({
+	        maxOpacity: 1,
+	        minOpacity: 1,
+	        gradient: {
+					'.1': '#201E21',
+					'.3': '#574C2D',
+					'.4': '#63127E',
+					'.45': '#370E79',
+					'.8': '#40886D',
+					'.96': '#24C9D2',
+					'.97': '#24C9D2',
+					'.99': '#24C9D2'
+				},
+				blur: .999,
+	      radius: 90,
+	      container: hm_div.value,
+			});
+			heatmap.setData({min:0, max:data_max, data:start_data})
+			// const pre_hms = hm_div.value.children.length
+			const hm_canvases = hm_div.value.children
+			for (let c = 0; c < hm_canvases.length -1; c ++) {
+				console.log(hm_canvases[c])
+				hm_div.value.removeChild(hm_canvases[c])
+			}
+			console.log('unhiding heatmap')
+			heatmap_faked.value = false
+		});
 
 	}
 
 	onMounted(() => {
 		renderHeatmap()
+		heatmap_faked.value = false
 	})
 
 </script>
 
 <style scoped>
-  .heatmap {
+  .heatmap .fake-heatmap {
     width: 100vw;
     height:100vh;
     position: fixed;
     top: 0;
+  }
+
+  .fake-heatmap {
+  	background-color: #201E21;
+  	z-index: 20;
   }
 </style>
