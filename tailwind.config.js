@@ -20,6 +20,8 @@ module.exports = {
       },
       gridTemplateColumns: {
         'header': '48px 1fr 48px',
+        'modal': '1fr 70px',
+        'modal-xl': '1fr 100px'
       },
       boxShadow: {
         'default': '2px 2px 4px 0px rgba(0, 0, 0, 0.25)'

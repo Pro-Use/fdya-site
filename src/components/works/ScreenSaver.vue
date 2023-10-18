@@ -20,7 +20,7 @@
 	const state = useStateStore()
 
 	const ss_monitor = ref(null)
-	const timeout_ms = 1000
+	const timeout_ms = 20000
 	const timeout_id = ref(null)
 	const ss_active = ref(false)
 	const props = defineProps(['monitored'])

@@ -10,7 +10,8 @@ export const useStateStore = defineStore('state', () => {
   const access_bg_images = ref(true)
   const access_animations = ref(true)
   const interfaceVisible = ref(false)
-
+  const small_screen = ref('false')
+  
   const navIntent = ref('mouse')
   
   const mainTransition = ref('zoom-fade')
@@ -56,7 +57,8 @@ export const useStateStore = defineStore('state', () => {
 
   const siteInfo = ref({})
 
-  const screensaver_disabled = ref(false)
+  const screensaver_disabled = ref(true)
+
 
   return {interfaceVisible, 
           mainTransition, 
@@ -73,5 +75,6 @@ export const useStateStore = defineStore('state', () => {
           access_bg_images, 
           access_animations,
           navIntent,
-          screensaver_disabled }
+          screensaver_disabled,
+          small_screen }
 })

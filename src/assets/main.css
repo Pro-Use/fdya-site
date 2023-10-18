@@ -22,3 +22,9 @@
     --x: 16.66vw;
   }
   
+
+@media screen and (orientation: portrait) {
+    :root{
+        --x: 33.33vw;
+      }
+}

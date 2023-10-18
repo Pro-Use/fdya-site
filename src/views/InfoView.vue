@@ -1,14 +1,14 @@
 <template>
-    <main id="main" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight">
-        <div class="grid p-8 grid-cols-3 gap-8 relative">
-            <div class="grid col-span-2 grid-cols-2 gap-24 pb-16 text-lg">
+    <main id="main" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 font-DMregular leading-tighterer">
+        <div class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
+            <div class="modal-body grid grid-cols-2 gap-16  p-2 lg:p-4 max-w-[1200px]">
                 <div class="col-span-2">
-                    <h2 class="pb-8 uppercase">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h2>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate. <br><br>[READ MORE]
+                    <h2 class="pb-8 text-lg xl:text-2xl">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h2>
+                    <p class="text-base xl:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
                 </div>
                 <div class="col-span-2">
-                    <h3 class="text-lg pb-8 uppercase">List Of Works</h3>
-                    <ul role="list" class="grid grid-cols-2 gap-8 text-lg">
+                    <h3 class="text-lg xl:text-2xl pb-8 uppercase">List Of Works</h3>
+                    <ul role="list" class="grid col-span-2 md:grid-cols-2 xl:grid-cols-3 gap-8 text-base xl:text-lg">
                         <li> 
                             <i class="block">Technological Grief Altar</i>
                             <p>Alice Yuan Zhang</p>
@@ -53,22 +53,21 @@
                         </li>
                     </ul>
                 </div>
-                
-                <div class="col-span-1 text-lg">
-                    <h3 class="pb-4 uppercase">AREBYTE</h3>
-                    <p>
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">AREBYTE</h3>
+                    <p class="text-base xl:text-lg">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. ero vulputate.
                     </p>
                 </div>
-                <div class="col-span-1 text-lg">
-                    <h3 class="pb-4 uppercase">CHRONUS ART CENTER</h3>
-                    <p>
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">CHRONUS ART CENTER</h3>
+                    <p class="text-base xl:text-lg">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. ero vulputate.
                     </p>
                 </div>
-                <div class="col-span-1 text-lg">
-                    <h3 class="pb-4 uppercase">CREDITS</h3>
-                    <ul role="list">
+                <div class="col-span-2">
+                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">CREDITS</h3>
+                    <ul role="list" class="text-base xl:text-lg">
                         <li class="pb-4">
                             <i class="block">Integer Purus</i>
                             Praesent consequat
@@ -88,12 +87,14 @@
                     </ul>
                 </div>
             </div>
-            <router-link class="absolute top-8 right-8 text-lg" to="/">
-                <span class="sr-only">Back to Home Page</span>
-			    <span aria-hidden="true">CLOSE</span>
-            </router-link>
+            <div class="close-button">
+                <router-link class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full" to="/">
+                    <span class="sr-only">Back to Home Page</span>
+                    <span aria-hidden="true">CLOSE</span>
+                </router-link>
+            </div>
         </div>
-   </main>
+    </main>
 </template>
 
 <script setup>

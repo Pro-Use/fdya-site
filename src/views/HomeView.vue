@@ -1,11 +1,12 @@
 <script setup>
-import { onMounted, computed } from 'vue'
+import { onMounted, onBeforeMount, computed, ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useStateStore } from '../stores/state'
 
 const router = useRouter()
 const state = useStateStore()
 const api_base =  import.meta.env.VITE_API_BASE
+const indexMain = ref() 
 
 const launchProject = (event) => {
   const a = event.target
@@ -30,14 +31,30 @@ const launchProject = (event) => {
   });
 }
 
+onBeforeMount(() => {
+  let width = window.innerWidth;
+  if (width < 768 && state.small_screen != 'viewed') {
+    state.small_screen = 'true'
+  }
+})
+
 onMounted(() => {
 		state.interfaceVisible = true
+    let height = window.innerHeight;
+    if(indexMain.value.scrollHeight > height){
+      indexMain.value.scrollTop = (indexMain.value.scrollHeight - height) / 2
+    }
+    console.log((indexMain.value.scrollHeight - height) / 2)
 	})
+
+const okaySmallScreen = (event) => {
+  state.small_screen = 'viewed'
+}
 
 </script>
 
 <template>
-  <main id="main" aria-label="Index Page" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
+  <main id="main" aria-label="Index Page" ref="indexMain" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
 
     <div class="grid-container absolute top-0 w-screen">
       <div class="grid-line-v"></div>
@@ -59,7 +76,7 @@ onMounted(() => {
         <img 
           v-if="state.workCovers[0] !== null" 
           aria-hidden="true"
-          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[0]">
       </a>
     </li>
@@ -68,7 +85,7 @@ onMounted(() => {
         <img 
         v-if="state.workCovers[1] !== null" 
         alt="Open B by Artist B"
-        class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+        class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[1]">
       </a>
     </li>
@@ -77,7 +94,7 @@ onMounted(() => {
         <img 
         v-if="state.workCovers[2] !== null" 
         alt="Open C by Artist C"
-        class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+        class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[2]">
       </a>
     </li>
@@ -86,7 +103,7 @@ onMounted(() => {
         <img 
           v-if="state.workCovers[3] !== null" 
           alt="Open D by Artist D"
-          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[3]">
       </a>
     </li>
@@ -95,7 +112,7 @@ onMounted(() => {
         <img 
           v-if="state.workCovers[4] !== null"
           alt="Open E by Artist E" 
-          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[4]">
       </a>
     </li>
@@ -104,16 +121,27 @@ onMounted(() => {
         <img 
           v-if="state.workCovers[5] !== null" 
           alt="Open F by Artist F"
-          class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" 
+          class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[5]">
       </a>
     </li>
   </ul>
 
+  <Teleport to="body">
+  <div v-if="state.small_screen == 'true'" class="modal fixed w-screen h-screen top-0 left-0 bg-black text-white p-4 text-center flex items-center justify-center z-[100] font-DMregular">
+    <div class="modal-inner">
+      <h2 class="pb-8">MESSAGE</h2>
+      <p class="pb-8">It looks like you are using a small screen to view this site. We recommend using a laptop or desktop computer for the best viewing experience as some artworks may not display correctly on this device.</p>
+      <button @click="okaySmallScreen" class="text-white p-4 px-8 border border-1 border-solid border-white">Okay</button>
+    </div>
+  </div>
+  </Teleport>
+
   </main>
 </template>
 
 <style scoped lang="scss">
+
 
 
 .grid-line-v{
@@ -157,31 +185,33 @@ onMounted(() => {
   }
 
   .grid-line-h:nth-child(6){
-    top: var(--x);
+    top: .5px;
   }
 
   .grid-line-h:nth-child(7){
-    top: calc(var(--x)*2);
+    top: calc(var(--x)*1);
   }
 
   .grid-line-h:nth-child(8){
-    top:calc(var(--x)*3);
+    top:calc(var(--x)*2);
   }
 
   .grid-line-h:nth-child(9){
-    top: calc(var(--x)*4);
+    top: calc(var(--x)*3);
   }
 
   .grid-line-h:nth-child(10){
-    top: calc(var(--x)*5);
+    top: calc(var(--x)*4);
   }
 
   .grid-line-h:nth-child(11){
-    top:calc(var(--x)*6);
+    top:calc(var(--x)*5);
+    display: none;
   }
 
   .grid-line-h:nth-child(12){
-    top: calc(var(--x)*7);
+    top: calc(var(--x)*6);
+    display: none;
   }
 
 
@@ -217,6 +247,7 @@ onMounted(() => {
   
   [class^="cross-container"]:hover, [class^="cross-container"]:focus-within{
     transform:translate(-50%,-50%) scale(100%, 100%);
+    z-index: 100;
     img{
       opacity: 1;
     }
@@ -240,8 +271,9 @@ onMounted(() => {
   }
 
   [class^="cross-container"].active{
+    position: fixed;
     top: 50%;
-    left:50%;
+    left: 50%;
     width: 100vw;
     height: 100vh;
     transform:translate(-50%,-50%) scale(100%, 100%);
@@ -338,5 +370,50 @@ onMounted(() => {
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 26%, 100% 26%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);  
   }
 
+
+
+@media screen and (orientation: portrait) {
+  .grid-line-v:nth-child(1){
+    left: var(--x);
+    display: block;
+  }
+  .grid-line-v:nth-child(2){
+    left: calc(var(--x)*2);
+    display: block;
+  }
+
+  .grid-line-v{
+    display: none;
+  }  
+
+  .cross-container-7{
+    top: calc(var(--x)*1);
+    left: calc(var(--x)*1);
+  }
+  .cross-container-8{
+    top: calc(var(--x)*1);
+    left: calc(var(--x)*2);
+  }
+  .cross-container-9{
+    top: calc(var(--x)*2);
+    left: calc(var(--x)*2);
+  }
+  .cross-container-10{
+    top: calc(var(--x)*3);
+    left: calc(var(--x)*1);
+  }
+  .cross-container-11{
+    top: calc(var(--x)*4);
+    left: calc(var(--x)*2);
+  }
+  .cross-container-12{
+    top: calc(var(--x)*5);
+    left: calc(var(--x)*1);
+  }
+
+  .grid-line-h:nth-child(11), .grid-line-h:nth-child(12){
+    display: block;
+  }
+}
 
 </style>

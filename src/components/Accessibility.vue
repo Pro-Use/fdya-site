@@ -4,10 +4,7 @@
         <a href="#main" ref="skipLinkMain" class="skip-link">Skip to main content</a>
         </li>
         <li v-if="state.interfaceVisible">
-        <a href="#header" ref="skipLinkHead" class="skip-link">Skip to main menu</a>
-        </li>
-        <li v-if="state.interfaceVisible">
-        <a href="#footer" ref="skipLinkFoot" class="skip-link">Skip to accessibility menu</a>
+        <a href="#header" ref="skipLinkHead" class="skip-link">Skip to menu</a>
         </li>
     </ul>
 </template>

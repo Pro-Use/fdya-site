@@ -1,9 +1,12 @@
 <template>
-	  <main id="main" class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
-        <img aria-hidden="true" v-if="coverImage" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
+	  <main id="main" 
+	  	class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
+		<img aria-hidden="true" v-if="coverImage && !loaded" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
-		<iframe class="funeral-iframe" v-if="props.work == 'funeral-play'" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+		<div v-if="props.work == 'funeral-play'" class="py-32 px-4 fixed w-screen h-screen overflow-hidden">
+			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+		</div>
 		<VideoWorkWrapper 
 			v-if="props.work == 'symbiotic-ai' || props.work == 'digital-traces' || props.work == 'landscape-enter-life'" :work="props.work" />
 	  </main>
@@ -22,6 +25,7 @@
 	const props = defineProps(['langauge', 'work'])
 	const route = useRoute()
 	const api_base =  import.meta.env.VITE_API_BASE
+	const loaded = ref(false)
 
 	console.log(props)
 
@@ -42,6 +46,10 @@
 	onMounted(() => {
 		state.mainTransition = 'zoom-fade'
 		state.interfaceVisible = false
+		if(props.work == 'funeral-play'){
+			loaded.value = true
+		}
+		
 	})
 
 
@@ -49,10 +57,5 @@
 </script>
 
 <style scoped>
-	.funeral-iframe {
-		width: 100vw;
-		height: 100%;
-		overflow: hidden;
-		position: fixed;
-	}
+
 </style>

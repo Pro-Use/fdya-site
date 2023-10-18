@@ -1,5 +1,5 @@
 <template>
-	<main id="#main" class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tight">
+	<main id="#main" class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 text-3xl p-5 font-DMregular leading-tighter">
 		<h1 class="sr-only">{{ accessTitle }}</h1>
 		<p class="introduction sr-only">
 			An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.

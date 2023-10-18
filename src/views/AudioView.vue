@@ -1,5 +1,5 @@
 <template>
-    <main class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tight">
+    <main class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-3xl p-5 font-DMregular leading-tighter">
         <div class="w-screen h-screen flex items-center justify-center">
             <router-link class="absolute top-8 right-8 text-lg" to="/">CLOSE</router-link>
             <figure>
