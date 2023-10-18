@@ -59,22 +59,26 @@ export const useStateStore = defineStore('state', () => {
 
   const screensaver_disabled = ref(true)
 
+  const download_heatmap = ref(false)
 
-  return {interfaceVisible, 
-          mainTransition, 
-          splashComplete, 
-          splashDone, 
-          infoVisible, 
-          browserInfo, 
-          hmData, 
-          siteLang, 
-          worksInfo,
-          workLinks,
-          workCovers,
-          siteInfo, 
-          access_bg_images, 
-          access_animations,
-          navIntent,
-          screensaver_disabled,
-          small_screen }
+  return {
+    interfaceVisible, 
+    mainTransition, 
+    splashComplete, 
+    splashDone, 
+    infoVisible, 
+    browserInfo, 
+    hmData, 
+    siteLang, 
+    worksInfo,
+    workLinks,
+    workCovers,
+    siteInfo, 
+    access_bg_images, 
+    access_animations,
+    navIntent,
+    screensaver_disabled,
+    small_screen,
+    download_heatmap,
+  }
 })
