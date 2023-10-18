@@ -50,7 +50,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style>
+<style lang="scss">
   body, html{
     padding: 0;
     margin: 0;
@@ -108,5 +108,15 @@ onMounted(() => {
     transition: all 0s 0s linear !important;
   }
 
+
+  .rte{
+    h1,h2,h3,h4,h5,h6{
+      text-transform: uppercase;
+      padding-bottom: 1em;
+    }
+    p{
+      padding-bottom: 1em;
+    }
+  }
 
 </style> 

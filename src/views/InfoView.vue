@@ -4,7 +4,18 @@
             <div class="modal-body grid grid-cols-2 gap-16  p-2 lg:p-4 max-w-[1200px]">
                 <div class="col-span-2">
                     <h2 class="pb-8 text-lg xl:text-2xl">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h2>
-                    <p class="text-base xl:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
+                    <div class="text-base xl:text-lg rte">
+                        <p>For Data You Are, And To Data You Shall Return explores the nuance of current reflections around technological and bodily decay, renewal and existence in the digital domain and its environmental counterpart. </p>
+                        <p>The online exhibition forms part of The Body, The Mind, The Soul programme ….</p>
+                        <p>comprises works that span a range of digital media processes and outcomes; from hypnotic encounters with concealed code to custom software from the early nineties, and planetary-scale simulations, the exhibition presents expanded video practices, role-playing narratives and a reconnection with devices and their material origins, drawing links between communications across ethers. Reflecting on the idea of a transitional presence imbued within digitised works, the boundary between online and offline is negated: instead, the exhibition speaks to the circularity of these two ways of being through mediation of the screen and argues that one does not supersede the other.</p>
+                    </div>
+                    <button @click="readMore" v-if="!readMoreActive" class="mt-8 text-base border-solid border border-white p-6 py-1 uppercase rounded-sm hover:bg-white hover:text-black">
+                        Read More
+                    </button>
+                    <div v-if="readMoreActive" class="text-base xl:text-lg rte">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
+                    </div>
                 </div>
                 <div class="col-span-2">
                     <h3 class="text-lg xl:text-2xl pb-8 uppercase">List Of Works</h3>
@@ -102,6 +113,7 @@ import { ref, provide, onMounted, onUnmounted } from 'vue';
 import { useStateStore } from '../stores/state'
 
 const state = useStateStore()
+const readMoreActive = ref(false)
 
 onMounted(() => {
     state.interfaceVisible = false
@@ -109,5 +121,9 @@ onMounted(() => {
 onUnmounted(() => {
     state.interfaceVisible = true
 })
+
+function readMore(){
+    readMoreActive.value = !readMoreActive.value
+}
 
 </script>
