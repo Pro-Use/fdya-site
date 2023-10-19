@@ -7,12 +7,12 @@
 			</h1>
 			
 			<button @click="toggleInfo" 
-				class="fixed bottom-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular z-50">
+				class="fixed bottom-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular z-50 hover:text-yellow">
 				<span class="sr-only">About this artwork</span>
 				<span aria-hidden="true">INFO</span>
 			</button>
 
-			<router-link to="/" class="fixed z-50 top-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
+			<router-link to="/" class="fixed z-50 top-0 right-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular hover:text-yellow">
 				<span class="sr-only">Back to index page</span>
 				<span aria-hidden="true">CLOSE</span>
 			</router-link>
@@ -23,12 +23,15 @@
 			<div class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16 p-2 lg:p-4  max-w-[1200px]">
                 <div class="col-span-2">
-					<h2 class="pb-8 text-lg xl:text-2xl uppercase"><i>{{ work_info.title_en }}</i><br>{{ work_info.artist_en }}</h2>
+					<h2 class="pb-8 text-lg xl:text-2xl uppercase">
+						<div v-html="work_info.artist_en"></div>
+						<div v-html="work_info.listing_en"></div>
+					</h2>
 					<div class="text-base xl:text-lg rte" v-html="work_info.description_en"></div>
                 </div>   
             </div>
             <div class="close-button">
-				<button ref="closeInfo" @click="toggleInfo" class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full">CLOSE</button>
+				<button ref="closeInfo" @click="toggleInfo" class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full hover:text-yellow">CLOSE</button>
             </div>
         </div>
 		</div>
