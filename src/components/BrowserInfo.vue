@@ -55,6 +55,7 @@
         console.log('geo', geo)
         splashText.push(strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
         splashText.push(strFmt(geo.loc))
+        cl_store.$patch({'latLng': String(geo.loc)})
         let device
         if (uap.device.type === 'mobile'){
             device = 'mobile'
