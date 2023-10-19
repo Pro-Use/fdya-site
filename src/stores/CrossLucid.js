@@ -5,6 +5,8 @@ export const useClStore = defineStore('crossLucid', () => {
   
   const location = ref(null);
 
+  const latLng = ref('');
+
   const device = ref(null);
   
   const artworksViewed = ref([]);
@@ -30,5 +32,5 @@ export const useClStore = defineStore('crossLucid', () => {
   
   // const lastKeyPressed = ref(null); // Not needed
 
-  return { location, device, artworksViewed, sessionStart, sessionLength, aboutTextViewed, clicks, textViewed, platformVersion}
+  return { location, latLng, device, artworksViewed, sessionStart, sessionLength, aboutTextViewed, clicks, textViewed, platformVersion}
 })
