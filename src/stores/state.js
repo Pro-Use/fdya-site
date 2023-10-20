@@ -28,6 +28,25 @@ export const useStateStore = defineStore('state', () => {
 
   const worksInfo = ref([])
 
+  const worksInfoTranslated = computed(() => {
+    let info = []
+    worksInfo.value.forEach((workInfo) => {
+      //loop through object keys, make new object with data from en/cn as appropriate
+      let translated = {}
+      let keys = Object.keys(workInfo)
+      keys.forEach((key) => {
+        if (siteLang.value == 'en' && key.includes('_en') || siteLang.value == 'cn' && key.includes('_cn')){
+          let new_key = key.replace('_en', '').replace('_cn', '')
+          translated[new_key] = workInfo[key]
+        } else if (!key.includes('_en') && !key.includes('_cn') ){
+          translated[key] = workInfo[key]
+        }
+      })
+      info.push(translated)
+    })
+    return info
+  })
+
   const workLinks = computed( () => {
     if (worksInfo.value.length === 0) {
       return ['','','','','','']
@@ -57,6 +76,20 @@ export const useStateStore = defineStore('state', () => {
 
   const siteInfo = ref({})
 
+  const siteInfoTranslated = computed(()=> {
+    let translated = {}
+    let keys = Object.keys(siteInfo.value)
+    keys.forEach((key) => {
+      if (siteLang.value == 'en' && key.includes('_en') || siteLang.value == 'cn' && key.includes('_cn')){
+        let new_key = key.replace('_en', '').replace('_cn', '')
+        translated[new_key] = siteInfo.value[key]
+      } else if (!key.includes('_en') && !key.includes('_cn') ){
+        translated[key] = siteInfo.value[key]
+      }
+    })
+    return translated
+  })
+
   const screensaver_disabled = ref(true)
 
   const download_heatmap = ref(false)
@@ -71,9 +104,11 @@ export const useStateStore = defineStore('state', () => {
     hmData, 
     siteLang, 
     worksInfo,
+    worksInfoTranslated,
     workLinks,
     workCovers,
-    siteInfo, 
+    siteInfo,
+    siteInfoTranslated, 
     access_bg_images, 
     access_animations,
     navIntent,

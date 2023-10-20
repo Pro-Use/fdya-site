@@ -2,8 +2,8 @@
 	<Transition name="fade">
 		<div v-show="showInfoLayer">
 			<h1 class="fixed z-50 bottom-0 left-0 invisible sm:visible p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
-				<i>{{ work_info.title_en }}</i>
-				<br>{{ work_info.artist_en }}
+				<i>{{ work_info.title }}</i>
+				<br>{{ work_info.artist }}
 			</h1>
 			
 			<button @click="toggleInfo" 
@@ -24,10 +24,10 @@
             <div class="modal-body grid grid-cols-2 gap-16 p-2 lg:p-4  max-w-[1200px]">
                 <div class="col-span-2">
 					<h2 class="pb-8 text-lg xl:text-2xl uppercase">
-						<div v-html="work_info.artist_en"></div>
-						<div v-html="work_info.listing_en"></div>
+						<div v-html="work_info.artist"></div>
+						<div v-html="work_info.listing"></div>
 					</h2>
-					<div class="text-base xl:text-lg rte" v-html="work_info.description_en"></div>
+					<div class="text-base xl:text-lg rte" v-html="work_info.description"></div>
                 </div>   
             </div>
             <div class="close-button">
@@ -49,7 +49,7 @@
 	const closeInfo = ref()
 
 	const work_info = computed(() => {
-		const filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
+		const filter_work = state.worksInfoTranslated.filter((work_obj) => work_obj.slug == props.work)
 		console.log(filter_work)
 		if (filter_work.length != 0) {
 			return filter_work[0]
