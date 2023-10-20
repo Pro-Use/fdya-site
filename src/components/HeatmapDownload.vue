@@ -71,7 +71,7 @@
 		let text_start = (0 - canvas.width) + border
 		context.fillText( "FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN", border, text_start);
 		text_start += text_height
-		context.fillText( "对于你所是的数据, 对于你应该返回的数据", border, text_start);
+		context.fillText( "为数据所生，亦归数据而去", border, text_start);
 		text_start += text_height
 		context.fillText( longLine, border, text_start)
 		text_start += text_height

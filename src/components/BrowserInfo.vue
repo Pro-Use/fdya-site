@@ -31,8 +31,8 @@
 	const info_text = ref('')
 	const info_index = ref('')
 	let splashText = []
-	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所是的数据, /对于你应该返回的数据 '
-	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  对于你所是的数据, 对于你应该返回的数据 '
+	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /为数据所生，/亦归数据而去 '
+	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  为数据所生，亦归数据而去 '
 
 	info_text.value = 'Loading'
 
