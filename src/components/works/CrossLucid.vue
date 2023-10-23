@@ -13,6 +13,9 @@ import axios from 'axios';
 const cl_store = useClStore()
 const state = useStateStore()
 const props = defineProps(['work'])
+const visitsToday = ref(0)
+const charge = ref(100)
+const workOrder = ['']
 
 const videos = computed(() => {
     let filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
@@ -23,7 +26,7 @@ const videos = computed(() => {
     }
 })
 
-const selectScene = async () => {
+const get_visitors = async() => {
     const now = new Date()
     const then = new Date()
     then.setHours(0,0,0)
@@ -35,23 +38,81 @@ const selectScene = async () => {
     }
     const query_str = JSON.stringify(query)
     const get_url = `${api_base}/items/heatmap_sessions?filter=${query_str}&aggregate[count]=*`
-    let visitorsToday
     try {
         const res = await axios.get(get_url)
-        visitorsToday = res.data.data[0].count
+        return res.data.data[0].count
     } catch {
-        visitorsToday = 0
+        return 0
     }
-    let charge
+}
+
+const get_charge = async() => {
     try {
         const battery = await window.navigator.getBattery()
-        charge = battery.level * 100
+        return battery.level * 100
     } catch {
-        charge = 100
+        return 100
     }
-    console.log(charge)
-    console.log(visitorsToday)
+}
 
+//
+const about_viewed__and_11_mins = () => {
+    if (cl_store.aboutTextViewed && cl_store.sessionLength > 600000){
+        return true
+    } else {
+        return false
+    }
+}
+
+const clicks_20_50_and_less_works = () => {
+    if (cl_store.clicks >= 20 && cl_store.click <= 50 && cl_store.artworksViewed.length < 5){
+        return true
+    } else {
+        return false
+    }
+}
+
+const more_works_and_1_text = () => {
+    if (cl_store.artworksViewed.length >4 && cl_textsViewed.lenth >= 1){
+        return true
+    } else {
+        return false
+    }
+}
+
+const more_viewers_and_desktop = () => {
+    if (visitsToday.value > 20 && cl_store.device != 'mobile') {
+        return true
+    } else {
+        return false
+    }
+}
+
+const platform_version_and_mobile = () => {
+    if (cl_store.platformUpToDate && cl_store.device == 'mobile'){
+        return true
+    } else {
+        return false
+    }
+}
+
+const small_browser_work_order = () => {
+    if (cl_store.browserSize > 3.55 || cl.compareWorks){
+        return true
+    } else {
+        return false
+    }
+}
+
+const last_work = () => {
+    if (cl_store.artworksViewed.length && cl_store.artworksViewed[-1] == 'symbiotic-ai'){
+        return true
+    } else {
+        return false
+    }
+}
+
+const selectScene = async () => {
 
     if(cl_store.aboutTextViewed && cl_store.sessionLength > 600000){
         // PLAY SCENE 1
