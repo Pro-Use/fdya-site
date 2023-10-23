@@ -52,12 +52,16 @@
 <script setup>
 import { ref, provide, onMounted, onUnmounted } from 'vue';
 import { useStateStore } from '../stores/state'
+import { useClStore } from '../stores/CrossLucid'
 
 const state = useStateStore()
+const cl_store = useClStore()
 const readMoreActive = ref(false)
 
 onMounted(() => {
     state.interfaceVisible = false
+    cl_store.$patch({'aboutTextViewed': true})
+
 })
 onUnmounted(() => {
     state.interfaceVisible = true

@@ -40,7 +40,9 @@
 <script setup>
 	import { defineProps, ref, computed } from 'vue'
 	import { useStateStore } from '../../stores/state'
+	import { useClStore } from '../../stores/CrossLucid'
 
+	const cl_store = useClStore()
 	const state = useStateStore()
 	const props = defineProps(['work'])
 	console.log(props.work)
@@ -61,8 +63,6 @@
 	let timer;
 
 
-	
-
 	function hideInfoLayer(){
 		showInfoLayer.value = false
 	}
@@ -71,6 +71,9 @@
 		showInfo.value = !showInfo.value
 		console.log(showInfo.value)
 		closeInfo.value.focus()
+		if (showInfo.value){
+			cl_store.addText(props.work)
+		}
 	}
 	
 </script>

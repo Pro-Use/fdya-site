@@ -20,7 +20,9 @@
 	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
 	import VideoWorkWrapper from '../components/works/VideoWorkWrapper.vue'
+	import { useClStore } from '../stores/CrossLucid'
 
+	const cl_store = useClStore()
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])
 	const route = useRoute()
@@ -49,6 +51,7 @@
 		if(props.work == 'funeral-play'){
 			loaded.value = true
 		}
+		cl_store.addWork(props.work)
 		
 	})
 
