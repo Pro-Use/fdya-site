@@ -84,6 +84,8 @@
 
 			heatmap.setData({min:0, max:data_max, data:start_data})
 			console.log(heatmap)
+			let hm_size = hm_div.value.scrollWidth / hm_div.value.scrollHeight
+			cl_store.$patch({'browser_size': hm_size})
 	
 	    const move = fromEvent(monitored, 'mousemove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));
 	    const touch = fromEvent(monitored, 'touchmove').pipe(map((value) => {return {x: value.clientX, y: value.clientY, value: 5}}));;
@@ -181,6 +183,8 @@
 			}
 			console.log('unhiding heatmap')
 			heatmap_faked.value = false
+			let new_hm_size = hm_div.value.scrollWidth / hm_div.value.scrollHeight
+			cl_store.$patch({'browser_size': new_hm_size})
 		});
 
 	}
