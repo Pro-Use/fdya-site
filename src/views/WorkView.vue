@@ -4,7 +4,7 @@
 		<img aria-hidden="true" v-if="coverImage && !loaded" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
-		<div v-if="props.work == 'funeral-play'" class="py-32 px-4 fixed w-screen h-screen overflow-hidden">
+		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen overflow-hidden">
 			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
 		</div>
 		<VideoWorkWrapper 
