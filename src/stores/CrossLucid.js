@@ -22,12 +22,14 @@ export const useClStore = defineStore('crossLucid', () => {
     }
   }
 
+  const lastWork = ref(null)
+
   const compareWorks = computed(() => {
    return artworksViewed.value.length === works_order.length && artworksViewed.value.every((element, index) => element === works_order[index]);
   })
   
   const sessionStart = ref(start_session);
-  const sessionLength = computed(() => Date.now() - sessionStart.value )
+  const sessionLength = () => { return Date.now() - sessionStart.value }
   
   const aboutTextViewed = ref(false);
   
@@ -48,5 +50,8 @@ export const useClStore = defineStore('crossLucid', () => {
     return false
   })
 
-  return { location, latLng, device, browser_size, artworksViewed, addWork, compareWorks, sessionStart, sessionLength, aboutTextViewed, clicks, textsViewed, addText, platformVersion, platformUpToDate}
+  return { 
+    location, latLng, device, browser_size, artworksViewed, addWork, compareWorks, lastWork,
+    sessionStart, sessionLength, aboutTextViewed, clicks, textsViewed, addText, platformVersion, platformUpToDate
+  }
 })

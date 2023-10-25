@@ -52,6 +52,9 @@
 			loaded.value = true
 		}
 		cl_store.addWork(props.work)
+		if (props.work != 'dwellers-between-the-waters'){
+			cl_store.$patch({'lastWork': props.work})
+		}
 		
 	})
 
