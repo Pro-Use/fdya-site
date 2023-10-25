@@ -1,5 +1,11 @@
 <template>
     <VideoComponent v-if="videos.length" :video_file="videos[0]"></VideoComponent>
+    <div>
+        <p>Site Visitors: {{visitsToday}}</p>
+        <p>Browser Updates Available: {{cl_store.platformUpToDate}} </p>
+        <p>Session Length: {{cl_store.sessionLength}} milliseconds</p>
+        <p></p>
+    </div>
 </template>
 
 <script setup>
