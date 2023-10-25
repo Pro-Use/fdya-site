@@ -120,6 +120,14 @@ export const useStateStore = defineStore('state', () => {
     return transEls
   })
 
+  const getTrans = (slug) => {
+    if (siteElsTranslated.value[slug]){
+      return siteElsTranslated.value[slug]
+    } else {
+      return slug
+    }
+  }
+
   const screensaver_disabled = ref(true)
 
   const download_heatmap = ref(false)
@@ -142,6 +150,7 @@ export const useStateStore = defineStore('state', () => {
     siteInfoTranslated, 
     elTranslations,
     siteElsTranslated,
+    getTrans,
     access_bg_images, 
     access_animations,
     navIntent,

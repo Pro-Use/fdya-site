@@ -7,7 +7,7 @@
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.site_summary">
                     </div>
                     <button @click="readMore" v-if="!readMoreActive" class="mt-8 text-base border-solid border border-white p-6 py-1 uppercase rounded-sm hover:bg-white hover:text-black">
-                        Read More
+                        {{ state.getTrans('read-more') }}
                     </button>
                     <div v-if="readMoreActive" class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.site_info">
                     </div>
@@ -23,26 +23,26 @@
                     </ul>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">AREBYTE</h3>
+                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('arebyte').toUpperCase() }}</h3>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.arebyte"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">CHRONUS ART CENTER</h3>
+                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('chronos-art-center').toUpperCase() }}</h3>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.cac"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">EVENTS</h3>
+                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">{{ state.getTrans('events').toUpperCase() }}</h3>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.events"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">CREDITS</h3>
+                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">{{state.getTrans('credits').toUpperCase()}}</h3>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.credits"></div>
                 </div>
             </div>
             <div class="close-button">
                 <router-link class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full hover:text-yellow" to="/">
-                    <span class="sr-only">Back to Home Page</span>
-                    <span aria-hidden="true">CLOSE</span>
+                    <span class="sr-only">{{state.getTrans('back-to-home-page')}}</span>
+                    <span aria-hidden="true">{{state.getTrans('close').toUpperCase()}}</span>
                 </router-link>
             </div>
         </div>
