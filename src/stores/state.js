@@ -26,6 +26,14 @@ export const useStateStore = defineStore('state', () => {
 
   const siteLang = ref('en')
 
+  const changeLang = () => {
+    if (siteLang.value == 'en'){
+      siteLang.value = 'cn'
+    } else {
+      siteLang.value = 'en'
+    }
+  }
+
   const worksInfo = ref([])
 
   const worksInfoTranslated = computed(() => {
@@ -90,6 +98,28 @@ export const useStateStore = defineStore('state', () => {
     return translated
   })
 
+  const elTranslations = ref([])
+
+  const siteElsTranslated = computed(() =>{
+    let transEls = {}
+    elTranslations.value.forEach((element) => {
+      if (siteLang.value == 'en'){
+        if (element.slug == 'language') {
+          transEls[element.slug] = element.chinese
+        } else {
+          transEls[element.slug] = element.english
+        }
+      } else {
+        if (element.slug == 'language') {
+          transEls[element.slug] = element.english
+        } else {
+          transEls[element.slug] = element.chinese
+        }
+      }
+    })
+    return transEls
+  })
+
   const screensaver_disabled = ref(true)
 
   const download_heatmap = ref(false)
@@ -102,13 +132,16 @@ export const useStateStore = defineStore('state', () => {
     infoVisible, 
     browserInfo, 
     hmData, 
-    siteLang, 
+    siteLang,
+    changeLang,
     worksInfo,
     worksInfoTranslated,
     workLinks,
     workCovers,
     siteInfo,
     siteInfoTranslated, 
+    elTranslations,
+    siteElsTranslated,
     access_bg_images, 
     access_animations,
     navIntent,

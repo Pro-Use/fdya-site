@@ -16,23 +16,18 @@ const state = useStateStore()
 const hm_data = ref(null)
 const works_info = ref([])
 
-const get_works_info = async () => {
+onMounted( async () => {
   let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*')
   const works = res.data.data
-
   state.$patch({'worksInfo': works})
-}
-
-const get_site_info = async () => {
-  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/site_info')
+  
+  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/site_info')
   const site = res.data.data
-
   state.$patch({'siteInfo': site})
-}
 
-onMounted(() => {
-  get_works_info()
-  get_site_info()
+  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/misc_translations')
+  const elementTrans = res.data.data
+  state.$patch({'elTranslations': elementTrans})
 })
 
 
