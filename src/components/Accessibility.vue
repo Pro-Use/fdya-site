@@ -1,10 +1,7 @@
 <template>
     <ul class="skip-links absolute top-[-10000px]">
         <li>
-        <a href="#main" ref="skipLinkMain" class="skip-link">Skip to main content</a>
-        </li>
-        <li v-if="state.interfaceVisible">
-        <a href="#header" ref="skipLinkHead" class="skip-link">Skip to menu</a>
+            <a href="#main" ref="skipLinkMain" class="skip-link">Skip to main content</a>
         </li>
     </ul>
 </template>

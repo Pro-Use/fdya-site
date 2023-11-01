@@ -61,7 +61,22 @@ const okaySmallScreen = (event) => {
 <template>
   <main id="main" aria-label="Index Page" ref="indexMain" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
 
-    <div class="grid-container absolute top-0 w-screen">
+  <div class="accessible-menu sr-only focus-within:not-sr-only border border-solid border-black rounded-lg p-8 font-DMregular">
+    <h1 class="text-xl pb-8">For Data You Are and to Data You Shall Return</h1>
+    <h2 class="text-lg pb-4">Introduction</h2>
+    <p class="pb-8">An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.</p>
+    <h2  class="text-lg pb-4" id="accessibleMenuTitle">Audio Accessible Menu</h2>
+    <nav>
+      <ul role="list" aria-labelledby="accessibleMenuTitle">
+        <li class="block"><RouterLink class="p-4 block" to="/access/intoduction">Introduction</RouterLink></li>
+        <li class="block"><RouterLink class="p-4 block" to="/access/intoduction">About the exhibition</RouterLink></li>
+        <li class="block" v-for="work in state.workLinks"><RouterLink class="p-4 block" :to="'/access/'+ work">{{ work }}</RouterLink></li>
+      </ul>
+    </nav>
+  </div>
+
+
+    <div aria-hidden="true" class="grid-container absolute top-0 w-screen">
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
       <div class="grid-line-v"></div>
@@ -75,7 +90,7 @@ const okaySmallScreen = (event) => {
       <div class="grid-line-h"></div>
     </div>
   
-    <h2 class="sr-only" id="ArtworkListTitle">The Artworks</h2>
+  <h2 class="sr-only" id="ArtworkListTitle">The Artworks</h2>
   <ul role="list" aria-labelledby="ArtworkListTitle">
     <li class="cross-container-7">
       <a :href="'#'+ state.worksInfo[0].title_en" @click="launchProject" :data-link="state.workLinks[0]" :aria-label="'Open '+ state.worksInfo[0].title_en + ' by ' + state.worksInfo[0].artist_en"> 
@@ -134,7 +149,7 @@ const okaySmallScreen = (event) => {
   </ul>
 
   <Teleport to="body">
-  <div v-if="state.small_screen == 'true'" class="modal fixed w-screen h-screen top-0 left-0 bg-black text-white p-4 text-center flex items-center justify-center z-[100] font-DMregular">
+  <div aria-hidden="true" v-if="state.small_screen == 'true'" class="modal fixed w-screen h-screen top-0 left-0 bg-black text-white p-4 text-center flex items-center justify-center z-[100] font-DMregular">
     <div class="modal-inner">
       <h2 class="pb-8">MESSAGE</h2>
       <p class="pb-8">It looks like you are using a small screen to view this site. We recommend using a laptop or desktop computer for the best viewing experience as some artworks may not display correctly on this device.</p>
@@ -425,5 +440,21 @@ const okaySmallScreen = (event) => {
 .notransition [class^="cross-container"], .notransition a, .notransition img {
     transition: all 0s 1ms linear !important;
   }
+
+
+
+  [data-intent='keyboard'] {
+    
+  }
+
+  .accessible-menu:focus-within{
+      position: fixed;
+          top: 32px;
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 16px;
+          background-color: white;
+          z-index: 500;
+    }
 
 </style>

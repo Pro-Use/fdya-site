@@ -4,8 +4,10 @@
 		<p class="introduction sr-only">
 			An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.
 		</p>
-		<button class="sr-only" @click="skipIntro">Enter the exhibition</button>
-		<span aria-hidden="true">{{info_text}}</span> <span aria-hidden="true" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>	
+		<span aria-hidden="true">{{info_text}}</span> <span v-if="!data_complete" aria-hidden="true" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>	
+		<div v-if="data_complete" class="pt-4">
+			<button class="p-4 border border-solid border-white" @click="skipIntro">Enter the exhibition</button>
+		</div>
 	</main>
 </template>
 
@@ -31,6 +33,9 @@
 
 	const info_text = ref('')
 	const info_index = ref('')
+
+	const data_complete = ref(false)
+
 	let splashText = []
 	let splashTextSave = ''
 	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /为数据所生，/亦归数据而去 '
@@ -140,7 +145,8 @@
 		}
 		if(index == arr.length - 1){
 			setTimeout(function () {
-				state.splashComplete = true
+				// state.splashComplete = true
+				data_complete.value = true
 			}, 1000);
 		}
 	}
