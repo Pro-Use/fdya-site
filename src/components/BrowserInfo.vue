@@ -21,6 +21,7 @@
 	const cl_store = useClStore()
 
 	const route = useRoute()
+	const api_base =  import.meta.env.VITE_API_BASE
 
 	console.log('route', route.fullPath)
 
@@ -31,13 +32,19 @@
 	const info_text = ref('')
 	const info_index = ref('')
 	let splashText = []
-	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /对于你所是的数据, /对于你应该返回的数据 '
-	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  对于你所是的数据, 对于你应该返回的数据 '
+	let splashTextSave = ''
+	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /为数据所生，/亦归数据而去 '
+	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  为数据所生，亦归数据而去 '
 
 	info_text.value = 'Loading'
 
 	const strFmt = (str, pre='', post='') => {
 		return pre.toUpperCase()+String(str).toUpperCase()+post.toUpperCase()+' '
+	}
+
+	const addText = (str) => {
+		splashText.push(str)
+		splashTextSave += str
 	}
 
 	const getDeviceInfo = async () => {
@@ -49,12 +56,14 @@
         let ip = res.data.ip
         let ip_str = strFmt(ip, 'IPV4: ')
         splashText.push(ip_str)
+        splashTextSave += 'IPV4: xxx.xxx.xxx.xxx '
         let ip_api = 'https://ipinfo.io/'+ip+'/?token=5119af49b37a8d'
         let res2 = await axios.get(ip_api)
         let geo = res2.data
         console.log('geo', geo)
-        splashText.push(strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
+        addText(strFmt(geo.city,'',',')+strFmt(geo.region)+strFmt(geo.org))
         splashText.push(strFmt(geo.loc))
+        splashTextSave += 'xx.xxx, xx.xxx '
         cl_store.$patch({'latLng': String(geo.loc)})
         let device
         if (uap.device.type === 'mobile'){
@@ -62,18 +71,18 @@
         } else {
             device = 'desktop or laptop'
         }
-        splashText.push(strFmt(device))
-        splashText.push(strFmt(uap.os.name)+strFmt(uap.os.version, 'VERSION: '))
-        splashText.push(strFmt(uap.cpu.architecture, 'CPU: '))
-        splashText.push(strFmt(window.navigator.hardwareConcurrency, 'CORES: '))
-        splashText.push(strFmt(uap.browser.name)+strFmt(uap.browser.version, 'VERSION: '))
-        splashText.push(strFmt(uap.engine.name, '(ENGINE: ')+strFmt(uap.engine.version, 'VERSION: ', ')'))
-        splashText.push(strFmt(uap.ua))
-        splashText.push('LANGUAGES ')
+        addText(strFmt(device))
+        addText(strFmt(uap.os.name)+strFmt(uap.os.version, 'VERSION: '))
+        addText(strFmt(uap.cpu.architecture, 'CPU: '))
+        addText(strFmt(window.navigator.hardwareConcurrency, 'CORES: '))
+        addText(strFmt(uap.browser.name)+strFmt(uap.browser.version, 'VERSION: '))
+        addText(strFmt(uap.engine.name, '(ENGINE: ')+strFmt(uap.engine.version, 'VERSION: ', ')'))
+        addText(strFmt(uap.ua))
+        addText('LANGUAGES ')
         window.navigator.languages.forEach((language) => {
-            splashText.push(strFmt(language))
+            addText(strFmt(language))
         })
-        splashText.push(strFmt(new Date()))
+        addText(strFmt(new Date()))
 
         if (!window.navigator.mediaDevices?.enumerateDevices) {
           console.log("enumerateDevices() not supported.");
@@ -90,10 +99,13 @@
                 audioinput ++
             }
           });
-          splashText.push(strFmt(videoinput, 'VIDEO INPUT(S): '))
-          splashText.push(strFmt(audioinput, 'AUDIO INPUT(S): '))
+          addText(strFmt(videoinput, 'VIDEO INPUT(S): '))
+          addText(strFmt(audioinput, 'AUDIO INPUT(S): '))
 
-          cl_store.$patch({'location': geo.country, 'device': device, 'platformVersion': uap.os.version, 'sessionStart': Date.now()})
+          cl_store.$patch({'location': geo.country, 'device': device, 'platformVersion': uap.engine.version, 'sessionStart': Date.now()})
+          console.log(splashTextSave)
+          let payload = {info: splashTextSave}
+		  await axios.post(api_base+'items/browser_info', payload)
         }
     }
 

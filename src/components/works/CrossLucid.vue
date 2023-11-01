@@ -1,9 +1,11 @@
 <template>
-    <VideoComponent v-if="videos.length" :video_file="videos[0]"></VideoComponent>
+    <VideoComponent v-if="videoSelected" :video_file="videoSelected"></VideoComponent>
+    <div v-if="overlayVisible" class="data-overlay" v-html="overlay">
+    </div>
 </template>
 
 <script setup>
-import { ref, computed, defineProps } from 'vue';
+import { ref, computed, defineProps, onMounted } from 'vue';
 import { useStateStore } from '../../stores/state'
 import { useClStore } from '../../stores/CrossLucid'
 import VideoComponent from './VideoComponent.vue'
@@ -13,6 +15,13 @@ import axios from 'axios';
 const cl_store = useClStore()
 const state = useStateStore()
 const props = defineProps(['work'])
+const visitsToday = ref(0)
+const charge = ref(100)
+const workOrder = ['']
+const overlayTexts = []
+const overlay = ref('')
+const overlayVisible = ref(false) // set to True
+const videoSelected = ref(null)
 
 const videos = computed(() => {
     let filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
@@ -23,7 +32,7 @@ const videos = computed(() => {
     }
 })
 
-const selectScene = async () => {
+const get_visitors = async() => {
     const now = new Date()
     const then = new Date()
     then.setHours(0,0,0)
@@ -35,50 +44,160 @@ const selectScene = async () => {
     }
     const query_str = JSON.stringify(query)
     const get_url = `${api_base}/items/heatmap_sessions?filter=${query_str}&aggregate[count]=*`
-    let visitorsToday
     try {
         const res = await axios.get(get_url)
-        visitorsToday = res.data.data[0].count
+        return res.data.data[0].count
     } catch {
-        visitorsToday = 0
+        return 0
     }
-    let charge
+}
+
+const get_charge = async() => {
     try {
         const battery = await window.navigator.getBattery()
-        charge = battery.level * 100
+        return battery.level * 100
     } catch {
-        charge = 100
+        return 100
     }
-    console.log(charge)
-    console.log(visitorsToday)
+}
 
 
-    if(cl_store.aboutTextViewed && cl_store.sessionLength > 600000){
-        // PLAY SCENE 1
-    }else if(cl_store.clicks > 20 && cl_store.clicks < 50 && cl_store.artworksViewed < 5){
-        // PLAY SCENE 2
-    }else if(cl_store.artworksViewed > 3 && cl_store.aboutTextViewed){
-        // PLAY SCENE 3
-    }else if(visitorsToday > 100 && cl_store.device != 'mobile'){
-        // PLAY SCENE 4
-    // }else if(platformVersionNumberTotal == 7 || platformVersionNumberTotal == 11 && device == 'mobile'){
-    //     // PLAY SCENE 5
-    }else if(charge < 20){
-        // PLAY SCENE 6
-    // }else if(windowRatio < .5 || windowRatio < 1.5 && lastKeyPressed == 'x'){
-        // PLAY SCENE 7
+// Logic Functions
+const about_viewed_and_11_mins = () => {
+    if (cl_store.aboutTextViewed && cl_store.sessionLength() > 600000){
+        return true
+    } else {
+        return false
+    }
+}
+
+const clicks_20_50_and_less_works = () => {
+    if (cl_store.clicks >= 20 && cl_store.click <= 50 && cl_store.artworksViewed.length < 5){
+        return true
+    } else {
+        return false
+    }
+}
+
+const more_works_and_1_text = () => {
+    if (cl_store.artworksViewed.length >4 && cl_textsViewed.lenth >= 1){
+        return true
+    } else {
+        return false
+    }
+}
+
+const more_viewers_and_desktop = () => {
+    if (visitsToday.value > 20 && cl_store.device != 'mobile') {
+        return true
+    } else {
+        return false
+    }
+}
+
+const platform_version_and_mobile = () => {
+    if (cl_store.platformUpToDate && cl_store.device == 'mobile'){
+        return true
+    } else {
+        return false
+    }
+}
+
+const small_browser_work_order = () => {
+    if (cl_store.browserSize > 3.55 || cl_store.compareWorks){
+        return true
+    } else {
+        return false
+    }
+}
+
+const last_work = () => {
+    if (cl_store.lastWork == 'symbiotic-ai'){
+        return true
+    } else {
+        return false
+    }
+}
+
+const selectScene = async () => {
+    let scene = 0
+
+    if (last_work()){
+        scene = 8
+    }else if (small_browser_work_order()){
+        scene = 7
+    } else if (charge.value < 20){
+        scene = 6
+    } else if (platform_version_and_mobile()){
+        scene = 5
+    } else if (more_viewers_and_desktop()){
+        scene = 4
+    } else if (more_works_and_1_text()){
+        scene = 3
+    } else if (clicks_20_50_and_less_works()){
+        scene = 2
+    } else if (about_viewed_and_11_mins()){
+        scene = 1
+    }
+
+    videoSelected.value = videos.value[scene]
+
+    console.log(`Scene selected = ${scene}`)
+
+}
+
+const add_to_overlay = (val, key) => {
+    overlayTexts.push(`${key}: ${val}`)
+}
+
+const gen_overlay = (index) => {
+    if (index <= overlayTexts.length){
+        if (index < overlayTexts.length){
+            overlay.value += `${overlayTexts[index]} <br>`
+        } else {
+            setTimeout(() => {
+                overlayVisible.value = false
+            }, 2000)
+        }
+        setTimeout(() => {gen_overlay(index + 1)}, 1000)
+    }
+}
+
+onMounted( async() => {
+    await get_visitors()
+    await get_charge()
+
+    add_to_overlay(visitsToday.value, 'visitorsToday')
+    add_to_overlay(cl_store.location, 'location')
+    add_to_overlay(cl_store.device, 'device')
+    add_to_overlay(cl_store.platformUpToDate, 'browserUpToDate')
+    add_to_overlay(`${charge.value}%`, 'charge')
+    add_to_overlay(cl_store.browser_size, 'browserSizeDecimal')
+    add_to_overlay(`${cl_store.sessionLength()}ms`, 'sessionLength')
+    add_to_overlay(cl_store.clicks, 'clicks')
+    add_to_overlay(cl_store.aboutTextViewed, 'aboutTextViewed')
+    add_to_overlay(cl_store.artworksViewed, 'artworksViewed')
+    add_to_overlay(cl_store.compareWorks, 'artworkPageKnock')
+    add_to_overlay(cl_store.textsViewed.length, 'artworkTextsViewed')
+
+    gen_overlay(0)
+
+    if (cl_store.location == 'us'){
+        videoSelected.value = videos.value[4]
+    // }else if(cl_store.location == 'ru'){
+    //     PLAY UKRAINE VICTORY SIGIL
     }else{
-        // what if none of these conditions are met?
+        selectScene();
     }
 
-}
+})
 
-if (cl_store.location == 'ru'){
-    // PLAY UKRAINE VICTORY SIGIL
-}else if(cl_store.location == 'us'){
-    // PLAY SCENE 4
-}else{
-    selectScene();
-}
 
 </script>
+
+<style scoped>
+    .data-overlay {
+        z-index: 100;
+        position: fixed;
+    }
+</style>

@@ -4,7 +4,7 @@
 		<img aria-hidden="true" v-if="coverImage && !loaded" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
-		<div v-if="props.work == 'funeral-play'" class="py-32 px-4 fixed w-screen h-screen overflow-hidden">
+		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen overflow-hidden">
 			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
 		</div>
 		<VideoWorkWrapper 
@@ -20,7 +20,9 @@
 	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
 	import VideoWorkWrapper from '../components/works/VideoWorkWrapper.vue'
+	import { useClStore } from '../stores/CrossLucid'
 
+	const cl_store = useClStore()
 	const state = useStateStore()
 	const props = defineProps(['langauge', 'work'])
 	const route = useRoute()
@@ -48,6 +50,10 @@
 		state.interfaceVisible = false
 		if(props.work == 'funeral-play'){
 			loaded.value = true
+		}
+		cl_store.addWork(props.work)
+		if (props.work != 'dwellers-between-the-waters'){
+			cl_store.$patch({'lastWork': props.work})
 		}
 		
 	})

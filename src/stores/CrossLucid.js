@@ -1,6 +1,9 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
+const start_session = Date.now()
+const works_order = ['landscape-enter-life', 'digital-traces', 'funeral-play']
+
 export const useClStore = defineStore('crossLucid', () => {
   
   const location = ref(null);
@@ -8,29 +11,47 @@ export const useClStore = defineStore('crossLucid', () => {
   const latLng = ref('');
 
   const device = ref(null);
+
+  const browser_size = ref(null);
   
   const artworksViewed = ref([]);
   
-  const sessionStart = ref(0);
-  const sessionLength = computed(() => Date.now() - sessionStart.value )
+  const addWork = (work) => {
+    if (! artworksViewed.value.includes(work)){
+      artworksViewed.value.push(work)
+    }
+  }
+
+  const lastWork = ref(null)
+
+  const compareWorks = computed(() => {
+   return artworksViewed.value.length === works_order.length && artworksViewed.value.every((element, index) => element === works_order[index]);
+  })
+  
+  const sessionStart = ref(start_session);
+  const sessionLength = () => { return Date.now() - sessionStart.value }
   
   const aboutTextViewed = ref(false);
   
   const clicks = ref(0);
   
-  const textViewed = ref(0);
-  
-  // const currentVisitors = ref(null); // Not needed
+  const textsViewed = ref([]);
+
+  const addText = (work) => {
+    if (! textsViewed.value.includes(work)){
+      textsViewed.value.push(work)
+    }
+    
+  }
   
   const platformVersion = ref(null);
-  
-  // const volume = ref(null);
-  
-  // const charge = ref(null); // Do in page
-  
-  // const windowRatio = ref(null); // Do in page
-  
-  // const lastKeyPressed = ref(null); // Not needed
 
-  return { location, latLng, device, artworksViewed, sessionStart, sessionLength, aboutTextViewed, clicks, textViewed, platformVersion}
+  const platformUpToDate = computed(() => {
+    return false
+  })
+
+  return { 
+    location, latLng, device, browser_size, artworksViewed, addWork, compareWorks, lastWork,
+    sessionStart, sessionLength, aboutTextViewed, clicks, textsViewed, addText, platformVersion, platformUpToDate
+  }
 })

@@ -8,6 +8,8 @@
 	import {storeToRefs} from 'pinia'
 	import { useStateStore } from '../stores/state'
 	import { useClStore } from '../stores/CrossLucid'
+	import axios from 'axios';
+	import { drawText } from 'canvas-txt'
 	const state = useStateStore()
 	const cl_store = useClStore()
 	const props = defineProps(['heatmap'])
@@ -24,19 +26,70 @@
 		"XU HAOMIN", "RUINI SHI", "REBECCA ALLEN", "IRIS QU", "CROSSLUCID", "APRIL LIN", "ALICE YUAN ZHANG"
 	]
 
-	const gen_download = () => {
+	const gen_download = async () => {
 		if (canvas_download === null){
 			return
 		}
-		console.log(props.heatmap)
 		const canvas = props.heatmap.firstChild
 		const context = canvas_download.value.getContext('2d')
+
+		let browserInfo = ""
+		const api_base =  import.meta.env.VITE_API_BASE
+		const res = await axios.get(api_base+'items/browser_info?sort=-date_created&limit=20')
+		console.log(res.data.data)
+		res.data.data.forEach((data) => {
+			browserInfo += data.info
+		})
+
+		let canvasBlobTxt = canvas.toDataURL()
+		canvasBlobTxt = canvasBlobTxt.slice(0,8000)
 
 		canvas_download.value.height = canvas.height
 		canvas_download.value.width = canvas.width
 		//set background
 		context.fillStyle='black';
 		context.fillRect(0,0, canvas.width, canvas.height);
+		//
+		// Background Text
+		let border = 16
+		let bg_text_size = 10
+		let bg_text_start = border
+		let bg_contents
+		let text_width
+		context.fillStyle = "rgb(208, 109, 255)";
+		context.textAlign = "left";
+		context.textBaseline = 'top';
+
+		if (canvas.width > canvas.height){
+			text_width = (canvas.width / 3 ) - ( border * 2 )
+			bg_contents = [
+				browserInfo,
+				canvasBlobTxt,
+				JSON.stringify(state.hmData)
+			]
+		} else {
+			text_width = canvas.width - ( border * 2 )
+			bg_contents = [
+				browserInfo
+			]
+		}
+
+		bg_contents.forEach((bg_txt) => {
+			drawText(context, bg_txt, {
+	  			x: bg_text_start,
+	  			y: border,
+	  			width: text_width,
+	  			height: canvas.height - (border * 2),
+	  			font: 'monospace',
+	  			fontSize: bg_text_size,
+	  			align: 'left',
+	  			justify: true,
+	  			lineHeight: bg_text_size * 1.5
+	  		})
+
+	  		bg_text_start += border + text_width
+		})
+
 		//
 		// Draw heatmap
 		context.drawImage(canvas, 0, 0)
@@ -71,14 +124,33 @@
 		let text_start = (0 - canvas.width) + border
 		context.fillText( "FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN", border, text_start);
 		text_start += text_height
-		context.fillText( "对于你所是的数据, 对于你应该返回的数据", border, text_start);
+		context.fillText( "为数据所生，亦归数据而去", border, text_start);
 		text_start += text_height
 		context.fillText( longLine, border, text_start)
 		text_start += text_height
 		context.fillText( "AREBYTE + CHRONOS ART CENTER", border, text_start);
 		context.restore();
+		// logos
+		const logo_src = "../src/assets/arebyte_logo_white.png"
+		const logo_min = 20
+		let logo_height = (canvas.height / 1080) * 50
+		if (logo_height < logo_min){
+			logo_height = logo_min
+		}
+		let logo_y = canvas_download.value.height - ( border + logo_height)
+		let logo_x = border
+
+		const logo = new Image()
+		logo.src = logo_src
+		await logo.decode()
+		const ratio = logo_height/logo.naturalHeight
+		const logo_width = logo.naturalWidth * ratio
+		context.drawImage(logo, logo_x, logo_y, logo_width, logo_height)
+		logo_x += border + logo_width
+
+
 		// artists 
-		text_start = canvas.height - border
+		text_start = canvas_download.value.height - ((border*2) + logo_height + text_height)
 		artists.forEach((artist) => {
 			context.fillText(artist, border, text_start)
 			text_start -= text_height

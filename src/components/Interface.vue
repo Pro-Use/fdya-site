@@ -12,15 +12,16 @@
             fixed flex items-center justify-center top-2.5 left-2.5  z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
             lg:top-8 lg:right-8 lg:left-auto lg:w-[96px] lg:rounded-lg
             ">
-            <span class="sr-only">About the exhibition</span>
-			<span aria-hidden="true">INFO</span>
+            <span class="sr-only">{{state.getTrans('about-the-exhibition')}}</span>
+			<span aria-hidden="true">{{state.getTrans('info').toUpperCase() }}</span>
         </router-link >
         <button
+            @click="state.changeLang()"
             class="fixed top-2.5 right-2.5  z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow 
             lg:top-[96px] lg:right-8 lg:w-[96px] lg:rounded-lg
             ">
-            <span class="sr-only">Change Language</span>
-			<span aria-hidden="true">中文</span>
+            <span class="sr-only">{{ state.getTrans('change-language') }}</span>
+			<span aria-hidden="true">{{state.getTrans('language')}}</span>
         </button>
         <router-link 
             to="/audio"
@@ -61,7 +62,7 @@ import DownloadIcon from './icons/DownloadIcon.vue';
 import { useStateStore } from '../stores/state'
 
 const state = useStateStore()
-// const { download_canvas } = storeToRefs(state)
+console.log(state.siteElsTranslated.language)
 
 const download_heatmap = () => {
     console.log('download_heatmap clicked')

@@ -3,11 +3,11 @@
         <div class="grid-cols-modal xl:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16 p-2 lg:p-4 max-w-[1200px]">
                 <div class="col-span-2">
-                    <h2 class="pb-8 text-lg xl:text-2xl">ACCESSIBILITY</h2>
+                    <h2 class="pb-8 text-lg xl:text-2xl">{{state.getTrans('accessibility').toUpperCase()}}</h2>
                     <p class="text-base xl:text-lg">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut consectetur iaculis porta. Etiam vel finibus diam. Quisque volutpat, arcu in maximus eleifend, lorem tellus commodo leo, sed condimentum elit massa vulputate est. Quisque id risus non urna dignissim feugiat. Aliquam erat volutpat. Mauris vulputate sapien nec metus hendrerit, id venenatis libero vulputate.</p>
                 </div>
                 <div class="col-span-2">
-                    <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Hide background images and heatmap:</h3>
+                    <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">{{state.getTrans('hide-background-images-and-heatmap')}}:</h3>
                     <button 
                         class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm hover:text-black hover:bg-white" 
                         @click="toggleBG"
@@ -16,7 +16,7 @@
                     </button>
                 </div>
                 <div class="col-span-2">
-                    <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">Pause animations:</h3>
+                    <h3 class="text-lg xl:text-2xl pt-8 pb-4 uppercase">{{state.getTrans('pause-animations')}}:</h3>
                     <button 
                         class="w-full max-w-md text-base border-solid border border-white p-4 uppercase rounded-sm hover:text-black hover:bg-white" 
                         @click="toggleAnimations"
@@ -27,8 +27,8 @@
             </div>
             <div class="close-button">
                 <router-link class="sticky top-0  p-2 lg:p-4 text-lg xl:text-2xl text-white text-right w-full block hover:text-yellow" to="/">
-                    <span class="sr-only">Back to Home Page</span>
-                    <span aria-hidden="true">CLOSE</span>
+                    <span class="sr-only">{{state.getTrans('back-to-home-page')}}</span>
+                    <span aria-hidden="true">{{state.getTrans('close').toUpperCase()}}</span>
                 </router-link>
             </div>
         </div>
