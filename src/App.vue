@@ -27,7 +27,7 @@ onMounted( async () => {
 
   res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/audio_descriptions?fields=*.*')
   const description = res.data.data
-  state.$patch({'descriptionInfo': description})
+  state.$patch({'accessInfo': description})
 
   res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/misc_translations')
   const elementTrans = res.data.data
