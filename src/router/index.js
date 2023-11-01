@@ -4,6 +4,7 @@ import WorkView from '../views/WorkView.vue'
 import InfoView from '../views/InfoView.vue'
 import AccessView from '../views/AccessView.vue'
 import AudioView from '../views/AudioView.vue'
+import AccessWorkView from '../views/AccessWorkView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,12 @@ const router = createRouter({
       path: '/audio/',
       name: 'audio',
       component: AudioView,
+    },
+    {
+      path: '/access/:page/:language',
+      name: 'access',
+      component: AccessWorkView,
+      props: true,
     },
   ]
 })
