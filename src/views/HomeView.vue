@@ -74,10 +74,11 @@ const okaySmallScreen = (event) => {
       <div class="grid-line-h"></div>
       <div class="grid-line-h"></div>
     </div>
-
-  <ul role="list" aria-label="Artworks">
+  
+    <h2 class="sr-only" id="ArtworkListTitle">The Artworks</h2>
+  <ul role="list" aria-labelledby="ArtworkListTitle">
     <li class="cross-container-7">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[0]" aria-label="Open A by Artist A"> 
+      <a :href="'#'+ state.worksInfo[0].title_en" @click="launchProject" :data-link="state.workLinks[0]" :aria-label="'Open '+ state.worksInfo[0].title_en + ' by ' + state.worksInfo[0].artist_en"> 
         <img 
           v-if="state.workCovers[0] !== null" 
           aria-hidden="true"
@@ -86,46 +87,46 @@ const okaySmallScreen = (event) => {
       </a>
     </li>
     <li class="cross-container-8">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[1]"> 
+      <a :href="'#'+ state.worksInfo[1].title_en" @click="launchProject" :data-link="state.workLinks[1]" :aria-label="'Open '+ state.worksInfo[1].title_en + ' by ' + state.worksInfo[1].artist_en"> 
         <img 
         v-if="state.workCovers[1] !== null" 
-        alt="Open B by Artist B"
+        aria-hidden="true"
         class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[1]">
       </a>
     </li>
     <li class="cross-container-9">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[2]"> 
+      <a :href="'#'+ state.worksInfo[2].title_en" @click="launchProject" :data-link="state.workLinks[2]" :aria-label="'Open '+ state.worksInfo[2].title_en + ' by ' + state.worksInfo[2].artist_en"> 
         <img 
         v-if="state.workCovers[2] !== null" 
-        alt="Open C by Artist C"
+        aria-hidden="true"
         class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[2]">
       </a>
     </li>
     <li class="cross-container-10">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[3]"> 
+      <a :href="'#'+ state.worksInfo[3].title_en" @click="launchProject" :data-link="state.workLinks[3]" :aria-label="'Open '+ state.worksInfo[3].title_en + ' by ' + state.worksInfo[3].artist_en"> 
         <img 
           v-if="state.workCovers[3] !== null" 
-          alt="Open D by Artist D"
+          aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[3]">
       </a>
     </li>
     <li class="cross-container-11">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[4]"> 
+      <a :href="'#'+ state.worksInfo[4].title_en" @click="launchProject" :data-link="state.workLinks[4]" :aria-label="'Open '+ state.worksInfo[4].title_en + ' by ' + state.worksInfo[4].artist_en"> 
         <img 
           v-if="state.workCovers[4] !== null"
-          alt="Open E by Artist E" 
+          aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[4]">
       </a>
     </li>
     <li class="cross-container-12">
-      <a href="#work" @click="launchProject" :data-link="state.workLinks[5]"> 
+      <a :href="'#'+ state.worksInfo[5].title_en" @click="launchProject" :data-link="state.workLinks[5]" :aria-label="'Open '+ state.worksInfo[5].title_en + ' by ' + state.worksInfo[5].artist_en"> 
         <img 
           v-if="state.workCovers[5] !== null" 
-          alt="Open F by Artist F"
+          aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[5]">
       </a>
