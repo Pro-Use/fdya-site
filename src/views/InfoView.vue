@@ -3,7 +3,8 @@
         <div class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16  p-2 lg:p-4 max-w-[1200px]">
                 <div class="col-span-2">
-                    <h2 class="pb-8 text-lg xl:text-2xl">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h2>
+                    <h1 class="pb-8 text-lg xl:text-2xl">FOR DATA YOU ARE, <br>AND TO DATA YOU SHALL RETURN</h1>
+                    <h2 class="sr-only">Introduction</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.site_summary">
                     </div>
                     <button @click="readMore" v-if="!readMoreActive" class="mt-8 text-base border-solid border border-white p-6 py-1 uppercase rounded-sm hover:bg-white hover:text-black">
@@ -13,29 +14,29 @@
                     </div>
                 </div>
                 <div class="col-span-2">
-                    <h3 class="text-lg xl:text-2xl pb-8 uppercase">List Of Works</h3>
+                    <h2 class="text-lg xl:text-2xl pb-8 uppercase">List Of Works</h2>
                     <ul role="list" class="grid col-span-2 md:grid-cols-2 xl:grid-cols-3 gap-8 text-base xl:text-lg">
                         <li v-for="(work, index) in state.worksInfoTranslated" :key="index"> 
                             <div v-html="work.artist"></div>
                             <div v-html="work.listing"></div>
-                            <router-link :to="state.workLinks[index]" class="hover:text-yellow">[OPEN]</router-link>
+                            <router-link :to="state.workLinks[index]" :aria-label="'open ' + work.title + ' by ' + work.artist" class="hover:text-yellow">[OPEN]</router-link>
                         </li>
                     </ul>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('arebyte').toUpperCase() }}</h3>
+                    <h2 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('arebyte').toUpperCase() }}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.arebyte"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('chronos-art-center').toUpperCase() }}</h3>
+                    <h2 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('chronos-art-center').toUpperCase() }}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.cac"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">{{ state.getTrans('events').toUpperCase() }}</h3>
+                    <h2 class="pb-4 text-lg  xl:text-2xl uppercase">{{ state.getTrans('events').toUpperCase() }}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.events"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h3 class="pb-4 text-lg  xl:text-2xl uppercase">{{state.getTrans('credits').toUpperCase()}}</h3>
+                    <h2 class="pb-4 text-lg  xl:text-2xl uppercase">{{state.getTrans('credits').toUpperCase()}}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.credits"></div>
                 </div>
             </div>
