@@ -68,9 +68,11 @@ const okaySmallScreen = (event) => {
     <h2  class="text-lg pb-4" id="accessibleMenuTitle">Audio Accessible Menu</h2>
     <nav>
       <ul role="list" aria-labelledby="accessibleMenuTitle">
-        <li class="block"><RouterLink class="p-4 block" to="/access/intoduction">Introduction</RouterLink></li>
-        <li class="block"><RouterLink class="p-4 block" to="/access/intoduction">About the exhibition</RouterLink></li>
-        <li class="block" v-for="work in state.workLinks"><RouterLink class="p-4 block" :to="'/access/'+ work">{{ work }}</RouterLink></li>
+        <li class="block" v-for="page in state.accessInfoTranslated">
+          <RouterLink class="p-4 block" :to="'/access/'+ page.slug + '/' + state.siteLang">
+            {{ page.accessible_description }}
+          </RouterLink>
+        </li>
       </ul>
     </nav>
   </div>
