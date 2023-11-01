@@ -20,7 +20,7 @@ const charge = ref(100)
 const workOrder = ['']
 const overlayTexts = []
 const overlay = ref('')
-const overlayVisible = ref(false) // set to True
+const overlayVisible = ref(false) // set to true
 const videoSelected = ref(null)
 
 const videos = computed(() => {
@@ -119,35 +119,15 @@ const last_work = () => {
     }
 }
 
-const selectScene = async () => {
-    let scene = 0
-
-    if (last_work()){
-        scene = 8
-    }else if (small_browser_work_order()){
-        scene = 7
-    } else if (charge.value < 20){
-        scene = 6
-    } else if (platform_version_and_mobile()){
-        scene = 5
-    } else if (more_viewers_and_desktop()){
-        scene = 4
-    } else if (more_works_and_1_text()){
-        scene = 3
-    } else if (clicks_20_50_and_less_works()){
-        scene = 2
-    } else if (about_viewed_and_11_mins()){
-        scene = 1
-    }
-
-    videoSelected.value = videos.value[scene]
-
-    console.log(`Scene selected = ${scene}`)
-
-}
-
 const add_to_overlay = (val, key) => {
     overlayTexts.push(`${key}: ${val}`)
+}
+
+const highlight_overlay = (key) => {
+    const index = overlayTexts.findIndex((text) => text.includes(key))
+    if (index !== -1){
+        overlayTexts[index] = `<span class="italic">${overlayTexts[index]}</span>`
+    }
 }
 
 const gen_overlay = (index) => {
@@ -161,6 +141,47 @@ const gen_overlay = (index) => {
         }
         setTimeout(() => {gen_overlay(index + 1)}, 1000)
     }
+}
+
+const selectScene = async () => {
+    let scene = 0
+
+    if (last_work()){
+        scene = 8
+        highlight_overlay('artworksViewed')
+    }else if (small_browser_work_order()){
+        scene = 7
+        highlight_overlay('artworksViewed')
+        highlight_overlay('browserSizeDecimal')
+    } else if (charge.value < 20){
+        scene = 6
+        highlight_overlay('charge')
+    } else if (platform_version_and_mobile()){
+        scene = 5
+        highlight_overlay('device')
+        highlight_overlay('browserUpToDate')
+    } else if (more_viewers_and_desktop()){
+        scene = 4
+        highlight_overlay('device')
+        highlight_overlay('visitorsToday')
+    } else if (more_works_and_1_text()){
+        scene = 3
+        highlight_overlay('artworksViewed')
+        highlight_overlay('artworkTextsViewed')
+    } else if (clicks_20_50_and_less_works()){
+        scene = 2
+        highlight_overlay('artworksViewed')
+        highlight_overlay('clicks')
+    } else if (about_viewed_and_11_mins()){
+        scene = 1
+        highlight_overlay('aboutTextViewed')
+        highlight_overlay('sessionLength')
+    }
+
+    videoSelected.value = videos.value[scene]
+
+    console.log(`Scene selected = ${scene}`)
+
 }
 
 onMounted( async() => {

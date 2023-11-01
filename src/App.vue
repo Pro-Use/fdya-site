@@ -25,6 +25,10 @@ onMounted( async () => {
   const site = res.data.data
   state.$patch({'siteInfo': site})
 
+  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/audio_descriptions?fields=*.*')
+  const description = res.data.data
+  state.$patch({'descriptionInfo': description})
+
   res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/misc_translations')
   const elementTrans = res.data.data
   state.$patch({'elTranslations': elementTrans})
