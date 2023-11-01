@@ -86,13 +86,13 @@ onMounted( async () => {
 
   .fade-enter-active,
   .fade-leave-active {
-    transition: all .3s cubic-bezier(1, 0.5, 0.8, 1);;
+    transition: all .3s cubic-bezier(1, 0.5, 0.8, 1);
   }
 
   .fade-enter-from,
   .fade-leave-to {
     opacity: 0;
-    transition: all .3s cubic-bezier(1, 0.5, 0.8, 1);;
+    transition: all .3s cubic-bezier(1, 0.5, 0.8, 1);
   }
 
 
