@@ -62,10 +62,12 @@ const okaySmallScreen = (event) => {
   <main id="main" aria-label="Index Page" ref="indexMain" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
 
   <div class="accessible-menu sr-only focus-within:not-sr-only border border-solid border-white rounded-lg focus-within:p-4 font-DMregular bg-black text-white">
-    <h1 class="text-xl pb-8 uppercase">For Data You Are and to Data You Shall Return</h1>
-    <h2 class="text-lg pb-4">Introduction</h2>
-    <p class="pb-8">An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin. Some of the works may not be accessible to screen readers. Use the accessible menu links to listen to audio described versions.</p>
-    <h2  class="text-lg pb-4" id="accessibleMenuTitle">Audio Accessible Menu</h2>
+    <h1 class="text-xl pb-8 uppercase">{{state.siteInfoTranslated.site_title}}</h1>
+    <h2 class="text-lg pb-4">{{state.getTrans('introduction')}}</h2>
+    <p class="pb-8">
+      {{state.siteInfoTranslated.screenreader_introduction}}
+    </p>
+    <h2  class="text-lg pb-4" id="accessibleMenuTitle">{{state.getTrans('audio-accessible-menu')}}</h2>
     <nav>
       <ul role="list" aria-labelledby="accessibleMenuTitle">
         <li class="block" v-for="page in state.accessInfoTranslated">
@@ -150,7 +152,7 @@ const okaySmallScreen = (event) => {
     </li>
   </ul>
 
-  <tempate v-if="small_screen_alert">
+<!--   <template v-if="small_screen_alert">
   <Teleport to="body">
   <div aria-hidden="true" v-if="state.small_screen == 'true'" class="modal fixed w-screen h-screen top-0 left-0 bg-black text-white p-4 text-center flex items-center justify-center z-[100] font-DMregular">
     <div class="modal-inner">
@@ -160,7 +162,7 @@ const okaySmallScreen = (event) => {
     </div>
   </div>
   </Teleport>
-  </tempate>
+  </template> -->
 
   </main>
 </template>
