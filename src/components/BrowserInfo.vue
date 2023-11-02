@@ -40,6 +40,10 @@
 	let splashTextSave = ''
 	let title = ' /FOR /DATA /YOU /ARE, /AND /TO /DATA /YOU /SHALL /RETURN  /为数据所生，/亦归数据而去 '
 	let accessTitle = ' FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN  为数据所生，亦归数据而去 '
+	const artists = [
+		"XU HAOMIN ", "RUINI SHI ", "REBECCA ALLEN ", "IRIS QU ", "CROSSLUCID ", "APRIL LIN ", "ALICE YUAN ZHANG "
+	]
+	const orgs = ["AREBYTE ", "+ ", "CHRONOS ART CENTER "]
 
 	info_text.value = 'Loading'
 
@@ -54,9 +58,15 @@
 
 	const getDeviceInfo = async () => {
 		let titleArray = title.split("/");
-		for (let i = 0; i < titleArray.length; i++) {
-			splashText.push(titleArray[i]);
-		}
+		titleArray.forEach((title) => {
+			splashText.push(title);
+		})
+		artists.forEach( (artist) => {
+			splashText.push(artist);
+		})
+		orgs.forEach((org) => {
+			splashText.push(org)
+		})
         let res = await axios.get('https://api.ipify.org?format=json')
         let ip = res.data.ip
         let ip_str = strFmt(ip, 'IPV4: ')
