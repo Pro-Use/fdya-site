@@ -1,6 +1,6 @@
 <template>
     <VideoComponent v-if="videoSelected" :video_file="videoSelected"></VideoComponent>
-    <div v-if="overlayVisible" class="data-overlay" v-html="overlay">
+    <div v-if="overlayVisible" class="data-overlay z-50 top-0 left-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular" v-html="overlay">
     </div>
 </template>
 
@@ -20,7 +20,7 @@ const charge = ref(100)
 const workOrder = ['']
 const overlayTexts = []
 const overlay = ref('')
-const overlayVisible = ref(false) // set to true
+const overlayVisible = ref(true) // set to true
 const videoSelected = ref(null)
 
 const videos = computed(() => {
@@ -139,7 +139,7 @@ const gen_overlay = (index) => {
                 overlayVisible.value = false
             }, 2000)
         }
-        setTimeout(() => {gen_overlay(index + 1)}, 1000)
+        setTimeout(() => {gen_overlay(index + 1)}, 500)
     }
 }
 

@@ -27,6 +27,14 @@
 						<div v-html="work_info.artist"></div>
 						<div v-html="work_info.listing"></div>
 					</h2>
+					<div class="pb-8" aria-hidden="true">
+						<button class="flex">
+							<span>
+								<AudioIconSmall></AudioIconSmall>
+							</span>
+							<span class="text-xs row-start-1 pl-2 uppercase">Listen to Audio Guide</span>
+						</button>
+					</div>
 					<div class="text-base xl:text-lg rte" v-html="work_info.description"></div>
                 </div>   
             </div>
@@ -41,6 +49,7 @@
 	import { defineProps, ref, computed } from 'vue'
 	import { useStateStore } from '../../stores/state'
 	import { useClStore } from '../../stores/CrossLucid'
+	import AudioIconSmall from '../icons/AudioIconSmall.vue';
 
 	const cl_store = useClStore()
 	const state = useStateStore()
@@ -77,6 +86,13 @@
 	}
 	
 </script>
-<style scoped>
+<style scoped lang="scss">
 	
+	button:hover{
+		color:#B8F33A;
+		path{
+			fill: #B8F33A!important
+		}
+	}
+
 </style>

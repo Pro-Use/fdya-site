@@ -44,8 +44,8 @@
         <button @click="download_heatmap" :disabled="state.download_canvas"
             aria-label="Download the heatmap"
             class="
-                fixed flex items-center justify-center bottom-2.5 right-2.5 z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
-                lg:right-8 lg:bottom-8 lg:w-[96px] lg:rounded-[50%] lg:bg-transparent lg:border-none lg:shadow-none lg:hover:bg-transparent lg:hover:border-solid lg:hover:border lg:hover:border-white
+                fixed flex items-center justify-center bottom-2.5 right-[50%] translate-x-[50%] z-[100] bg-white h-12 w-12 block border-solid border border-black rounded-full shadow-default text-xs cursor-pointer hover:bg-yellow
+                lg:translate-x-[0] lg:right-8 lg:bottom-8 lg:w-[96px] lg:rounded-[50%] lg:bg-transparent lg:border-none lg:shadow-none lg:hover:bg-transparent lg:hover:border-solid lg:hover:border lg:hover:border-white
             ">
             <DownloadIcon></DownloadIcon>
         </button>
