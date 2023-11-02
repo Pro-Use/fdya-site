@@ -100,18 +100,23 @@ export const useStateStore = defineStore('state', () => {
 
   const accessInfo = ref([])
 
-  const accessInfoTranslated = computed(()=> {
-    let translated = {}
-    let keys = Object.keys(accessInfo.value)
-    keys.forEach((key) => {
-      if (siteLang.value == 'en' && key.includes('_en') || siteLang.value == 'cn' && key.includes('_cn')){
-        let new_key = key.replace('_en', '').replace('_cn', '')
-        translated[new_key] = accessInfo.value[key]
-      } else if (!key.includes('_en') && !key.includes('_cn') ){
-        translated[key] = accessInfo.value[key]
-      }
+  const accessInfoTranslated = computed(() => {
+    let info = []
+    accessInfo.value.forEach((accessInfo) => {
+      //loop through object keys, make new object with data from en/cn as appropriate
+      let translated = {}
+      let keys = Object.keys(accessInfo)
+      keys.forEach((key) => {
+        if (siteLang.value == 'en' && key.includes('_en') || siteLang.value == 'cn' && key.includes('_cn')){
+          let new_key = key.replace('_en', '').replace('_cn', '')
+          translated[new_key] = accessInfo[key]
+        } else if (!key.includes('_en') && !key.includes('_cn') ){
+          translated[key] = accessInfo[key]
+        }
+      })
+      info.push(translated)
     })
-    return translated
+    return info
   })
 
   const elTranslations = ref([])
@@ -163,7 +168,9 @@ export const useStateStore = defineStore('state', () => {
     workLinks,
     workCovers,
     siteInfo,
-    siteInfoTranslated, 
+    siteInfoTranslated,
+    accessInfo,
+    accessInfoTranslated, 
     elTranslations,
     siteElsTranslated,
     getTrans,
