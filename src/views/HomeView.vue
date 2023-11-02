@@ -261,12 +261,12 @@ const okaySmallScreen = (event) => {
     height: calc(var(--x)*2);
     cursor: pointer;
     transition: 
-      all 300ms 0ms ease-in-out;
+      all 250ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
     transform: translate(-50%,-50%) scale(25%);
     z-index: 2;
     img{
       opacity: 0;
-      transition: all 300ms 0ms ease-in-out;
+      transition: all 250ms 0ms cubic-bezier(0.4, 0, 0.2, 1);
     }
   }
   
@@ -290,8 +290,8 @@ const okaySmallScreen = (event) => {
     background-attachment: scroll;
     transform: rotate(90deg);
     transition: 
-      transform 300ms 100ms ease-in-out,
-      clip-path 300ms 300ms ease-in-out;
+      transform 250ms 100ms cubic-bezier(0.4, 0, 0.2, 1),
+      clip-path 250ms 250ms cubic-bezier(0.4, 0, 0.2, 1);
     clip-path: polygon(0 49%, 49% 49%, 49% 0, 51% 0, 51% 49%, 100% 49%, 100% 51%, 51% 51%, 51% 100%, 49% 100%, 49% 51%, 0 51%);  
   }
 
@@ -306,7 +306,7 @@ const okaySmallScreen = (event) => {
     a{
       transform: rotate(0);
       clip-path: polygon(0% 15%, 0 0, 15% 0%, 85% 0%, 100% 0, 100% 15%, 100% 85%, 100% 100%, 85% 100%, 15% 100%, 0 100%, 0% 85%) !important ;
-      transition: clip-path 300ms 300ms ease-in-out;
+      transition: clip-path 250ms 250ms cubic-bezier(0.4, 0, 0.2, 1);
     }
     img{
       opacity: 1;

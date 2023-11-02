@@ -110,10 +110,12 @@ onMounted( async () => {
     transform: scale(1.1);
     opacity: 0;
   }
+  
 
   .notransition > * {
     transition: all 0s 0s linear !important;
   }
+
 
 
   .rte{

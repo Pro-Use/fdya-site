@@ -8,6 +8,7 @@
 		<div v-if="data_complete" class="pt-4">
 			<button class="p-4 border border-solid border-white" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
 		</div>
+		<button class="focus:p-4 border border-solid border-white sr-only focus:not-sr-only focus:fixed bottom-[32px] left-[50%] translate-x-[-50%] bg-offBlack" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
 	</main>
 </template>
 
@@ -168,13 +169,9 @@
 	const skipIntro = async () => {
 		state.splashComplete = true
 		state.interfaceVisible = true
+		document.getElementById('skip-to-main').focus()
 	}
 	
-	// onMounted(() => {
-	// 	setTimeout(async () => {
-	// 		await showDeviceInfo()
-	// 	}, 3000);
-	// })
 	showDeviceInfo()
 
 

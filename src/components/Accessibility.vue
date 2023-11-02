@@ -1,7 +1,7 @@
 <template>
     <ul class="skip-links absolute top-[-10000px]">
         <li>
-            <a href="#main" ref="skipLinkMain" class="skip-link">Skip to main content</a>
+            <a href="#main" ref="skipLinkMain" id="skip-to-main" class="skip-link">Skip to main content</a>
         </li>
     </ul>
 </template>

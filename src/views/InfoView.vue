@@ -39,6 +39,20 @@
                     <h2 class="pb-4 text-lg  xl:text-2xl uppercase">{{state.getTrans('credits').toUpperCase()}}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.credits"></div>
                 </div>
+                <div class="col-span-2">
+                    <h2 class="sr-only">Partners</h2>
+                    <div class="partner-logo-strip flex pt-[100px]">
+                        <div class="flex items-center"> 
+                            <img class="mr-8 w-[180px] h-auto" src="../assets/arebyte_logo_white.png" alt="Arebyte Gallery Logo"/>
+                        </div>
+                        <div class="flex items-center"> 
+                            <img class="mr-6 w-[160px] h-auto" src="../assets/cac-logo.svg" alt="Chronos Art Centre Logo"/>
+                        </div>
+                        <div class="flex items-center"> 
+                            <img class="mr-2 w-[200px] h-auto" src="../assets/grant_png_white.png" alt="Supported Using Public Funding by Arts Council England"/>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="close-button">
                 <router-link class="sticky p-2 lg:p-4 top-0 text-lg xl:text-2xl text-white text-right block w-full hover:text-yellow" to="/">
