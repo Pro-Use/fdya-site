@@ -1,5 +1,5 @@
 <template>
-	<canvas class="test" v-show="false" ref="canvas_download"></canvas>
+	<canvas class="test" v-show="true" ref="canvas_download"></canvas>
 	<a ref="download"></a>
 </template>
 
@@ -131,7 +131,7 @@
 		context.fillText( "AREBYTE + CHRONOS ART CENTER", border, text_start);
 		context.restore();
 		// logos
-		const logo_src = "../src/assets/arebyte_logo_white.png"
+		const logo_src = "../src/assets/Logo Strip@1.5x.png"
 		const logo_min = 20
 		let logo_height = (canvas.height / 1080) * 50
 		if (logo_height < logo_min){
