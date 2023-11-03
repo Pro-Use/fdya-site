@@ -18,7 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        DMregular: ['dm-mono-regular',  'monospace']
+        DMregular: ['dm-mono-regular',  'monospace'],
+        Monaco: ['monaco', 'serif']
       },
       gridTemplateColumns: {
         'header': '48px 1fr 48px',

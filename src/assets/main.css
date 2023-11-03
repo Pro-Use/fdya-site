@@ -18,6 +18,12 @@
         url("/src/assets/dmmono-italic-webfont.woff2")format("woff2");
 }
 
+@font-face {
+    font-family: "monaco";
+    src: 
+        url("/src/assets/monaco-webfont.woff")format("woff");
+}
+
 :root{
     --x: 16.66vw;
   }

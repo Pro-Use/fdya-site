@@ -1,9 +1,9 @@
 <template>
 	<div aria-hidden="true" class="bg-text h-screen w-screen">
 		<div class="grid grid-cols-3">
-			<div class="p-4 h-screen overflow-y-auto break-all">{{state.browserInfo}} {{additionalInfo}}</div>
-			<div class="p-4 h-screen overflow-y-auto break-all"><example></example></div>
-			<div class="p-4 h-screen overflow-y-auto break-all">{{state.browserInfo}} <br> <br> {{state.hmData}}</div>
+			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.browserInfo}} {{additionalInfo}}</div>
+			<div class="px-4 h-screen overflow-y-auto break-all text-[10px] leading-[20px] font-Monaco"><example></example></div>
+			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.hmData}}</div>
 		</div>
 	</div>
 </template>
@@ -37,7 +37,6 @@
   position: fixed;
   top: 0px;
   background-color: black;
-  font-size: 10px;
   font-family: monospace;
 }
 </style>
