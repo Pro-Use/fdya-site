@@ -59,10 +59,10 @@ const okaySmallScreen = (event) => {
 </script>
 
 <template>
-  <main id="main" aria-label="Index Page" ref="indexMain" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain">
+  <main id="main" aria-label="Index Page" ref="indexMain" class="fixed w-screen h-screen bg-transparent z-50 top-0 left-0 overflow-y-auto overscroll-contain font-DMregular">
 
   <div class="accessible-menu sr-only focus-within:not-sr-only border border-solid border-white rounded-lg focus-within:p-4 font-DMregular bg-black text-white">
-    <h1 class="text-xl pb-8 uppercase">{{state.siteInfoTranslated.site_title}}</h1>
+    <h1 class="text-xl pb-8 uppercase font-Monaco">{{state.siteInfoTranslated.site_title}}</h1>
     <h2 class="text-lg pb-4">{{state.getTrans('introduction')}}</h2>
     <p class="pb-8">
       {{state.siteInfoTranslated.screenreader_introduction}}
@@ -103,6 +103,10 @@ const okaySmallScreen = (event) => {
           aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[0]">
+          <span 
+            aria-hidden="true" 
+            class="work-title font-monaco pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[0].title_en }}</i><br>{{ state.worksInfo[0].artist_en }}</span>
       </a>
     </li>
     <li class="cross-container-8">
@@ -112,6 +116,10 @@ const okaySmallScreen = (event) => {
         aria-hidden="true"
         class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[1]">
+        <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[1].title_en }}</i><br>{{ state.worksInfo[1].artist_en }}</span>
       </a>
     </li>
     <li class="cross-container-9">
@@ -121,6 +129,10 @@ const okaySmallScreen = (event) => {
         aria-hidden="true"
         class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
         :src="state.workCovers[2]">
+        <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[2].title_en }}</i><br>{{ state.worksInfo[2].artist_en }}</span>
       </a>
     </li>
     <li class="cross-container-10">
@@ -130,6 +142,10 @@ const okaySmallScreen = (event) => {
           aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[3]">
+          <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[3].title_en }}</i><br>{{ state.worksInfo[3].artist_en }}</span>
       </a>
     </li>
     <li class="cross-container-11">
@@ -139,6 +155,10 @@ const okaySmallScreen = (event) => {
           aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[4]">
+          <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[4].title_en }}</i><br>{{ state.worksInfo[4].artist_en }}</span>
       </a>
     </li>
     <li class="cross-container-12">
@@ -148,6 +168,10 @@ const okaySmallScreen = (event) => {
           aria-hidden="true"
           class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
           :src="state.workCovers[5]">
+          <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[5].title_en }}</i><br>{{ state.worksInfo[5].artist_en }}</span>
       </a>
     </li>
   </ul>
@@ -278,6 +302,9 @@ const okaySmallScreen = (event) => {
     img{
       opacity: 1;
     }
+    span{
+      opacity: 1;
+    }
   }
 
   [class^="cross-container"] a{
@@ -312,6 +339,9 @@ const okaySmallScreen = (event) => {
     }
     img{
       opacity: 1;
+    }
+    span{
+      opacity: 0;
     }
   }
 
