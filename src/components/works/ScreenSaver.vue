@@ -1,11 +1,20 @@
 <template>
 	<div v-if="ss_active">
-		<iframe 
+<!-- 		<iframe 
 			class="ss-iframe"  
 			allowtransparency="true"
 			src="http://works.fordatayouareandtodatayoushallreturn.online/threejs_yunshi/">
 
-		</iframe>
+		</iframe> -->
+	</div>
+	<div v-show="!ss_loaded || ss_active" class="position: fixed top-0 z-[1000]">
+		<Meteorite ref="meteorite" @loaded="handleLoaded"
+		 	:resource="{ 
+			 	gltf: `${resource_base}/models/final.glb`, 
+			 	normal: `${resource_base}/textures/normal_1.jpg`, 
+			 	environment: `${resource_base}/textures/iStock-1609113229.jpg` 
+		 	}" 
+		/>
 	</div>
 	<div v-show="ss_active"
 		 class="ss-iframe hide"  
@@ -16,32 +25,49 @@
 	import { ref, defineProps, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
 	import { useStateStore } from '../../stores/state'
+	import Meteorite from './glimpse/Meteorite.vue';
 
+
+	const meteorite = ref(null)
 	const state = useStateStore()
 
 	const ss_monitor = ref(null)
 	const timeout_ms = 20000
 	const timeout_id = ref(null)
 	const ss_active = ref(false)
+	const ss_loaded = ref(false)
 	const props = defineProps(['monitored'])
 	const monitored = props.monitored
+
+	const resource_base = "/works/glimpse"
+
+	const getDelay = () => {
+	  return (Math.random() * 10 + 10) * 1000;
+	}
+
+	const handleLoaded = () => {
+		ss_loaded.value = true
+	  	set_timeout()
+	}
 
 	const set_timeout = () => {
 		if (timeout_id.value !== null){
 			clearTimeout(timeout_id.value)
 		}
+		const delay = getDelay();
 		timeout_id.value = setTimeout(() => {
+			console.log('disabled', state.screensaver_disabled)
+			console.log('focus', document.hasFocus())
 			if(state.screensaver_disabled == false && document.hasFocus()){
 				ss_active.value = true
+				console.log('meteorite')
+				meteorite.value?.start()
+
 			}
-		}, timeout_ms)
+		}, delay)
 	}
 
 	onMounted(() => {
-		set_timeout()
-
-		// console.log(document.hasFocus())
-		// console.log(ss_monitor)
 
 		const move = fromEvent(monitored, 'mousemove')
 		const ss_move = fromEvent(ss_monitor._value, 'mousemove')
@@ -51,6 +77,8 @@
 		.subscribe(() => {
 			if (ss_active.value){
 				ss_active.value = false
+				// stop meteorite
+				meteorite.value?.reset()
 			}
 			set_timeout()
 			

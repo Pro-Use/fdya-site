@@ -149,7 +149,7 @@ export const useStateStore = defineStore('state', () => {
     }
   }
 
-  const screensaver_disabled = ref(true)
+  const screensaver_disabled = ref(false)
 
   const download_heatmap = ref(false)
 
