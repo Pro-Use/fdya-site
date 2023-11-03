@@ -1,8 +1,8 @@
 <template>
-	  <main id="main" 
+	  <main ref="main" id="main" 
 	  	class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
 		<img aria-hidden="true" v-if="coverImage && !loaded" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
-		<WorkInfo :work="props.work" />
+		<WorkInfo :work="props.work" :show_info_layer="showInfo" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
 		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen overflow-hidden">
 			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
@@ -16,6 +16,7 @@
 	import { ref, defineProps, onMounted, computed } from 'vue';
 	import { useRoute } from 'vue-router'
 	import { useStateStore } from '../stores/state'
+	import { fromEvent } from 'rxjs';
 	import WorkInfo from '../components/works/WorkInfo.vue'
 	import VideoComponent from '../components/works/VideoComponent.vue'
 	import CrossLucid from '../components/works/CrossLucid.vue'
@@ -28,6 +29,9 @@
 	const route = useRoute()
 	const api_base =  import.meta.env.VITE_API_BASE
 	const loaded = ref(false)
+	const main = ref(null)
+	let timeout_id = null
+	const showInfo = ref(true)
 
 	console.log(props)
 
@@ -45,6 +49,16 @@
 		}
 	})
 
+	const set_info_timeout = () => {
+		showInfo.value = true
+		if (timeout_id !== null){
+			clearTimeout(timeout_id)
+		}
+		timeout_id = setTimeout(() => {
+			showInfo.value = false
+		}, 3000)
+	}
+
 	onMounted(() => {
 		state.mainTransition = 'zoom-fade'
 		state.interfaceVisible = false
@@ -55,7 +69,12 @@
 		if (props.work != 'dwellers-between-the-waters'){
 			cl_store.$patch({'lastWork': props.work})
 		}
-		
+		const move = fromEvent(main.value, 'mousemove')
+		set_info_timeout()
+		move.subscribe(() => {
+			set_info_timeout()
+
+		})
 	})
 
 

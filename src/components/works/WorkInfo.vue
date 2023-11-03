@@ -1,6 +1,6 @@
 <template>
 	<Transition name="fade">
-		<div v-show="showInfoLayer">
+		<div v-show="show_info_layer">
 			<h1 class="fixed z-50 bottom-0 left-0 invisible sm:visible p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
 				<i>{{ work_info.title }}</i>
 				<br>{{ work_info.artist }}
@@ -27,14 +27,15 @@
 						<div v-html="work_info.artist"></div>
 						<div v-html="work_info.listing"></div>
 					</h2>
-					<div class="pb-8" aria-hidden="true">
+					<!-- <div class="pb-8" aria-hidden="true">
 						<button class="flex">
 							<span>
 								<AudioIconSmall></AudioIconSmall>
 							</span>
 							<span class="text-xs row-start-1 pl-2 uppercase">Listen to Audio Guide</span>
 						</button>
-					</div>
+					</div> -->
+					<AudioGuide :work="props.work" />
 					<div class="text-base xl:text-lg rte" v-html="work_info.description"></div>
                 </div>   
             </div>
@@ -46,14 +47,14 @@
 	</Transition>
 </template>
 <script setup>
-	import { defineProps, ref, computed } from 'vue'
+	import { ref, computed } from 'vue'
 	import { useStateStore } from '../../stores/state'
 	import { useClStore } from '../../stores/CrossLucid'
-	import AudioIconSmall from '../icons/AudioIconSmall.vue';
+	import AudioGuide from './AudioGuide.vue'
 
 	const cl_store = useClStore()
 	const state = useStateStore()
-	const props = defineProps(['work'])
+	const props = defineProps(['work', 'show_info_layer'])
 	console.log(props.work)
 	const showInfoLayer = ref(true)
 	const showInfo = ref(false)
@@ -68,13 +69,6 @@
 			return null
 		}
 	})
-
-	let timer;
-
-
-	function hideInfoLayer(){
-		showInfoLayer.value = false
-	}
 
 	function toggleInfo(){
 		showInfo.value = !showInfo.value
