@@ -27,15 +27,7 @@
 						<div v-html="work_info.artist"></div>
 						<div v-html="work_info.listing"></div>
 					</h2>
-					<!-- <div class="pb-8" aria-hidden="true">
-						<button class="flex">
-							<span>
-								<AudioIconSmall></AudioIconSmall>
-							</span>
-							<span class="text-xs row-start-1 pl-2 uppercase">Listen to Audio Guide</span>
-						</button>
-					</div> -->
-					<AudioGuide :work="props.work" />
+					<AudioGuide v-if="showInfo" :work="props.work" />
 					<div class="text-base xl:text-lg rte" v-html="work_info.description"></div>
                 </div>   
             </div>
@@ -58,7 +50,7 @@
 	console.log(props.work)
 	const showInfoLayer = ref(true)
 	const showInfo = ref(false)
-	const closeInfo = ref()
+	const closeInfo = ref(null)
 
 	const work_info = computed(() => {
 		const filter_work = state.worksInfoTranslated.filter((work_obj) => work_obj.slug == props.work)
