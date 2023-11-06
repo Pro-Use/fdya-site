@@ -4,7 +4,7 @@
 		<p class="introduction sr-only">
 			An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.
 		</p>
-		<span aria-hidden="true">{{info_text}}</span> <span v-if="!data_complete" aria-hidden="true" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>	
+		<span aria-hidden="true" v-html="info_text"></span> <span v-if="!data_complete" aria-hidden="true" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7"></span>	
 		<div v-if="data_complete" class="pt-4">
 			<button class="p-4 border border-solid border-white" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
 		</div>
@@ -58,6 +58,7 @@
 	}
 
 	const getDeviceInfo = async () => {
+		splashText.push("<span class='bg-txt-highlight'>")
 		let titleArray = title.split("/");
 		titleArray.forEach((title) => {
 			splashText.push(title);
@@ -68,6 +69,7 @@
 		orgs.forEach((org) => {
 			splashText.push(org)
 		})
+		splashText.push("</span>")
         let res = await axios.get('https://api.ipify.org?format=json')
         let ip = res.data.ip
         let ip_str = strFmt(ip, 'IPV4: ')
@@ -198,6 +200,10 @@
     font-size: 60px;
 		font-family: monospace;
 		top: 0px;
+  }
+
+  >>> .bg-txt-highlight {
+  	color: #B8F33A;
   }
 
   .flash{
