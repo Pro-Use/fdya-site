@@ -7,7 +7,7 @@
 
 		</iframe> -->
 	</div>
-	<div v-show="!ss_loaded || ss_active" class="position: fixed top-0 z-[1000]">
+	<div v-show="!ss_loaded || ss_active" class="fixed top-0 pointer-events-none" :style="{ 'z-index': z_index}">
 		<Meteorite ref="meteorite" @loaded="handleLoaded"
 		 	:resource="{ 
 			 	gltf: `${resource_base}/models/final.glb`, 
@@ -22,7 +22,7 @@
 	</div>
 </template>
 <script setup>
-	import { ref, defineProps, onMounted } from 'vue';
+	import { ref, onMounted } from 'vue';
 	import { fromEvent, mergeWith} from 'rxjs';
 	import { useStateStore } from '../../stores/state'
 	import Meteorite from './glimpse/Meteorite.vue';
@@ -36,6 +36,7 @@
 	const timeout_id = ref(null)
 	const ss_active = ref(false)
 	const ss_loaded = ref(false)
+	const z_index = ref(0)
 	const props = defineProps(['monitored'])
 	const monitored = props.monitored
 
@@ -47,6 +48,7 @@
 
 	const handleLoaded = () => {
 		ss_loaded.value = true
+		z_index.value = 1000
 	  	set_timeout()
 	}
 
