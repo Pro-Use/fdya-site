@@ -1,7 +1,9 @@
 <template>
-    <VideoComponent v-if="videoSelected" :video_file="videoSelected"></VideoComponent>
-    <div v-if="overlayVisible" class="data-overlay z-50 top-0 left-0 p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular" v-html="overlay">
-    </div>
+    <transition :name="state.mainTransition">
+        <VideoComponent v-if="videoSelected && ! overlayVisible" :video_file="videoSelected"></VideoComponent>
+        <div v-else class="data-overlay z-50 top-0 left-0 p-4 lg:p-8 text-white text-lg xl:text-2xl font-DMregular" v-html="overlay">
+        </div>
+    </transition>
 </template>
 
 <script setup>
@@ -133,13 +135,13 @@ const highlight_overlay = (key) => {
 const gen_overlay = (index) => {
     if (index <= overlayTexts.length){
         if (index < overlayTexts.length){
-            overlay.value += `${overlayTexts[index]} <br>`
+            overlay.value += `<span class="p-2 bg-black inline-block" >${overlayTexts[index]}</span> <br>`
         } else {
             setTimeout(() => {
                 overlayVisible.value = false
             }, 2000)
         }
-        setTimeout(() => {gen_overlay(index + 1)}, 500)
+        setTimeout(() => {gen_overlay(index + 1)}, 750)
     }
 }
 
