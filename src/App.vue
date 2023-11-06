@@ -16,20 +16,21 @@ const state = useStateStore()
 const hm_data = ref(null)
 const works_info = ref([])
 
+
 onMounted( async () => {
-  let res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*')
+  let res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*')
   const works = res.data.data
   state.$patch({'worksInfo': works})
   
-  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/site_info')
+  res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/site_info')
   const site = res.data.data
   state.$patch({'siteInfo': site})
 
-  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/audio_descriptions?fields=*.*')
+  res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/audio_descriptions?fields=*.*')
   const description = res.data.data
   state.$patch({'accessInfo': description})
 
-  res = await axios.get('http://data.fordatayouareandtodatayoushallreturn.online/items/misc_translations')
+  res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/misc_translations')
   const elementTrans = res.data.data
   state.$patch({'elTranslations': elementTrans})
 })

@@ -17,7 +17,7 @@ export default defineConfig({
     proxy: {
       // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
       '/works/glimpse': {
-        target: 'http://fordatayouareandtodatayoushallreturn.online/works/',
+        target: 'https://fordatayouareandtodatayoushallreturn.online/works/',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/works/, ''),
       }
