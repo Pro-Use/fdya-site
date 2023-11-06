@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-	import { defineProps, ref, computed, onMounted, onUnmounted } from 'vue'
+	import { ref, computed, onMounted, onUnmounted, inject } from 'vue'
 	import { useStateStore } from '../../stores/state'
 	import PlayButton from '../../components/icons/PlayButton.vue'
 
@@ -22,6 +22,7 @@
 	const props = defineProps(['video_file'])
 	const video = ref(null)
 	const is_paused = ref(false)
+	const player = inject('player')
 
 	const video_file = computed(() => {
 		return `${api_base}assets/${props.video_file}`
@@ -40,7 +41,8 @@
     		if (video.value.paused){
     			is_paused.value = true
     		}
-    	}, 200)
+    	}, 500)
+    	player.value = video.value
     })
 
     onUnmounted( () => {

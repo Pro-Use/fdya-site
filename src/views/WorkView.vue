@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-	import { ref, defineProps, onMounted, computed } from 'vue';
+	import { ref, onMounted, computed, provide } from 'vue';
 	import { useRoute } from 'vue-router'
 	import { useStateStore } from '../stores/state'
 	import { fromEvent } from 'rxjs';
@@ -32,6 +32,9 @@
 	const main = ref(null)
 	let timeout_id = null
 	const showInfo = ref(true)
+	const player = ref(null)
+
+	provide('player', player)
 
 	console.log(props)
 
