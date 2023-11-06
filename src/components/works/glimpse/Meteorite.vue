@@ -52,6 +52,6 @@ defineExpose({
 .container {
   width: 100vw;
   height: 100vh;
-/*  pointer-events: none; */
+  pointer-events: none; 
 }
-</style>./world
+</style>
