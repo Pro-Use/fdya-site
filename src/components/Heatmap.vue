@@ -5,7 +5,8 @@
 </template>
 
 <script setup>
-	import { ref, defineProps, onMounted } from 'vue';
+	import { ref, onMounted, watch } from 'vue';
+	import { useRoute } from "vue-router";
 	import h337 from 'heatmap.js';
 	import { fromEvent, map, mergeWith, debounceTime } from 'rxjs';
 	import axios from 'axios';
@@ -18,10 +19,17 @@
 
 	const props = defineProps(['monitored'])
 	const monitored = props.monitored
+	const route = useRoute();
 
 	const hm_div = ref(null)
 	const heatmap_faked = ref(true)
 	let heatmap
+
+	const no_cache = {
+      'Cache-Control': 'no-cache',
+      'Pragma': 'no-cache',
+      'Expires': '0',
+    }
 
 	const addValue = (e, value) => {
      	e.value = value;
@@ -50,7 +58,7 @@
 	    //From latest session in DB
 		  if (pull){
 				try {
-					let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1')
+					let res = await axios.get(api_base+'items/heatmap_sessions?sort=-date_updated&limit=1', {headers: no_cache})
 					console.log(res)
 					if (res.data.data.length > 0) {
 						const old_data = JSON.parse(res.data.data[0].data)
@@ -115,15 +123,6 @@
 			// }
 			// heatmap.setDataMax(data_max)
 			cl_store.clicks ++
-			let payload = {data: all_points}
-			//send to an API for database storage
-			if (session_id === null){
-				let res = await axios.post(api_base+'items/heatmap_sessions', payload)
-				session_id = res.data.data.id
-			} else {
-				let res = await axios.patch(api_base+'items/heatmap_sessions/'+session_id, payload)
-				console.log(res)
-			}
 			let first = 0
 			if (all_points.length > 1000){
 				first = -1000
@@ -134,7 +133,25 @@
 			
 
 		})
-		
+
+		watch(
+		  () => route.fullPath,
+		  async () => {
+		  	if (!route.fullPath.includes('#')){
+		  		let payload = {data: all_points}
+					//send to an API for database storage
+					if (session_id === null){
+						let res = await axios.post(api_base+'items/heatmap_sessions', payload)
+						session_id = res.data.data.id
+					} else {
+						let res = await axios.patch(api_base+'items/heatmap_sessions/'+session_id, payload)
+						console.log(res)
+					}
+		  	}
+		    
+		  }
+		);
+				
 		const resize = fromEvent(window, 'resize');
 		const result = resize.pipe(debounceTime(1));
 		
