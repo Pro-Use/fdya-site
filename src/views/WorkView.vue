@@ -12,6 +12,9 @@
 		</div>
 		<VideoWorkWrapper 
 			v-if="props.work == 'symbiotic-ai' || props.work == 'digital-traces' || props.work == 'landscape-enter-life'" :work="props.work" />
+		<div v-if="props.work == 'glimpse' " class="h-full grid place-items-center " >
+			<span class="p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">{{state.getTrans('please-stop-any-mouse-action-and-wait')}}</span>
+		</div>
 	  </main>
 </template>
 
