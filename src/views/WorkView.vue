@@ -5,7 +5,10 @@
 		<WorkInfo :work="props.work" :show_info_layer="showInfo" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
 		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen overflow-hidden">
-			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='http://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='https://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+		</div>
+		<div v-if="props.work == 'reconnecting'" class="fixed w-screen h-screen overflow-hidden">
+			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='https://reconnecting.aliceyuanzhang.com/'></iframe>
 		</div>
 		<VideoWorkWrapper 
 			v-if="props.work == 'symbiotic-ai' || props.work == 'digital-traces' || props.work == 'landscape-enter-life'" :work="props.work" />
@@ -13,7 +16,7 @@
 </template>
 
 <script setup>
-	import { ref, onMounted, computed, provide } from 'vue';
+	import { ref, onMounted, onUnmounted, computed, provide } from 'vue';
 	import { useRoute } from 'vue-router'
 	import { useStateStore } from '../stores/state'
 	import { fromEvent } from 'rxjs';
@@ -53,13 +56,16 @@
 	})
 
 	const set_info_timeout = () => {
-		showInfo.value = true
-		if (timeout_id !== null){
-			clearTimeout(timeout_id)
+		// Don't hide info on iframes!
+		if (!['reconnecting','funeral-play'].includes(props.work)){
+			showInfo.value = true
+			if (timeout_id !== null){
+				clearTimeout(timeout_id)
+			}
+			timeout_id = setTimeout(() => {
+				showInfo.value = false
+			}, 3000)
 		}
-		timeout_id = setTimeout(() => {
-			showInfo.value = false
-		}, 3000)
 	}
 
 	onMounted(() => {
@@ -78,6 +84,16 @@
 			set_info_timeout()
 
 		})
+		if (props.work == 'dwellers-between-the-waters' ||
+			props.work == 'reconnecting' ||
+			props.work == 'funeral-play')
+		{
+			state.screensaver_disabled = true
+		}
+	})
+
+	onUnmounted(() => {
+		state.screensaver_disabled = false
 	})
 
 
