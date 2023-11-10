@@ -28,7 +28,7 @@
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.arebyte"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
-                    <h2 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('chronos-art-center').toUpperCase() }}</h2>
+                    <h2 class="pb-8 text-lg  xl:text-2xl uppercase">{{ state.getTrans('chronus-art-center').toUpperCase() }}</h2>
                     <div class="text-base xl:text-lg rte" v-html="state.siteInfoTranslated.cac"></div>
                 </div>
                 <div class="col-span-2 md:col-span-1">
