@@ -4,7 +4,7 @@
 	    	ref="video" class="w-screen h-screen absolute top-0 left-0 object-contain z-40 bg-black" 
 	    	:src="video_file" autoplay playsinline="true">
 	    </video>
-	    <div v-if="is_paused" @click="video.play" class="h-full grid place-items-center cursor-pointer">
+	    <div v-if="is_paused" @click="play()" class="h-full grid place-items-center cursor-pointer">
 			<PlayButton />
 		</div>
 	</div>
@@ -28,11 +28,16 @@
 		return `${api_base}assets/${props.video_file}`
 	})
 
+	const play = () => {
+		video.value.play()
+		is_paused.value = false
+	}
+
     onMounted( () => {
     	state.screensaver_disabled = true
-    	video.value.onplaying = () => {
-    		is_paused.value = false
-    	}
+    	// video.value.onplaying = () => {
+    	// 	is_paused.value = false
+    	// }
     	video.value.onpause = () => {
     		is_paused.value = true
     	}
@@ -41,7 +46,7 @@
     		if (video.value.paused){
     			is_paused.value = true
     		}
-    	}, 500)
+    	}, 1000)
     	player.value = video.value
     })
 
