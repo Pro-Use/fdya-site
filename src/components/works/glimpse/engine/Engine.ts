@@ -52,6 +52,7 @@ export class Engine {
   }
 
   start() {
+    this.experience.reset();
     this.time.start();
   }
 

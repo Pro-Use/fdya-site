@@ -13,10 +13,26 @@ export interface ResourceMap {
   environment: string;
 }
 
+function getLightPosition() {
+  let hour = new Date().getHours();
+  let r = 100;
+  let cos45 = Math.cos((45 / 180) * Math.PI);
+  let angle = (hour / 24) * 270 - 45;
+  // console.log("angle", angle);
+  let xy = r * Math.cos((angle / 180) * Math.PI);
+  // console.log("xy = ", xy);
+  let x = xy * cos45;
+  let y = xy * cos45;
+  let z = r * cos45 * Math.sin((hour / 24) * Math.PI);
+  return { x, y, z };
+}
+
+
 export class World implements Experience {
   resources: Resource[];
   entities: GameEntity[] = [];
   astroid!: Astroid;
+  light2!: THREE.DirectionalLight;
 
   constructor(private engine: Engine, resource: ResourceMap) {
     this.resources = [
@@ -68,17 +84,7 @@ export class World implements Experience {
     const light2 = new THREE.DirectionalLight(0xffffff, 3.5);
     light2.name = "main_light";
 
-    let hour = new Date().getHours();
-    let r = 100;
-    let cos45 = Math.cos((45 / 180) * Math.PI);
-    let angle = (hour / 24) * 270 - 45;
-    // console.log("angle", angle);
-    let xy = r * Math.cos((angle / 180) * Math.PI);
-    // console.log("xy = ", xy);
-    let x = xy * cos45;
-    let y = xy * cos45;
-    let z = r * cos45 * Math.sin((hour / 24) * Math.PI);
-    // console.log(`(${x.toFixed(2)}, ${y.toFixed(2)}, ${z.toFixed(2)})`);
+    let { x, y, z } = getLightPosition();
     light2.position.set(x, y, z);
 
     light2.castShadow = true;
@@ -86,8 +92,10 @@ export class World implements Experience {
     light2.shadow.mapSize.height = 2048; // default
     light2.shadow.camera.near = 0.5; // default
     light2.shadow.camera.far = 500; // default
-    this.engine.scene.add(light2);
     light2.target = astroid.scene;
+    this.engine.scene.add(light2);
+
+    this.light2 = light2;
 
     // if (DEBUG) {
     //   const helper = new THREE.DirectionalLightHelper(light2, 50);
@@ -125,6 +133,13 @@ export class World implements Experience {
 
   reset() {
     this.astroid.reset();
+    this.engine.camera.instance.zoom = 1;
+    this.engine.camera.instance.updateProjectionMatrix();
+    let { x, y, z } = getLightPosition();
+    this.light2.position.set(x, y, z);
+    this.engine.camera.instance.zoom = 1;
+    this.engine.camera.instance.updateProjectionMatrix();
+
   }
 
   update(delta: number) {

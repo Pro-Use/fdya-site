@@ -45,11 +45,11 @@ defineExpose({
 </script>
 
 <template>
-  <canvas ref="canvas" class="container" :style="styleObject"></canvas>
+  <canvas ref="canvas" class="meteorite_container" :style="styleObject"></canvas>
 </template>
 
 <style scoped>
-.container {
+.meteorite_container {
   width: 100vw;
   height: 100vh;
   pointer-events: none; 
