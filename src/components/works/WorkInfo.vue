@@ -1,6 +1,10 @@
 <template>
 	<Transition name="fade">
 		<div v-show="show_info_layer">
+			<div v-if="!is_paused" @click="pause()"
+				class="fixed w-screen h-screen top-0 left-0 z-50 grid place-items-center cursor-pointer" >
+				<PauseButton style="width: 78px; height: 78px;"/>
+			</div>
 			<h1 class="fixed z-50 bottom-0 left-0 invisible sm:visible p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
 				<i>{{ work_info.title }}</i>
 				<br>{{ work_info.artist }}
@@ -39,10 +43,11 @@
 	</Transition>
 </template>
 <script setup>
-	import { ref, computed } from 'vue'
+	import { ref, computed, inject, watch } from 'vue'
 	import { useStateStore } from '../../stores/state'
 	import { useClStore } from '../../stores/CrossLucid'
 	import AudioGuide from './AudioGuide.vue'
+	import PauseButton from '../../components/icons/PauseButton.vue'
 
 	const cl_store = useClStore()
 	const state = useStateStore()
@@ -51,6 +56,8 @@
 	const showInfoLayer = ref(true)
 	const showInfo = ref(false)
 	const closeInfo = ref(null)
+	const v_player = inject('player')
+	const is_paused = ref(true)
 
 	const work_info = computed(() => {
 		const filter_work = state.worksInfoTranslated.filter((work_obj) => work_obj.slug == props.work)
@@ -70,6 +77,30 @@
 			cl_store.addText(props.work)
 		}
 	}
+
+	const pause = () => {
+		if (v_player.value){
+			v_player.value.pause()
+			is_paused.value = true
+		}
+	} 
+
+	watch(v_player, (player_obj)=>{
+		if(player_obj){
+			console.log('player', player_obj)
+			is_paused.value = player_obj.paused
+			// v_player.value.onpause = () => {
+			// 	is_paused.value = true
+			// }
+			v_player.value.onplay = () => {
+				is_paused.value = false
+			}
+			v_player.value.onplaying = () => {
+				is_paused.value = false
+			}
+
+		}
+	})
 	
 </script>
 <style scoped lang="scss">
