@@ -1,16 +1,19 @@
 <template>
 	<div class="pb-8" aria-hidden="true">
 		<button @click="play_toggle()" class="flex">
-			<span v-if="!is_playing">
-				<AudioIconSmall></AudioIconSmall>
+			<span class="w-5">
+				<AudioIconSmall v-if="!is_playing" class="h-full"></AudioIconSmall>
+				<StopIconSmall v-else class="h-full"/>
 			</span>
-			<span v-else>
-				<StopIconSmall />
+			<span class="text-s row-start-1 pl-2 uppercase">
+				{{access_work_info.accessible_description}}
 			</span>
-			<span class="text-xs row-start-1 pl-2 uppercase">{{access_work_info.accessible_description}}</span>
-			<audio ref="player" v-show="false"></audio>
 		</button>
-	</div>
+		<div class="text-s row-start-2 pl-2 uppercase h-2">
+			<span v-if="is_playing">{{file_position}}/{{file_duration}}</span>
+		</div>
+		<audio v-if="audio_file != null" ref="player" :src="audio_file" v-show="false" preload='metadata'></audio>
+		</div>
 	
 </template>
 <script setup>
@@ -23,6 +26,8 @@
 	const props = defineProps(['work'])
 	const api_base =  import.meta.env.VITE_API_BASE
 	const player = ref(null)
+	const file_duration = ref(null)
+	const file_position = ref(null)
 	const is_playing = ref(false)
 	const v_player = inject('player')
 
@@ -45,12 +50,10 @@
 	})
 
 	const play_toggle = () => {
-		console.log(player.value)
 		if (!player.value?.paused){
 			player.value.pause()
 			is_playing.value = false
 		} else if (audio_file.value !== null && player.value?.paused){
-			player.value.src = audio_file.value
 			player.value.play()
 			is_playing.value = true
 			if (v_player.value){
@@ -59,7 +62,25 @@
 		}
 	}
 
+	const secs_to_timecode = (seconds) => {
+         let minutes = ~~(seconds / 60);
+         minutes = minutes.toString().padStart(2, '0')
+         let extraSeconds = seconds % 60;
+         extraSeconds = extraSeconds.toString().padStart(2, '0')
+         return `${minutes}:${extraSeconds}`
+      }
+
 	onMounted(() => {
+		if(player.value){
+			player.value.onloadedmetadata = () => {
+				file_duration.value = secs_to_timecode(player.value.duration.toFixed(0))
+			}
+
+			player.value.ontimeupdate = () => {
+				file_position.value = secs_to_timecode(player.value.currentTime.toFixed(0))
+			}
+		}
+		
 	})
 	
 </script>
