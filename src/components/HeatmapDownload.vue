@@ -1,5 +1,5 @@
 <template>
-	<canvas class="test" v-show="true" ref="canvas_download"></canvas>
+	<canvas class="test" v-show="false" ref="canvas_download"></canvas>
 	<a ref="download"></a>
 </template>
 
