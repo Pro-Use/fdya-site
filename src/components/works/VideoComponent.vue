@@ -2,9 +2,9 @@
 	<div class="h-full">
 	    <video 
 	    	ref="video" class="w-screen h-screen absolute top-0 left-0 object-contain z-40 bg-black" 
-	    	:src="video_file" autoplay playsinline="true">
+	    	:src="video_file" playsinline="true">
 	    </video>
-	    <div v-if="is_paused" @click="play()" class="h-full grid place-items-center cursor-pointer">
+	    <div v-if="is_paused" v-show="can_play" @click="play()" class="h-full grid place-items-center cursor-pointer">
 			<PlayButton />
 		</div>
 	</div>
@@ -22,6 +22,7 @@
 	const props = defineProps(['video_file'])
 	const video = ref(null)
 	const is_paused = ref(false)
+	const can_play = ref(false)
 	const player = inject('player')
 
 	const video_file = computed(() => {
@@ -42,11 +43,19 @@
     		is_paused.value = true
     	}
 
-    	setTimeout(() => {
-    		if (video.value.paused){
-    			is_paused.value = true
-    		}
-    	}, 1000)
+    	video.value.oncanplay = () => {
+    		console.log('can_play')
+    		video.value.play()
+    		can_play.value = true
+    		setTimeout(() => {
+	    		if (video.value.paused){
+	    			is_paused.value = true
+	    		}
+	    	}, 500)
+
+    	}
+
+    	
     	player.value = video.value
     })
 
