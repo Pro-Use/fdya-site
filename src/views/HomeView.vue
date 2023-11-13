@@ -97,7 +97,7 @@ const okaySmallScreen = (event) => {
   <h2 class="sr-only" id="ArtworkListTitle">The Artworks</h2>
   <ul role="list" aria-labelledby="ArtworkListTitle">
     <li class="cross-container-7">
-      <a :href="'#'+ state.worksInfo[0].title_en" @click="launchProject" :data-link="state.workLinks[0]" :aria-label="'Open '+ state.worksInfo[0].title_en + ' by ' + state.worksInfo[0].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[0].title" @click="launchProject" :data-link="state.workLinks[0]" :aria-label="'Open '+ state.worksInfoTranslated[0].title + ' by ' + state.worksInfoTranslated[0].artist"> 
         <img 
           v-if="state.workCovers[0] !== null" 
           aria-hidden="true"
@@ -106,11 +106,11 @@ const okaySmallScreen = (event) => {
           <span 
             aria-hidden="true" 
             class="work-title font-monaco pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[0].title_en }}</i><br>{{ state.worksInfo[0].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[0].title }}</i><br>{{ state.worksInfoTranslated[0].artist }}</span>
       </a>
     </li>
     <li class="cross-container-8">
-      <a :href="'#'+ state.worksInfo[1].title_en" @click="launchProject" :data-link="state.workLinks[1]" :aria-label="'Open '+ state.worksInfo[1].title_en + ' by ' + state.worksInfo[1].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[1].title" @click="launchProject" :data-link="state.workLinks[1]" :aria-label="'Open '+ state.worksInfoTranslated[1].title + ' by ' + state.worksInfoTranslated[1].artist"> 
         <img 
         v-if="state.workCovers[1] !== null" 
         aria-hidden="true"
@@ -119,11 +119,11 @@ const okaySmallScreen = (event) => {
         <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[1].title_en }}</i><br>{{ state.worksInfo[1].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[1].title }}</i><br>{{ state.worksInfoTranslated[1].artist }}</span>
       </a>
     </li>
     <li class="cross-container-9">
-      <a :href="'#'+ state.worksInfo[2].title_en" @click="launchProject" :data-link="state.workLinks[2]" :aria-label="'Open '+ state.worksInfo[2].title_en + ' by ' + state.worksInfo[2].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[2].title" @click="launchProject" :data-link="state.workLinks[2]" :aria-label="'Open '+ state.worksInfoTranslated[2].title + ' by ' + state.worksInfoTranslated[2].artist"> 
         <img 
         v-if="state.workCovers[2] !== null" 
         aria-hidden="true"
@@ -132,11 +132,11 @@ const okaySmallScreen = (event) => {
         <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[2].title_en }}</i><br>{{ state.worksInfo[2].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[2].title }}</i><br>{{ state.worksInfoTranslated[2].artist }}</span>
       </a>
     </li>
     <li class="cross-container-10">
-      <a :href="'#'+ state.worksInfo[3].title_en" @click="launchProject" :data-link="state.workLinks[3]" :aria-label="'Open '+ state.worksInfo[3].title_en + ' by ' + state.worksInfo[3].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[3].title" @click="launchProject" :data-link="state.workLinks[3]" :aria-label="'Open '+ state.worksInfoTranslated[3].title + ' by ' + state.worksInfoTranslated[3].artist"> 
         <img 
           v-if="state.workCovers[3] !== null" 
           aria-hidden="true"
@@ -145,11 +145,11 @@ const okaySmallScreen = (event) => {
           <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[3].title_en }}</i><br>{{ state.worksInfo[3].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[3].title }}</i><br>{{ state.worksInfoTranslated[3].artist }}</span>
       </a>
     </li>
     <li class="cross-container-11">
-      <a :href="'#'+ state.worksInfo[4].title_en" @click="launchProject" :data-link="state.workLinks[4]" :aria-label="'Open '+ state.worksInfo[4].title_en + ' by ' + state.worksInfo[4].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[4].title" @click="launchProject" :data-link="state.workLinks[4]" :aria-label="'Open '+ state.worksInfoTranslated[4].title + ' by ' + state.worksInfoTranslated[4].artist"> 
         <img 
           v-if="state.workCovers[4] !== null"
           aria-hidden="true"
@@ -158,11 +158,11 @@ const okaySmallScreen = (event) => {
           <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[4].title_en }}</i><br>{{ state.worksInfo[4].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[4].title }}</i><br>{{ state.worksInfoTranslated[4].artist }}</span>
       </a>
     </li>
     <li class="cross-container-12">
-      <a :href="'#'+ state.worksInfo[5].title_en" @click="launchProject" :data-link="state.workLinks[5]" :aria-label="'Open '+ state.worksInfo[5].title_en + ' by ' + state.worksInfo[5].artist_en"> 
+      <a :href="'#'+ state.worksInfoTranslated[5].title" @click="launchProject" :data-link="state.workLinks[5]" :aria-label="'Open '+ state.worksInfoTranslated[5].title + ' by ' + state.worksInfoTranslated[5].artist"> 
         <img 
           v-if="state.workCovers[5] !== null" 
           aria-hidden="true"
@@ -171,7 +171,7 @@ const okaySmallScreen = (event) => {
           <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfo[5].title_en }}</i><br>{{ state.worksInfo[5].artist_en }}</span>
+            ><i>{{ state.worksInfoTranslated[5].title }}</i><br>{{ state.worksInfoTranslated[5].artist }}</span>
       </a>
     </li>
   </ul>
