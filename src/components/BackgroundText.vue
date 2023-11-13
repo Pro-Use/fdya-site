@@ -1,7 +1,7 @@
 <template>
 	<div aria-hidden="true" class="bg-text h-screen w-screen">
 		<div class="grid grid-cols-3">
-			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.browserInfo}} {{additionalInfo}}</div>
+			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{additionalInfo}}</div>
 			<div class="px-4 h-screen overflow-y-auto break-all text-[10px] leading-[20px] font-Monaco"><example></example></div>
 			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.hmData}}</div>
 		</div>
@@ -19,7 +19,7 @@
 
 	onMounted( async () => {
 		const api_base =  import.meta.env.VITE_API_BASE
-		const res = await axios.get(api_base+'items/browser_info?sort=-date_created&limit=20')
+		const res = await axios.get(api_base+'items/browser_info?sort=-date_created&limit=30')
 		console.log(res.data.data)
 		res.data.data.forEach((data) => {
 			console.log(data)
