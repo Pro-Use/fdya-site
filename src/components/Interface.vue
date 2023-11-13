@@ -10,10 +10,11 @@
             to="/info"
             class="
             fixed flex items-center justify-center top-2.5 left-2.5  z-[100] text-[#80BFF9] h-12 w-12 block 
-            text-xs cursor-pointer hover:border-yellow
+            text-xs cursor-pointer hover:border-yellow hover:text-yellow 
             lg:top-5 lg:right-5 lg:left-auto lg:w-[80px] lg:h-[80px]
             ">
             <span class="sr-only">{{state.getTrans('about-the-exhibition')}}</span>
+            <span class="absolute top-0.5 lg:top-1 left-0 w-full h-full flex items-center justify-center uppercase">{{state.getTrans('info')}}</span>
 			<InfoIcon></InfoIcon>
         </router-link >
         <button

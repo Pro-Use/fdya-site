@@ -826,6 +826,11 @@
   dependencies:
     "any-promise" "^1.0.0"
 
+"three@^0.157.0":
+  "integrity" "sha512-CeAwQrf4x3z0/e+MC4F+nXLW5t0gh3pw+L6CCBqpHvOq3bGYIgRYub7Pv0j/9wR+d++OiEglyZzWyuSYbwWGOA=="
+  "resolved" "https://registry.npmjs.org/three/-/three-0.157.0.tgz"
+  "version" "0.157.0"
+
 "to-regex-range@^5.0.1":
   "integrity" "sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ=="
   "resolved" "https://registry.npmjs.org/to-regex-range/-/to-regex-range-5.0.1.tgz"

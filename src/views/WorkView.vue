@@ -1,7 +1,7 @@
 <template>
 	  <main ref="main" id="main" 
 	  	class="fixed w-screen h-screen bg-black z-50 top-0 left-0 overflow-y-auto text-white">
-		<img aria-hidden="true" v-if="coverImage && !loaded" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
+		<img aria-hidden="true" v-if="coverImage && !loaded && props.work != 'glimpse'" class="absolute top-0 left-0 w-screen h-screen pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" :show_info_layer="showInfo" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
 		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen overflow-hidden">
