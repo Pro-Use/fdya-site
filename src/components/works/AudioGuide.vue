@@ -1,7 +1,7 @@
 <template>
 	<div class="pb-8" aria-hidden="true">
 		<button @click="play_toggle()" class="flex">
-			<span class="w-5">
+			<span class="w-5 pt-1.5">
 				<AudioIconSmall v-if="!is_playing" class="h-full"></AudioIconSmall>
 				<StopIconSmall v-else class="h-full"/>
 			</span>

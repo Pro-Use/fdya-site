@@ -174,6 +174,19 @@ const okaySmallScreen = (event) => {
             ><i>{{ state.worksInfoTranslated[5].title }}</i><br>{{ state.worksInfoTranslated[5].artist }}</span>
       </a>
     </li>
+    <li class="cross-container-13">
+      <a :href="'#'+ state.worksInfo[6].title_en" @click="launchProject" :data-link="state.workLinks[6]" :aria-label="'Open '+ state.worksInfo[6].title_en + ' by ' + state.worksInfo[6].artist_en"> 
+        <img 
+          v-if="state.workCovers[6] !== null" 
+          aria-hidden="true"
+          class="absolute top-0 left-0 w-full h-full pointer-events-none object-cover" 
+          :src="state.workCovers[6]">
+          <span 
+            aria-hidden="true" 
+            class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
+            ><i>{{ state.worksInfo[6].title_en }}</i><br>{{ state.worksInfo[6].artist_en }}</span>
+      </a>
+    </li>
   </ul>
 
 <!--   <template v-if="small_screen_alert">
@@ -427,7 +440,18 @@ const okaySmallScreen = (event) => {
     clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 26%, 100% 26%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);  
   }
 
-
+  .cross-container-13{
+    top: calc(var(--x)*3);
+    left: calc(var(--x)*2);
+  }
+  .cross-container-13:hover{
+    transform:translate(-50%,-50%) scale(100%, 100%);
+  }
+  .cross-container-13:hover a, .cross-container-12 a:focus{
+   /* transform: rotate(90deg); */
+ transform: rotate(0deg);
+    clip-path: polygon(0 25%, 25% 25%, 25% 0, 75% 0, 75% 26%, 100% 26%, 100% 75%, 100% 100%, 75% 100%, 25% 100%, 25% 75%, 0 75%);  
+  }
 
 @media screen and (orientation: portrait) {
   .grid-line-v:nth-child(1){
@@ -464,9 +488,15 @@ const okaySmallScreen = (event) => {
     left: calc(var(--x)*2);
   }
   .cross-container-12{
-    top: calc(var(--x)*5);
+    top: calc(var(--x)*3);
+    left: calc(var(--x)*2);
+  }
+
+  .cross-container-13{
+    top: calc(var(--x)*4);
     left: calc(var(--x)*1);
   }
+
 
   .grid-line-h:nth-child(11), .grid-line-h:nth-child(12){
     display: block;
