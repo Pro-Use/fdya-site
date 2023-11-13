@@ -11,7 +11,7 @@ export class Astroid implements GameEntity {
   private rateX!: number;
   private rateY!: number;
 
-  constructor(resource: Resources) {
+  constructor(resource: Resources, texture: THREE.Texture) {
     const gltf: GLTF = resource.getItem("astroid");
     console.log(gltf);
     this.scene = gltf.scene;
@@ -19,7 +19,8 @@ export class Astroid implements GameEntity {
     const mesh = this.model.children[0] as THREE.Mesh;
     const material = mesh.material as THREE.MeshStandardMaterial;
     material.normalMap = resource.getItem("normal_1");
-
+    const mirror = this.model.children[1] as THREE.Mesh;
+    (mirror.material as THREE.MeshStandardMaterial).envMap = texture;
     this.reset();
   }
 

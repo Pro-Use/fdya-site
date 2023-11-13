@@ -7,7 +7,6 @@ import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass.js";
 
 export class RenderEngine implements GameEntity {
   private readonly renderer: WebGLRenderer;
-  pmremGenerator: THREE.PMREMGenerator;
   composer: EffectComposer;
 
   constructor(private engine: Engine) {
@@ -23,10 +22,6 @@ export class RenderEngine implements GameEntity {
     this.renderer.shadowMap.enabled = true;
     this.renderer.setSize(this.engine.sizes.width, this.engine.sizes.height);
     this.renderer.setPixelRatio(Math.min(this.engine.sizes.pixelRatio, 2));
-
-    const pmremGenerator = new THREE.PMREMGenerator(this.renderer);
-    pmremGenerator.compileEquirectangularShader();
-    this.pmremGenerator = pmremGenerator;
 
     this.composer = new EffectComposer(this.renderer);
 

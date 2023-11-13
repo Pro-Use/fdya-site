@@ -55,12 +55,7 @@ export class World implements Experience {
     iStock.colorSpace = THREE.SRGBColorSpace;
     iStock.mapping = THREE.EquirectangularReflectionMapping;
 
-    const jpgRenderTarget =
-      this.engine.renderEngine.pmremGenerator.fromEquirectangular(iStock);
-    jpgRenderTarget.texture.generateMipmaps = false;
-    this.engine.scene.environment = jpgRenderTarget.texture;
-
-    const astroid = new Astroid(this.engine.resources);
+    const astroid = new Astroid(this.engine.resources, iStock);
     this.astroid = astroid;
     this.entities.push(astroid);
     this.engine.scene.add(astroid.scene);
