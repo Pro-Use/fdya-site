@@ -53,9 +53,11 @@
 		if (!player.value?.paused){
 			player.value.pause()
 			is_playing.value = false
+			state.audioPlaying = false
 		} else if (audio_file.value !== null && player.value?.paused){
 			player.value.play()
 			is_playing.value = true
+			state.audioPlaying = true
 			if (v_player.value){
 				v_player.value.pause()
 			}
