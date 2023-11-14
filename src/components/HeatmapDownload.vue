@@ -10,6 +10,7 @@
 	import { useClStore } from '../stores/CrossLucid'
 	import axios from 'axios';
 	import { drawText } from 'canvas-txt'
+	import logoStrip from "../assets/Logo_Strip1.5x.png"
 	const state = useStateStore()
 	const cl_store = useClStore()
 	const props = defineProps(['heatmap'])
@@ -131,7 +132,7 @@
 		context.fillText( "AREBYTE + CHRONOS ART CENTER", border, text_start);
 		context.restore();
 		// logos
-		const logo_src = "../src/assets/Logo Strip@1.5x.png"
+		const logo_src = logoStrip
 		const logo_min = 20
 		let logo_height = (canvas.height / 1080) * 50
 		if (logo_height < logo_min){
