@@ -17,7 +17,7 @@
 	
 </template>
 <script setup>
-	import { ref, computed, onMounted, inject } from 'vue'
+	import { ref, computed, onMounted, onUnmounted,  inject } from 'vue'
 	import { useStateStore } from '../../stores/state'
 	import AudioIconSmall from '../icons/AudioIconSmall.vue';
 	import StopIconSmall from '../icons/StopIconSmall.vue'
@@ -77,12 +77,13 @@
 			player.value.onloadedmetadata = () => {
 				file_duration.value = secs_to_timecode(player.value.duration.toFixed(0))
 			}
-
 			player.value.ontimeupdate = () => {
 				file_position.value = secs_to_timecode(player.value.currentTime.toFixed(0))
 			}
 		}
-		
+	})
+	onUnmounted(() => {
+		state.audioPlaying = false
 	})
 	
 </script>
