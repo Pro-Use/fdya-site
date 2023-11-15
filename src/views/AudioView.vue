@@ -6,9 +6,12 @@
             <h1 class="uppercase text-lg xl:text-2xl pb-10 ">Audio Guide</h1>
             <ul class="border-t border-white">
                 <li v-for="page in state.accessInfoTranslated">
-                    <button class="w-full text-left text-lg xl:text-2xl py-3 border-b border-white hover:text-yellow" aria-label="{{ page.accessible_description }}" @click="loadfile(page.audio_file)">
+                    <button class="w-full text-left text-lg xl:text-2xl py-3 border-b border-white hover:text-yellow" 
+                        aria-label="{{ page.title }}" @click="loadfile(page.audio_file)">
                         {{ page.title }}
+                        <span v-if="page.audio_file_length"> - {{page.audio_file_length}}</span>
                     </button>
+                    
                 </li>
                 <li class="pt-10">
                     <audio class="text-lg pt-4 w-full" ref="player" controls ></audio>

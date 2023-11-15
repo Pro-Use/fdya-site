@@ -14,7 +14,7 @@
     setInterval(() => {
         const randomIndex = Math.floor(Math.random() * array.length);
         text.value = array[randomIndex];
-        console.log(text)
+        // console.log(text)
     }, 5000);
 
 </script>

@@ -46,12 +46,15 @@
             ">
             <AccessIcon></AccessIcon>
         </router-link>
-        <button @click="download_heatmap" :disabled="state.download_canvas"
+        <button id="dl_button" @click="download_heatmap" :disabled="state.download_canvas"
             aria-label="Download the heatmap"
             class="
                 fixed flex items-center justify-center bottom-2.5 right-[50%] translate-x-[50%] z-[100] h-12 w-12 block text-xs cursor-pointer
                 lg:translate-x-[0] lg:right-5 lg:bottom-5 lg:w-[80px] lg:h-[80px]
             ">
+            <span id="hm_download" v-if="dl_step != 0" class="fixed w-max lg:right-[100px] h-full flex items-center text-[#80BFF9] hover:border-yellow hover:text-yellow bg-black border-blue border-1 border pr-4 pl-4">
+                {{state.getTrans('download-your-heatmap')}}
+            </span>
             <DownloadIcon></DownloadIcon>
         </button>
     </header>
@@ -61,6 +64,7 @@
 <script setup>
 
 const title ='FOR DATA YOU ARE, AND TO DATA YOU SHALL RETURN 对于你所是的数据, 对于你应该返回的数据 '
+import { ref } from 'vue'
 import AudioIcon from './icons/AudioButton.vue';
 import AccessIcon from './icons/AccessButton.vue';
 import DownloadIcon from './icons/DownloadButton.vue';
@@ -71,8 +75,26 @@ import { useStateStore } from '../stores/state'
 const state = useStateStore()
 console.log(state.siteElsTranslated.language)
 
+const dl_step = ref(0)
+
+const download_listner = (event) => {
+    if (event.target.closest('button') == null || event.target.closest('button').id !== 'dl_button'){
+        dl_step.value = 0
+        document.removeEventListener('click', download_listner)
+    }
+    
+}
+
 const download_heatmap = () => {
-    console.log('download_heatmap clicked')
-    state.$patch({'download_heatmap': true})
+    dl_step.value ++
+    if (dl_step.value == 1){
+        document.addEventListener("click", download_listner)
+            
+    } else if (dl_step.value == 2){
+        console.log('download_heatmap clicked')
+        state.$patch({'download_heatmap': true})
+        dl_step.value = 0
+    }
+    
 }
 </script>
