@@ -30,6 +30,7 @@
 	const file_position = ref(null)
 	const is_playing = ref(false)
 	const v_player = inject('player')
+	const funeral_iframe = inject('funeral_iframe')
 
 	const access_work_info = computed(() => {
 		const filter_work = state.accessInfoTranslated.filter((work_obj) => work_obj.slug == props.work)
@@ -53,13 +54,17 @@
 		if (!player.value?.paused){
 			player.value.pause()
 			is_playing.value = false
-			state.audioPlaying = false
+			if (funeral_iframe.value){
+				funeral_iframe.value.contentWindow.postMessage("nomute", "*")
+			}
 		} else if (audio_file.value !== null && player.value?.paused){
 			player.value.play()
 			is_playing.value = true
-			state.audioPlaying = true
 			if (v_player.value){
 				v_player.value.pause()
+			}
+			if (funeral_iframe.value){
+				funeral_iframe.value.contentWindow.postMessage("mute", "*")
 			}
 		}
 	}
@@ -82,8 +87,11 @@
 			}
 		}
 	})
+
 	onUnmounted(() => {
-		state.audioPlaying = false
+		if (funeral_iframe.value){
+			funeral_iframe.value.contentWindow.postMessage("nomute", "*")
+		}
 	})
 	
 </script>
