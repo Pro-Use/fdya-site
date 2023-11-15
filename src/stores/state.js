@@ -11,8 +11,6 @@ export const useStateStore = defineStore('state', () => {
   const access_animations = ref(true)
   const interfaceVisible = ref(false)
   const small_screen = ref('false')
-
-  const audioPlaying = ref(false)
   
   const navIntent = ref('mouse')
   
