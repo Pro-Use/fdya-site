@@ -20,9 +20,9 @@
 	onMounted( async () => {
 		const api_base =  import.meta.env.VITE_API_BASE
 		const res = await axios.get(api_base+'items/browser_info?sort=-date_created&limit=30')
-		console.log(res.data.data)
+		// console.log(res.data.data)
 		res.data.data.forEach((data) => {
-			console.log(data)
+			// console.log(data)
 			additionalInfo.value += data.info
 		})
 	})
