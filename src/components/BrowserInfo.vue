@@ -1,12 +1,13 @@
 <template>
-	<main id="#main" class="loadingScreen fixed w-screen h-screen bg-offBlack text-white z-50 p-5 text-3xl font-DMregular leading-tighter overflow-y-auto">
+	<main id="#main" class="loadingScreen fixed w-screen h-screen h-fill-available bg-offBlack text-white z-50 p-5 text-3xl font-DMregular leading-tighter overflow-y-auto">
 		<h1 class="sr-only">{{ accessTitle }}</h1>
 		<p class="introduction sr-only">
 			An online exhibition featuring, Alice Yuan Zhang, April Lin, Crosslucid, Iris QU, Rebecca Allen, Ruini Shi and XU Haomin.
 		</p>
 		<span aria-hidden="true" v-html="info_text"></span> <span v-if="!data_complete" aria-hidden="true" ref="cursor" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7 cursor"></span>	
 		<div v-show="data_complete" ref="enterContainer" class="pt-4 pb-[100px]">
-			<button class="p-4 border border-solid uppercase hover:border-white text-yellow border-yellow hover:text-white transition" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
+			<button class="p-4 mr-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies enabled" @click="skipIntro">Accept</button>
+			<button class="p-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies disabled" @click="skipIntro">Decline</button>
 		</div>
 		<button class="focus:p-4 border border-solid border-white uppercase sr-only focus:not-sr-only focus:fixed bottom-[32px] left-[50%] translate-x-[-50%] bg-offBlack" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
 	</main>
@@ -147,6 +148,7 @@
           });
           addText(strFmt(videoinput, 'VIDEO INPUT(S): '))
           addText(strFmt(audioinput, 'AUDIO INPUT(S): '))
+		  addText('<span class="uppercase">This site uses cookies for analytics</span>')
 		  addText('<br>')
 		  addText('<br>')
 		  addText('<br>')

@@ -1,6 +1,6 @@
 <template>
     <main id="main" 
-		class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 font-DMregular leading-tighterer">
+		class="fixed w-screen h-screen h-fill-available top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 font-DMregular leading-tighterer">
         <div v-if="access_work_info" class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16  p-2 lg:p-4 max-w-[1200px]">
                 <div class="col-span-2">

@@ -1,7 +1,7 @@
 <template>
 	<div class="h-full">
 	    <video 
-	    	ref="video" class="w-screen h-screen absolute top-0 left-0 object-contain z-40 bg-black" 
+	    	ref="video" class="w-screen h-screen h-fill-available absolute top-0 left-0 object-contain z-40 bg-black" 
 	    	:src="video_file" playsinline="true">
 	    </video>
 	    <div v-if="is_paused" v-show="can_play" @click="play()" class="h-full grid place-items-center cursor-pointer">

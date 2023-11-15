@@ -1,11 +1,11 @@
 <template>
 	<div class="pb-8" aria-hidden="true">
-		<button @click="play_toggle()" class="flex">
+		<button @click="play_toggle()" class="flex hover:text-yellow">
 			<span class="w-5 pt-1.5">
 				<AudioIconSmall v-if="!is_playing" class="h-full"></AudioIconSmall>
 				<StopIconSmall v-else class="h-full"/>
 			</span>
-			<span class="text-s row-start-1 pl-2 uppercase">
+			<span class="text-s row-start-1 pl-2 uppercase text-left">
 				{{access_work_info.accessible_description}}
 			</span>
 		</button>

@@ -7,7 +7,7 @@
 
 		</iframe> -->
 	</div>
-	<div v-show="!ss_loaded || ss_active" class="fixed top-0 w-screen h-screen pointer-events-none" :style="{ 'z-index': z_index}">
+	<div v-show="!ss_loaded || ss_active" class="fixed top-0 w-screen h-screen h-fill-available pointer-events-none" :style="{ 'z-index': z_index}">
 		<Meteorite ref="meteorite" @loaded="handleLoaded"
 		 	:resource="{ 
 			 	gltf: `${resource_base}/models/final.glb`, 

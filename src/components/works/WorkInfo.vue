@@ -2,7 +2,7 @@
 	<Transition name="fade">
 		<div v-show="show_info_layer">
 			<div v-if="!is_paused" @click="pause()"
-				class="fixed w-screen h-screen top-0 left-0 z-50 grid place-items-center cursor-pointer" >
+				class="fixed w-screen h-screen h-fill-available top-0 left-0 z-50 grid place-items-center cursor-pointer" >
 				<PauseButton style="width: 78px; height: 78px;"/>
 			</div>
 			<h1 class="fixed z-50 bottom-0 left-0 invisible sm:visible p-2 lg:p-4 text-white text-lg xl:text-2xl font-DMregular">
@@ -23,7 +23,7 @@
 		</div>
 	</Transition>
 	<Transition name="zoom-fade">
-		<div v-show="showInfo" class="fixed w-screen h-screen top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-lg font-DMregular leading-tighter "> 
+		<div v-show="showInfo" class="fixed w-screen h-screen h-fill-available top-0 left-0 overflow-y-auto bg-black-40 backdrop-blur-3xl text-white z-50 text-lg font-DMregular leading-tighter "> 
 			<div class="grid-cols-modal lg:grid-cols-modal-xl grid gap-1">
             <div class="modal-body grid grid-cols-2 gap-16 p-2 lg:p-4  max-w-[1200px]">
                 <div class="col-span-2">

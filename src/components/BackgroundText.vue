@@ -1,9 +1,9 @@
 <template>
-	<div aria-hidden="true" class="bg-text h-screen w-screen">
+	<div aria-hidden="true" class="bg-text h-screen h-fill-available w-screen">
 		<div class="grid grid-cols-3">
-			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{additionalInfo}}</div>
-			<div class="px-4 h-screen overflow-y-auto break-all text-[10px] leading-[20px] font-Monaco"><example></example></div>
-			<div class="px-4 h-screen overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.hmData}}</div>
+			<div class="px-4 h-screen h-fill-available overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{additionalInfo}}</div>
+			<div class="px-4 h-screen h-fill-available overflow-y-auto break-all text-[10px] leading-[20px] font-Monaco"><example></example></div>
+			<div class="px-4 h-screen h-fill-available overflow-y-auto break-all font-Monaco text-[10px] leading-[20px]">{{state.hmData}}</div>
 		</div>
 	</div>
 </template>

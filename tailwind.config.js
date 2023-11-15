@@ -21,6 +21,12 @@ module.exports = {
         DMregular: ['dm-mono-regular',  'monospace'],
         Monaco: ['monaco', 'serif']
       },
+      height: {
+        'fill-available': '-webkit-fill-available',
+      },
+      minHeight: {
+        'fill-available': '-webkit-fill-available',
+      },
       gridTemplateColumns: {
         'header': '48px 1fr 48px',
         'modal': '1fr 70px',
