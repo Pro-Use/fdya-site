@@ -4,9 +4,6 @@
 	    	ref="video" class="w-screen h-screen absolute top-0 left-0 object-contain z-40 bg-black" 
 	    	:src="video_file" playsinline="true">
 	    </video>
-	    <div v-if="is_paused" v-show="can_play" @click="play()" class="h-full grid place-items-center cursor-pointer">
-			<PlayButton />
-		</div>
 	</div>
 
 
@@ -15,7 +12,6 @@
 <script setup>
 	import { ref, computed, onMounted, onUnmounted, inject } from 'vue'
 	import { useStateStore } from '../../stores/state'
-	import PlayButton from '../../components/icons/PlayButton.vue'
 
 	const state = useStateStore()
 	const api_base =  import.meta.env.VITE_API_BASE
@@ -29,31 +25,26 @@
 		return `${api_base}assets/${props.video_file}`
 	})
 
-	const play = () => {
-		video.value.play()
-		is_paused.value = false
-	}
-
     onMounted( () => {
     	state.screensaver_disabled = true
     	// video.value.onplaying = () => {
     	// 	is_paused.value = false
     	// }
-    	video.value.onpause = () => {
-    		is_paused.value = true
-    	}
+    	// video.value.onpause = () => {
+    	// 	is_paused.value = true
+    	// }
 
-    	video.value.oncanplay = () => {
-    		console.log('can_play')
-    		video.value.play()
-    		can_play.value = true
-    		setTimeout(() => {
-	    		if (video.value.paused){
-	    			is_paused.value = true
-	    		}
-	    	}, 500)
+    	// video.value.oncanplay = () => {
+    	// 	console.log('can_play')
+    	// 	video.value.play()
+    	// 	can_play.value = true
+    	// 	setTimeout(() => {
+	    // 		if (video.value.paused){
+	    // 			is_paused.value = true
+	    // 		}
+	    // 	}, 500)
 
-    	}
+    	// }
 
     	
     	player.value = video.value
