@@ -184,7 +184,7 @@ const okaySmallScreen = (event) => {
           <span 
             aria-hidden="true" 
             class="work-title pointer-events-none absolute top-[50%] left-[50%] translate-y-[-50%] translate-x-[-50%] p-1 bg-black  text-yellow uppercase text-1xl opacity-0 transition text-center"
-            ><i>{{ state.worksInfoTranslated[6].title }}</i><br>{{ state.worksInfoTranslated[5].artist }}</span>
+            ><i>{{ state.worksInfoTranslated[6].title }}</i><br>{{ state.worksInfoTranslated[6].artist }}</span>
       </a>
     </li>
   </ul>
