@@ -16,6 +16,7 @@
     "three": "^0.157.0",
     "ua-parser-js": "^1.0.36",
     "vue": "^3.3.4",
+    "vue-gtag": "^2.0.1",
     "vue-router": "^4.2.4",
     "vue3-marquee": "^4.1.0"
   },
