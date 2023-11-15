@@ -4,8 +4,8 @@
 		<img aria-hidden="true" v-if="coverImage && !loaded && props.work != 'glimpse'" class="absolute top-0 left-0 w-screen h-screen h-fill-available pointer-events-none object-cover" :src="coverImage">
 		<WorkInfo :work="props.work" :show_info_layer="showInfo" />
 		<CrossLucid v-if="props.work == 'dwellers-between-the-waters'" :work="props.work" />
-		<div v-if="props.work == 'funeral-play' && !state.audioPlaying" class="fixed w-screen h-screen h-fill-available overflow-hidden">
-			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='https://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
+		<div v-if="props.work == 'funeral-play'" class="fixed w-screen h-screen h-fill-available overflow-hidden">
+			<iframe ref="funeral_iframe" class="funeral-iframe w-full h-full overflow-hidden" src='https://funeral.fordatayouareandtodatayoushallreturn.online/funeral/#/'></iframe>
 		</div>
 		<div v-if="props.work == 'reconnecting'" class="fixed w-screen h-screen h-fill-available overflow-hidden">
 			<iframe class="funeral-iframe w-full h-full overflow-hidden" src='https://reconnecting.aliceyuanzhang.com/'></iframe>
@@ -39,8 +39,10 @@
 	let timeout_id = null
 	const showInfo = ref(true)
 	const player = ref(null)
+	const funeral_iframe = ref(null)
 
 	provide('player', player)
+	provide('funeral_iframe', funeral_iframe)
 
 	console.log(props)
 
