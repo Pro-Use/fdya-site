@@ -6,10 +6,10 @@
 		</p>
 		<span aria-hidden="true" v-html="info_text"></span> <span v-if="!data_complete" aria-hidden="true" ref="cursor" class="flash text-black w-20 bg-white inline-block translate-y-1 h-7 cursor"></span>	
 		<div v-show="data_complete" ref="enterContainer" class="pt-4 pb-[100px]">
-			<button class="p-4 mr-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies enabled" @click="skipIntro">Accept</button>
-			<button class="p-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies disabled" @click="skipIntro">Decline</button>
+			<button class="p-4 mr-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies enabled" @click="skipIntro(true)">Accept</button>
+			<button class="p-4 border border-solid uppercase hover:bg-yellow text-yellow border-yellow hover:text-black transition" aria-label="Enter the exhibition with cookies disabled" @click="skipIntro(false)">Decline</button>
 		</div>
-		<button class="focus:p-4 border border-solid border-white uppercase sr-only focus:not-sr-only focus:fixed bottom-[32px] left-[50%] translate-x-[-50%] bg-offBlack" aria-label="Enter the exhibition" @click="skipIntro">Enter</button>
+		<button class="focus:p-4 border border-solid border-white uppercase sr-only focus:not-sr-only focus:fixed bottom-[32px] left-[50%] translate-x-[-50%] bg-offBlack" aria-label="Enter the exhibition" @click="skipIntro(false)">Enter</button>
 	</main>
 </template>
 
@@ -20,6 +20,7 @@
 	import { useStateStore } from '../stores/state'
 	import { useClStore } from '../stores/CrossLucid'
 	import { useRoute } from 'vue-router'
+	import { optIn, optOut } from 'vue-gtag'
 
 	const state = useStateStore()
 	const cl_store = useClStore()
@@ -29,9 +30,6 @@
 
 	const cursor = ref('')
 	const enterContainer = ref('')
-
-
-	// console.log('route', route.fullPath)
 
 	// console.log('navigator',window.navigator)
 	const uap = UAParser(navigator.userAgent);
@@ -214,7 +212,14 @@
 		}
 	}
 
-	const skipIntro = async () => {
+	const skipIntro = async (ga=false) => {
+		if(ga){
+			// optIn()
+			console.log('window', window)
+		} else {
+			optOut()
+			console.log('window', window)
+		}
 		state.splashComplete = true
 		state.interfaceVisible = true
 		document.getElementById('skip-to-main').focus()
