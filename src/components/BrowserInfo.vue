@@ -146,10 +146,10 @@
           });
           addText(strFmt(videoinput, 'VIDEO INPUT(S): '))
           addText(strFmt(audioinput, 'AUDIO INPUT(S): '))
+          addText('<br>')
+		  addText('<br>')
+		  addText('<br>')
 		  addText('<span class="uppercase">This site uses cookies for analytics</span>')
-		  addText('<br>')
-		  addText('<br>')
-		  addText('<br>')
 		  addText('<br>')
           cl_store.$patch({'location': geo.country, 'device': device, 'platformVersion': uap.engine.version, 'sessionStart': Date.now()})
         //   console.log(splashTextSave)
@@ -214,7 +214,7 @@
 
 	const skipIntro = async (ga=false) => {
 		if(ga){
-			// optIn()
+			optIn()
 			console.log('window', window)
 		} else {
 			optOut()
