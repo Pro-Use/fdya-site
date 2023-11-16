@@ -14,7 +14,7 @@
 	import { useStateStore } from '../../stores/state'
 
 	const state = useStateStore()
-	const api_base =  import.meta.env.VITE_API_BASE
+	const api_base =  import.meta.env.VITE_ASSET_BASE
 	const props = defineProps(['video_file'])
 	const video = ref(null)
 	const is_paused = ref(false)
@@ -22,7 +22,7 @@
 	const player = inject('player')
 
 	const video_file = computed(() => {
-		return `${api_base}assets/${props.video_file}`
+		return `${api_base}${props.video_file}`
 	})
 
     onMounted( () => {

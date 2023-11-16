@@ -12,7 +12,7 @@
 	const videos = computed(() => {
     let filter_work = state.worksInfo.filter((work_obj) => work_obj.slug == props.work)
     if (filter_work.length === 1 && filter_work[0].videos.length > 0){
-        return filter_work[0].videos.map((video_info) => video_info.directus_files_id)
+        return filter_work[0].videos.map((video_info) => video_info.directus_files_id.filename_disk)
     } else {
         return []
     }
