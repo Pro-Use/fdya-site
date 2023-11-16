@@ -18,7 +18,7 @@ const works_info = ref([])
 
 
 onMounted( async () => {
-  let res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*')
+  let res = await axios.get('https://data.fordatayouareandtodatayoushallreturn.online/items/works?fields=*.*.*')
   const works = res.data.data
   state.$patch({'worksInfo': works})
   
