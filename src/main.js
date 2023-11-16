@@ -18,6 +18,6 @@ app.use(Vue3Marquee)
 app.use(router)
 app.use(VueGtag, {
   config: { id: import.meta.env.VITE_GA_MEASUREMENT_ID },
-  // enabled: false
+  enabled: false,
 }, router)
 app.mount('#app')
